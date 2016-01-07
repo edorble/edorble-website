@@ -1,6 +1,4 @@
 <!-- Firebase -->
-<script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
-<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script>
 //Prepare variables
 var myFirebaseRef = 
