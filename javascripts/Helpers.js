@@ -1,3 +1,8 @@
+
+	
+// ---- HTML 5 ----
+// ****************
+	
 //Validate a html 5 form from javascript
 function ValidateForm(myForm)
 {
@@ -14,4 +19,19 @@ function ValidateForm(myForm)
   }
   
   return isFormValid;
+}
+
+//Variables
+var url_dashboardpage = 
+	"http://cederiks-playground.webflow.io/dashboard-prototype"
+	
+// ---- Auth check ----
+// ****************
+	
+// Checks
+function SendToDashboardIfAuthed(){
+var authData = myFirebaseRef.getAuth();
+if (authData) {
+  		window.location = url_dashboardpage;
+	} 
 }

@@ -1,32 +1,16 @@
+//includes
+<script>../Helpers.js</script>
+
 //Prepare variables
 var myFirebaseRef = 
 	new Firebase("https://edorble-dev.firebaseio.com/");
-var url_dashboardpage = 
-	"http://cederiks-playground.webflow.io/dashboard-prototype"
 
 //Business Logic
-//General
-//Validate input based on the configuration set in webflow
-function ValidateForm(myForm)
-{
-	//Forcing html 5 validation based on this example:
-  //http://stackoverflow.com/questions/11866910/how-to-force-a-html5-form-validation-without-submitting-it-via-jquery
-	var isFormValid = myForm[0].checkValidity();
-  
-  if(!isFormValid)
-  {
-  	// If the form is invalid, submit it. The form won't actually submit;
-  	// this will just cause the browser to display the native HTML5 error messages.
-    // If your form doesn't have a submit button, you can fake one:
-  	$('<input type="submit">').hide().appendTo(myForm).click().remove();
-  }
-  
-  return isFormValid;
-}
 
 //-----------
 // Authentication 
 //-----------
+//Create a event listener for when a user is authed.
 myFirebaseRef.onAuth(function(authData) {
   if (authData) {
     console.log("Authenticated with uid:", authData.uid);
@@ -35,6 +19,7 @@ myFirebaseRef.onAuth(function(authData) {
     console.log("Client unauthenticated.")
   }
 });
+
 // Create a callback to handle the result of the authentication
 function LoginHandler(error, authData) {
   if (error) {
@@ -44,6 +29,7 @@ function LoginHandler(error, authData) {
   }
 }
 
+// Try the login details provided by the user
 function TryToLoginEmailPassword(email, password){
 	// Try to auth using Firebase and with an email/password combination
   myFirebaseRef.authWithPassword({
@@ -72,36 +58,19 @@ function doLoginFacebookBehavior(){
   			scope: "email" // the permissions requested
 			});
 }
+
 //-----------
 // End of Authentication 
 //-----------
 
-// Checks
-function checkAuthState(){
-var authData = myFirebaseRef.getAuth();
-if (authData) {
-  window.location = url_dashboardpage;
-} else {
-  $('#auth-state').text("User is logged out");
-}
-}
-
 //Preparation binding
 function bindButtonEvents(){
-$("#button").on("click", checkAuthState);
 $("#button-login").click(doLoginEmailPasswordBehavior);
 $("#button-login-facebook").click(doLoginFacebookBehavior);
 }
 
-//Test functions
-function runFirebaseExample(){
-
-}
-
 //On page load
 $( document ).ready(function() {
-	checkAuthState();
+	SendToDashboardIfAuthed();
 	bindButtonEvents();
-	runFirebaseExample();
-
 });
