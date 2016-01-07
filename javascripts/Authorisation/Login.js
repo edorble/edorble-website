@@ -1,9 +1,12 @@
-//includes
-<script>../Helpers.js</script>
-
 //Prepare variables
 var myFirebaseRef = 
 	new Firebase("https://edorble-dev.firebaseio.com/");
+	
+var url_dashboardpage = 
+	"http://cederiks-playground.webflow.io/dashboard-prototype"
+	
+var myEdorbleRef =
+	new Edorble();
 
 //Business Logic
 
@@ -71,6 +74,6 @@ $("#button-login-facebook").click(doLoginFacebookBehavior);
 
 //On page load
 $( document ).ready(function() {
-	SendToDashboardIfAuthed();
+	myEdorbleRef.sendToDashboardIfAuthed(url_dashboardpage);
 	bindButtonEvents();
 });
