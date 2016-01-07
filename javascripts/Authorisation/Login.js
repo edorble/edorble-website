@@ -44,7 +44,7 @@ function TryToLoginEmailPassword(email, password){
 //Holds all business logic when clicking the login button
 function doLoginEmailPasswordBehavior(){
 	var myForm = $('#Login-Form');
-	var isFormValidated = ValidateForm(myForm);
+	var isFormValidated = myEdorbleRef.Helpers.HTML5.validateForm(myForm);
   
   if(isFormValidated){
     var email = $('#Login-Input-UserName').val();
@@ -74,6 +74,6 @@ $("#button-login-facebook").click(doLoginFacebookBehavior);
 
 //On page load
 $( document ).ready(function() {
-	myEdorbleRef.sendToDashboardIfAuthed(url_dashboardpage);
+	myEdorbleRef.Logic.Authorisation.sendToDashboardIfAuthed(url_dashboardpage);
 	bindButtonEvents();
 });
