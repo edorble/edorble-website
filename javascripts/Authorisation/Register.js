@@ -1,5 +1,4 @@
 <!-- Firebase -->
-<script>
 //Prepare variables
 var myFirebaseRef = 
 	new Firebase("https://edorble-dev.firebaseio.com/");
@@ -155,5 +154,3 @@ $( document ).ready(function() {
 	runFirebaseExample();
 
 });
-
-</script>
