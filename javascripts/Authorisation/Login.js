@@ -4,9 +4,6 @@ var myFirebaseRef =
 	
 var url_dashboardpage = 
 	"http://cederiks-playground.webflow.io/dashboard-prototype"
-	
-var myEdorbleRef =
-	new Edorble();
 
 //Business Logic
 
@@ -44,7 +41,7 @@ function TryToLoginEmailPassword(email, password){
 //Holds all business logic when clicking the login button
 function doLoginEmailPasswordBehavior(){
 	var myForm = $('#Login-Form');
-	var isFormValidated = myEdorbleRef.Helpers.HTML5.validateForm(myForm);
+	var isFormValidated = Edorble.Helpers.HTML5.validateForm(myForm);
   
   if(isFormValidated){
     var email = $('#Login-Input-UserName').val();
@@ -74,6 +71,6 @@ $("#button-login-facebook").click(doLoginFacebookBehavior);
 
 //On page load
 $( document ).ready(function() {
-	myEdorbleRef.Logic.Authorisation.sendToDashboardIfAuthed(url_dashboardpage);
+	Edorble.Logic.Authorisation.sendToDashboardIfAuthed(url_dashboardpage);
 	bindButtonEvents();
 });
