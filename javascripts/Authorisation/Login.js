@@ -65,14 +65,14 @@ function doLoginFacebookBehavior(){
 
 function prepareLoginForm(idLoginButton, idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler)
 {
-	//$("#button-login").click(doLoginEmailPasswordBehavior(idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler));
-	$("#button-login").click(doLoginFacebookBehavior());
+	$("#button-login").click(function (){
+		doLoginEmailPasswordBehavior(idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler);
+	});
 }
 
 //Preparation binding
 function bindButtonEvents(){
-
-$("#button-login-facebook").click(doLoginFacebookBehavior);
+	$("#button-login-facebook").click(doLoginFacebookBehavior);
 }
 
 //On page load
@@ -84,7 +84,7 @@ $( document ).ready(function() {
 	var idLoginForm = "#Login-Form";
 	var idLoginUserNameInput = "#Login-Input-UserName";
 	var idLoginInputPassword = "#Login-Input-Password";
-	prepareLoginForm('#button-login', idLoginForm, idLoginUserNameInput, idLoginInputPassword, LoginHandler)
+	prepareLoginForm(idLoginButton, idLoginForm, idLoginUserNameInput, idLoginInputPassword, LoginHandler)
 	
 	bindButtonEvents();
 });
