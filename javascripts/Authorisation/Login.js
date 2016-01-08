@@ -63,7 +63,7 @@ function doLoginFacebookBehavior(){
 // End of Authentication 
 //-----------
 
-function PrepareLoginForm(idLoginButton, idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler)
+function prepareLoginForm(idLoginButton, idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler)
 {
 	$(idLoginButton).click(doLoginEmailPasswordBehavior(idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler));
 }
@@ -83,7 +83,7 @@ $( document ).ready(function() {
 	var idLoginForm = "#Login-Form";
 	var idLoginUserNameInput = "#Login-Input-UserName";
 	var idLoginInputPassword = "#Login-Input-Password";
-	prepareLogin(idLoginButton, idLoginForm, idLoginUserNameInput, idLoginInputPassword, LoginHandler)
+	prepareLoginForm(idLoginButton, idLoginForm, idLoginUserNameInput, idLoginInputPassword, LoginHandler)
 	
 	bindButtonEvents();
 });
