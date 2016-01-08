@@ -17,16 +17,14 @@ var url_dashboardpage =
 	}
 	
 	// Authentication 
-	function redirectUserToThisPageOnLogin(pageurl){
-		myFirebaseRef.onAuth(function(authData) {
+	myFirebaseRef.onAuth(function(authData) {
 		  if (authData) {
 		    console.log("Authenticated with uid:", authData.uid);
-		    window.location = pageurl;
+		    window.location = url_dashboardpage;
 		  } else {
 		    console.log("Client unauthenticated.")
 		  }
 		});
-	}
 
 
 //On page load
