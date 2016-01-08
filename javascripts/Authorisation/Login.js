@@ -72,7 +72,7 @@ function prepareLoginForm(idLoginButton, idLoginForm, idLoginUserNameInput, idLo
 
 //Preparation binding
 function bindButtonEvents(){
-	$("#button-login-facebook").click(doLoginFacebookBehavior);
+	//$("#button-login-facebook").click(doLoginFacebookBehavior);
 }
 
 //On page load
