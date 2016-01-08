@@ -79,7 +79,7 @@ $( document ).ready(function() {
 	Edorble.Logic.Authorisation.sendToDashboardIfAuthed(url_dashboardpage);
 	
 	//Prepare the login form if you want to enable loggin in using a form
-	var idLoginButton = "#button-login";
+	var idLoginButton = '#button-login';
 	var idLoginForm = "#Login-Form";
 	var idLoginUserNameInput = "#Login-Input-UserName";
 	var idLoginInputPassword = "#Login-Input-Password";
