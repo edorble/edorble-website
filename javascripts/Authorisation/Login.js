@@ -71,7 +71,7 @@ function prepareLoginForm(idLoginButton, idLoginForm, idLoginUserNameInput, idLo
 }
 
 //Preparation binding
-function prepareLoginForm(idFacebookLoginButton, loginHandler){
+function prepareLoginFacebook(idFacebookLoginButton, loginHandler){
 	$(idFacebookLoginButton).click(function(){
 		doLoginFacebookBehavior(LoginHandler);
 	});
