@@ -30,23 +30,23 @@ function LoginHandler(error, authData) {
 }
 
 // Try the login details provided by the user
-function TryToLoginEmailPassword(email, password){
+function TryToLoginEmailPassword(email, password, loginHandler){
 	// Try to auth using Firebase and with an email/password combination
   myFirebaseRef.authWithPassword({
     email    : email,
     password : password
-  }, LoginHandler);
+  }, loginHandler);
 }
 
 //Holds all business logic when clicking the login button
-function doLoginEmailPasswordBehavior(){
-	var myForm = $('#Login-Form');
+function doLoginEmailPasswordBehavior(idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler){
+	var myForm = $(idLoginForm);
 	var isFormValidated = Edorble.Helpers.HTML5.validateForm(myForm);
   
   if(isFormValidated){
-    var email = $('#Login-Input-UserName').val();
+    var email = $(idLoginUserNameInput).val();
     var password = $('#Login-Input-Password').val();
-    TryToLoginEmailPassword(email, password); //Async operation handles by authhandler
+    TryToLoginEmailPassword(email, password, loginHandler); //Async operation handles by authhandler
   }
 }
 
@@ -63,14 +63,27 @@ function doLoginFacebookBehavior(){
 // End of Authentication 
 //-----------
 
+function PrepareLoginForm(idLoginButton, idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler)
+{
+	$(idLoginButton).click(doLoginEmailPasswordBehavior(idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler));
+}
+
 //Preparation binding
 function bindButtonEvents(){
-$("#button-login").click(doLoginEmailPasswordBehavior);
+
 $("#button-login-facebook").click(doLoginFacebookBehavior);
 }
 
 //On page load
 $( document ).ready(function() {
 	Edorble.Logic.Authorisation.sendToDashboardIfAuthed(url_dashboardpage);
+	
+	//Prepare the login form if you want to enable loggin in using a form
+	var idLoginButton = "#button-login";
+	var idLoginForm = "#Login-Form";
+	var idLoginUserNameInput = "#Login-Input-UserName";
+	var idLoginInputPassword = "#Login-Input-Password";
+	prepareLogin(idLoginButton, idLoginForm, idLoginUserNameInput, idLoginInputPassword, LoginHandler)
+	
 	bindButtonEvents();
 });
