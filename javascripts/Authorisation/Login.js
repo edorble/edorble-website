@@ -77,7 +77,7 @@ function bindButtonEvents(){
 
 //On page load
 $( document ).ready(function() {
-	Edorble.Logic.Authorisation.sendToDashboardIfAuthed(url_dashboardpage);
+	//Edorble.Logic.Authorisation.sendToDashboardIfAuthed(url_dashboardpage);
 	
 	//Prepare the login form if you want to enable loggin in using a form
 	var idLoginButton = '#button-login';
