@@ -29,5 +29,5 @@ $( document ).ready(function() {
 	Edorble.Logic.Authorisation.prepareLoginFacebook(idFacebookLoginButton, LoginHandler);
 	
 	//Setup that upon login the user is redirected to the following page
-	Edorble.redirectToPageOnLogin("http://cederiks-playground.webflow.io/dashboard-prototype");
+	Edorble.Logic.Authorisation.redirectToPageOnLogin("http://cederiks-playground.webflow.io/dashboard-prototype");
 });
