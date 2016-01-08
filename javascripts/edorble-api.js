@@ -10,11 +10,22 @@ var Edorble =
 		Authorisation:
 		{
 			// ---- Auth check ----
-			sendToDashboardIfAuthed: function (url_dashboardpage){
+			sendToPageIfAlreadyLoggedIn: function (page){
 			var authData = myFirebaseRef.getAuth();
 			if (authData) {
 			  		window.location = url_dashboardpage;
 				} 
+			},
+			
+			redirectToPageOnLogin: function (page){
+				myFirebaseRef.onAuth(function(authData) {
+					  if (authData) {
+					    console.log("Authenticated with uid:", authData.uid);
+					    window.location = page;
+					  } else {
+					    console.log("Client unauthenticated.")
+					  }
+					});
 			},
 
 			// Try the login details provided by the user
