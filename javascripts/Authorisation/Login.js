@@ -83,7 +83,7 @@ $( document ).ready(function() {
 	var idLoginForm = "#Login-Form";
 	var idLoginUserNameInput = "#Login-Input-UserName";
 	var idLoginInputPassword = "#Login-Input-Password";
-	prepareLoginForm(idLoginButton, idLoginForm, idLoginUserNameInput, idLoginInputPassword, LoginHandler)
+	prepareLoginForm('#button-login', idLoginForm, idLoginUserNameInput, idLoginInputPassword, LoginHandler)
 	
 	bindButtonEvents();
 });
