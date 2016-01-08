@@ -7,6 +7,14 @@ var url_dashboardpage =
 
 //Business Logic
 
+	// Create a callback to handle the result of the authentication
+	function LoginHandler(error, authData) {
+	  if (error) {
+	    console.log("Login Failed!", error);
+	  } else {
+	    console.log("Authenticated successfully with payload:", authData);
+	  }
+	}
 //-----------
 // Authentication 
 //-----------
@@ -20,14 +28,6 @@ myFirebaseRef.onAuth(function(authData) {
   }
 });
 
-// Create a callback to handle the result of the authentication
-function LoginHandler(error, authData) {
-  if (error) {
-    console.log("Login Failed!", error);
-  } else {
-    console.log("Authenticated successfully with payload:", authData);
-  }
-}
 
 // Try the login details provided by the user
 function TryToLoginEmailPassword(email, password, loginHandler){
@@ -51,9 +51,9 @@ function doLoginEmailPasswordBehavior(idLoginForm, idLoginUserNameInput, idLogin
 }
 
 //Holds all business logic when clicking the login facebook button
-function doLoginFacebookBehavior(){
+function doLoginFacebookBehavior(loginHandler){
     myFirebaseRef.authWithOAuthRedirect("facebook", 
-    	LoginHandler,  
+    	loginHandler,  
     	{
   			scope: "email" // the permissions requested
 			});
@@ -65,14 +65,16 @@ function doLoginFacebookBehavior(){
 
 function prepareLoginForm(idLoginButton, idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler)
 {
-	$("#button-login").click(function (){
+	$(idLoginButton).click(function (){
 		doLoginEmailPasswordBehavior(idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler);
 	});
 }
 
 //Preparation binding
-function bindButtonEvents(){
-	//$("#button-login-facebook").click(doLoginFacebookBehavior);
+function prepareLoginForm(idFacebookLoginButton, loginHandler){
+	$(idFacebookLoginButton).click(function(){
+		doLoginFacebookBehavior(LoginHandler);
+	});
 }
 
 //On page load
@@ -86,5 +88,7 @@ $( document ).ready(function() {
 	var idLoginInputPassword = "#Login-Input-Password";
 	prepareLoginForm(idLoginButton, idLoginForm, idLoginUserNameInput, idLoginInputPassword, LoginHandler)
 	
-	bindButtonEvents();
+	//Prepare login using facebook
+	var idFacebookLoginButton = "#button-login-facebook";
+	prepareLoginFacebook(idFacebookLoginButton, LoginHandler);
 });
