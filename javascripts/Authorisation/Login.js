@@ -66,7 +66,7 @@ function doLoginFacebookBehavior(){
 function prepareLoginForm(idLoginButton, idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler)
 {
 	$("#button-login").click(function (){
-		//doLoginEmailPasswordBehavior(idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler);
+		doLoginEmailPasswordBehavior(idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler);
 	});
 }
 
