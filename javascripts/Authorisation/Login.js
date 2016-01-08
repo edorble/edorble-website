@@ -15,6 +15,18 @@ var url_dashboardpage =
 	    console.log("Authenticated successfully with payload:", authData);
 	  }
 	}
+	
+	// Authentication 
+	function redirectUserToThisPageOnLogin(pageurl){
+		myFirebaseRef.onAuth(function(authData) {
+		  if (authData) {
+		    console.log("Authenticated with uid:", authData.uid);
+		    window.location = pageurl;
+		  } else {
+		    console.log("Client unauthenticated.")
+		  }
+		});
+	}
 
 
 //On page load
@@ -31,4 +43,7 @@ $( document ).ready(function() {
 	//Prepare login using facebook
 	var idFacebookLoginButton = "#button-login-facebook";
 	Edorble.Logic.Authorisation.prepareLoginFacebook(idFacebookLoginButton, LoginHandler);
+	
+	//Setup that upon login the user is redirected to the following page
+	redirectUserToThisPageOnLogin(url_dashboardpage);
 });
