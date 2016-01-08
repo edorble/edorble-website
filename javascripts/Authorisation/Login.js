@@ -65,7 +65,8 @@ function doLoginFacebookBehavior(){
 
 function prepareLoginForm(idLoginButton, idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler)
 {
-	$("#button-login").click(doLoginEmailPasswordBehavior(idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler));
+	//$("#button-login").click(doLoginEmailPasswordBehavior(idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler));
+	$("#button-login").click(doLoginFacebookBehavior());
 }
 
 //Preparation binding
