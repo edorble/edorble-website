@@ -15,7 +15,7 @@ var Edorble =
 			if (authData) {
 			  		window.location = url_dashboardpage;
 				} 
-			}
+			},
 
 			// Try the login details provided by the user
 			TryToLoginEmailPassword: function (email, password, loginHandler){
@@ -24,7 +24,7 @@ var Edorble =
 			    email    : email,
 			    password : password
 			  }, loginHandler);
-			}
+			},
 
 			//Holds all business logic when clicking the login button
 			doLoginEmailPasswordBehavior: function (idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler){
@@ -36,7 +36,7 @@ var Edorble =
 			    var password = $(idLoginPasswordInput).val();
 			    Edorble.Logic.Authorisation.TryToLoginEmailPassword(email, password, loginHandler); 
 			  }
-			}
+			},
 
 			//Holds all business logic when clicking the login facebook button
 			doLoginFacebookBehavior: function (loginHandler){
@@ -45,7 +45,7 @@ var Edorble =
 			    	{
 			  			scope: "email" // the permissions requested
 						});
-			}
+			},
 			
 			//Add a function that takes care of login behavior for edorble
 			prepareLoginForm: function (idLoginButton, idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler)
@@ -53,7 +53,7 @@ var Edorble =
 				$(idLoginButton).click(function (){
 					Edorble.Logic.Authorisation.doLoginEmailPasswordBehavior(idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler);
 				});
-			}
+			},
 
 			//Preparation binding
 			prepareLoginFacebook: function (idFacebookLoginButton, loginHandler){
