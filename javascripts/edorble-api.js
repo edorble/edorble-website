@@ -96,7 +96,7 @@ var Edorble =
 			//***************************************
 			
 			storeNewlyRegisteredUserInformation: function (userData){
-			var lockedWorldcode = worldcode;
+			var lockedWorldcode = Register_worldcode;
 			var newWorldRef = new Firebase(myFirebaseWorldsRef + "/"+ lockedWorldcode);
 			console.log("new world path " + newWorldRef.toString());
 			  newWorldRef.transaction(function(currentData) {
