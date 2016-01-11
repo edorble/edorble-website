@@ -78,7 +78,11 @@ var Edorble =
 			prepareLoginForm: function (idLoginButton, idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler)
 			{
 				$(idLoginButton).click(function (){
-					Edorble.Logic.Authorisation.doLoginEmailPasswordBehavior(idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler);
+					Edorble.Logic.Authorisation.doLoginEmailPasswordBehavior(
+						idLoginForm, 
+						idLoginUserNameInput, 
+						idLoginPasswordInput, 
+						loginHandler);
 				});
 			},
 
