@@ -2,7 +2,7 @@
 // Create a callback to handle the result of the authentication
 function LoginHandler(error, authData) {
   if (error) {
-    console.log("Login Failed!", error);
+    $("#Login-AuthFeedback").text(error);
   } else {
     console.log("Authenticated successfully with payload:", authData);
   }
