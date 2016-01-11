@@ -193,7 +193,7 @@ var Edorble =
 					Edorble.Logic.Authorisation.doRegisterEmailPasswordBehavior(idRegisterForm, idRegisterUserNameInput, idRegisterPasswordInput);
 				});
 								
-				monitorWorldCounter();
+				Edorble.Logic.Authorisation.monitorWorldCounter();
 			},
 		}
 	},
