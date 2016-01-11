@@ -87,7 +87,7 @@ var Edorble =
 				$(idFacebookLoginButton).click(function(){
 					Edorble.Logic.Authorisation.doLoginFacebookBehavior(LoginHandler);
 				});
-			}
+			},
 			
 			//***************************************
 			//***************************************
