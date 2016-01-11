@@ -162,7 +162,7 @@ var Edorble =
 					Register_passwordholder, 
 					Edorble.Logic.Authorisation.loginHandler); 
 			  }
-			}
+			},
 
 			//Holds all business logic when clicking the login button
 			doRegisterEmailPasswordBehavior: function (idRegisterForm, idRegisterUserNameInput, idRegisterPasswordInput){
