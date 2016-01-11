@@ -1,6 +1,16 @@
 //Prepare variables
 var myFirebaseRef = 
 	new Firebase("https://edorble-dev.firebaseio.com/");
+var myFirebaseWorldsRef = 
+	new Firebase("https://edorble-dev.firebaseio.com/worlds/");
+var myFirebaseUsersRef = 
+	new Firebase("https://edorble-dev.firebaseio.com/users/");
+	
+//Register.js variables	
+var Register_emailholder = "";
+var Register_passwordholder = "";
+var Register_worldcode = null;
+var Register_idRegisterFeedback = "";
 	
 var Edorble = 
 {
@@ -27,7 +37,13 @@ var Edorble =
 					  }
 					});
 			},
-
+			
+			//***************************************
+			//***************************************
+			// 				Login
+			//***************************************
+			//***************************************
+			
 			// Try the login details provided by the user
 			TryToLoginEmailPassword: function (email, password, loginHandler){
 				// Try to auth using Firebase and with an email/password combination
@@ -72,6 +88,113 @@ var Edorble =
 					Edorble.Logic.Authorisation.doLoginFacebookBehavior(LoginHandler);
 				});
 			}
+			
+			//***************************************
+			//***************************************
+			// 				Registration
+			//***************************************
+			//***************************************
+			
+			storeNewlyRegisteredUserInformation: function (userData){
+			var lockedWorldcode = worldcode;
+			var newWorldRef = new Firebase(myFirebaseWorldsRef + "/"+ lockedWorldcode);
+			console.log("new world path " + newWorldRef.toString());
+			  newWorldRef.transaction(function(currentData) {
+			    if (currentData === null) {
+			      return { 
+			        admin_uid: userData.uid,
+			        name: "world " + lockedWorldcode};
+			    } else {
+			      console.log('World already exists: ' + lockedWorldcode);
+			      return; // Abort the transaction.
+			    }
+			  }, function(error, committed, snapshot) {
+			    if (error) {
+			      console.log('Transaction failed abnormally!', error);
+			    } else if (!committed) {
+			      console.log('We aborted the transaction (because world already exists).');
+			    } else {
+			      console.log('world added! ' + lockedWorldcode );
+			      //add user
+			      var newUserRef = new Firebase(myFirebaseUsersRef + "/" + userData.uid);
+			      console.log("new user to be created: " + newUserRef.toString());
+			      myFirebaseUsersRef.child(userData.uid).set({email: Register_emailholder, 
+			        	world: lockedWorldcode
+			          });
+			      //Increment worldcode
+			      myFirebaseRef.child("worldcounter").transaction(function (worldcounter){
+			          return worldcounter + 1;
+			        });
+			    }
+			  });
+			  // Set mixpanel alias
+			},
+			
+			// Try the login details provided by the user
+			TryToRegisterEmailPassword: function (email, password, registerHandler){
+				// Try to auth using Firebase and with an email/password combination
+				Register_emailholder = email;
+				Register_passwordholder = password;
+
+				myFirebaseRef.createUser({
+				email    : email,
+				password : password
+				}, registerHandler);
+			},
+			
+			// Create a callback to handle the result of the authentication
+			loginHandler: function (error, authData) {
+			  if (error) {
+			    console.log("Login Failed!", error);
+			  } else {
+			    console.log("Authenticated successfully with payload:", authData);
+			  }
+			},
+			
+			// Create a callback to handle the result of the authentication
+			registerHandler: function (error, userData) {
+			  if (error) {
+			    	$(Register_idRegisterFeedback).text(error);
+			  } else {
+			    Edorble.Logic.Authorisation.storeNewlyRegisteredUserInformation(userData);
+			    Edorble.Logic.Authorisation.TryToLoginEmailPassword(
+					Register_emailholder, 
+					Register_passwordholder, 
+					Edorble.Logic.Authorisation.loginHandler); 
+			  }
+			}
+
+			//Holds all business logic when clicking the login button
+			doRegisterEmailPasswordBehavior: function (idRegisterForm, idRegisterUserNameInput, idRegisterPasswordInput){
+				var myForm = $(idRegisterForm);
+				var isFormValidated = Edorble.Helpers.HTML5.validateForm(myForm);
+  
+			  if(isFormValidated){
+			    var email = $(idRegisterUserNameInput).val();
+			    var password = $(idRegisterPasswordInput).val();
+			    Edorble.Logic.Authorisation.TryToRegisterEmailPassword(email, password, Edorble.Logic.Authorisation.registerHandler); 
+			  }
+			},
+			
+			//Value monitor of firebase entry
+			monitorWorldCounter: function(){
+				//Firebase value monitors
+				myFirebaseRef.child("worldcounter").on("value", function(snapshot) {
+					Register_worldcode = snapshot.val();
+				});
+			},
+			
+			//Add a function that takes care of login behavior for edorble
+			prepareRegisterForm: function (idRegisterButton, idRegisterForm, idRegisterUserNameInput, idRegisterPasswordInput, idRegisterFeedback)
+			{
+				Register_idRegisterFeedback = idRegisterFeedback;
+				
+				$(idRegisterButton).click(function (){
+					Edorble.Logic.Authorisation.doRegisterEmailPasswordBehavior(idRegisterForm, idRegisterUserNameInput, idRegisterPasswordInput);
+				});
+								
+				monitorWorldCounter();
+			},
 		}
 	},
 	Helpers:
