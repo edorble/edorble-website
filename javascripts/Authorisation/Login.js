@@ -17,20 +17,21 @@ $( document ).ready(function() {
 	var idLoginForm = "#Login-Form";
 	var idLoginUserNameInput = "#Login-Input-UserName";
 	var idLoginInputPassword = "#Login-Input-Password";
+	var idLoginFeedback = "#Login-AuthFeedback";
 	Edorble.Logic.Authorisation.prepareLoginForm(
 		idLoginButton, 
 		idLoginForm, 
 		idLoginUserNameInput,
-		idLoginInputPassword, 
-		LoginHandler)
+		idLoginInputPassword,
+		idLoginFeedback)
 	
 	//Prepare login using facebook
 	var idFacebookLoginButton = "#button-login-facebook";
-	Edorble.Logic.Authorisation.prepareLoginFacebook(idFacebookLoginButton, LoginHandler);
+	Edorble.Logic.Authorisation.prepareLoginFacebook(idFacebookLoginButton, idLoginFeedback);
 	
 	//Prepare login using facebook
 	var idTwitterLoginButton = "#button-twitter-facebook";
-	Edorble.Logic.Authorisation.prepareLoginTwitter(idTwitterLoginButton, LoginHandler);
+	Edorble.Logic.Authorisation.prepareLoginTwitter(idTwitterLoginButton, idLoginFeedback);
 	
 	//Setup that upon login the user is redirected to the following page
 	Edorble.Logic.Authorisation.redirectToPageOnLogin("http://cederiks-playground.webflow.io/dashboard-prototype");
