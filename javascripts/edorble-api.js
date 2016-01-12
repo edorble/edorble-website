@@ -341,7 +341,7 @@ var Edorble =
   			    	$(Register_idRegisterGoogleFeedback).text(error);
   			  } else {
 				  	//Pull the email adress from facebook
-				  	Register_emailholder = authData.google.email
+				  Register_emailholder = authData.google.email;
 				  	Edorble.Logic.Authorisation.storeNewlyRegisteredUserInformation(authData);
 				  
 				  	//Setup that upon login the user is redirected to the following page
