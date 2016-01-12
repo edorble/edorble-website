@@ -244,7 +244,7 @@ var Edorble =
 			},
 			
 			// Try the login details provided by the user
-			TryToRegisterEmailPassword: function (email, password, registerHandler){
+			TryToRegisterEmailPassword: function (email, password){
 				// Try to auth using Firebase and with an email/password combination
 				Register_emailholder = email;
 				Register_passwordholder = password;
@@ -263,7 +263,7 @@ var Edorble =
 			  if(isFormValidated){
 			    var email = $(idRegisterUserNameInput).val();
 			    var password = $(idRegisterPasswordInput).val();
-			    Edorble.Logic.Authorisation.TryToRegisterEmailPassword(email, password, Edorble.Logic.Authorisation.registerEmailPasswordHandler); 
+			    Edorble.Logic.Authorisation.TryToRegisterEmailPassword(email, password); 
 			  }
 			},
 			
