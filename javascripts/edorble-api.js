@@ -108,7 +108,7 @@ var Edorble =
 			
 			//Holds all business logic when clicking the login facebook button
 			doLoginFacebookBehavior: function (){
-			    myFirebaseRef.authWithOAuthRedirect("facebook", 
+			    myFirebaseRef.authWithOAuthPopup("facebook", 
 			    	Edorble.Logic.Authorisation.loginHandler,  
 			    	{
 			  			scope: "email" // the permissions requested
@@ -130,7 +130,7 @@ var Edorble =
 			
 			//Holds all business logic when clicking the login twitter button
 			doLoginTwitterBehavior: function (){
-			    myFirebaseRef.authWithOAuthRedirect("twitter", 
+			    myFirebaseRef.authWithOAuthPopup("twitter", 
 					Edorble.Logic.Authorisation.loginHandler);
 			},
 			
@@ -149,11 +149,11 @@ var Edorble =
 			
 			//Holds all business logic when clicking the login google button
 			doLoginGoogleBehavior: function (){
-			    myFirebaseRef.authWithOAuthRedirect("google", 
+			    myFirebaseRef.authWithOAuthPopup("google", 
 					Edorble.Logic.Authorisation.loginHandler);
 			},
 			
-			//Preparation binding
+			//Prepare google login - important this will not work with coherent due to pop ups
 			prepareLoginGoogle: function (idGoogleLoginButton, idLoginFeedback){
 				Login_idLoginFeedback = idLoginFeedback;
 				
