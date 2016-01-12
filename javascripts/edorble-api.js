@@ -130,8 +130,11 @@ var Edorble =
 			      //add user
 			      var newUserRef = new Firebase(myFirebaseUsersRef + "/" + userData.uid);
 			      console.log("new user to be created: " + newUserRef.toString());
-			      myFirebaseUsersRef.child(userData.uid).set({email: Register_emailholder, 
-			        	world: lockedWorldcode
+			      myFirebaseUsersRef.child(userData.uid).set(
+					  {
+						  email: Register_emailholder, 
+						  world: lockedWorldcode,
+						  provider: userData.provider
 			          });
 			      //Increment worldcode
 			      myFirebaseRef.child("worldcounter").transaction(function (worldcounter){
@@ -188,7 +191,7 @@ var Edorble =
 				myFirebaseRef.createUser({
 				email    : email,
 				password : password
-				}, registerHandler);
+				}, registerEmailPasswordHandler);
 			},
 			
 			//Holds all business logic when clicking the login button
@@ -272,7 +275,7 @@ var Edorble =
 			
 			//Holds all business logic when clicking the login facebook button
 			doRegisterTwitterBehavior: function (loginHandler){
-			    myFirebaseRef.authWithOAuthPopup("twitter");
+			    myFirebaseRef.authWithOAuthPopup("twitter", Edorble.Logic.Authorisation.continueTwitterHandler);
 			},
 			
 			//Add a function that takes care of login behavior for edorble
