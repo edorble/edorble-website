@@ -28,6 +28,10 @@ $( document ).ready(function() {
 	var idFacebookLoginButton = "#button-login-facebook";
 	Edorble.Logic.Authorisation.prepareLoginFacebook(idFacebookLoginButton, LoginHandler);
 	
+	//Prepare login using facebook
+	var idTwitterLoginButton = "#button-twitter-facebook";
+	Edorble.Logic.Authorisation.prepareLoginTwitter(idTwitterLoginButton, LoginHandler);
+	
 	//Setup that upon login the user is redirected to the following page
 	Edorble.Logic.Authorisation.redirectToPageOnLogin("http://cederiks-playground.webflow.io/dashboard-prototype");
 });

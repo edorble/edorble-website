@@ -8,7 +8,9 @@ var myFirebaseUsersRef =
 	
 //General settings
 	var dashboardpage = "http://cederiks-playground.webflow.io/dashboard-prototype";
-	
+
+//Login.js variables
+	var Login_idLoginFeedback = "";	
 //Register.js variables	
 var Register_emailholder = "";
 var Register_passwordholder = "";
@@ -49,27 +51,57 @@ var Edorble =
 			//***************************************
 			//***************************************
 			
+			// Create a callback to handle the result of the authentication
+			loginHandler: function (error, authData) {
+			  if (error) {
+			    $("#Login-AuthFeedback").text(error);
+			  } else {
+			    console.log("Authenticated successfully with payload:", authData);
+			  }
+			},
+			
+			//***************************************
+			// 		Login with email and password
+			//***************************************
+			
 			// Try the login details provided by the user
-			TryToLoginEmailPassword: function (email, password, loginHandler){
+			TryToLoginEmailPassword: function (email, password){
 				// Try to auth using Firebase and with an email/password combination
 			  myFirebaseRef.authWithPassword({
 			    email    : email,
 			    password : password
-			  }, loginHandler);
+			  }, Edorble.Logic.Authorisation.loginHandler);
 			},
 
 			//Holds all business logic when clicking the login button
-			doLoginEmailPasswordBehavior: function (idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler){
+			doLoginEmailPasswordBehavior: function (idLoginForm, idLoginUserNameInput, idLoginPasswordInput){
 				var myForm = $(idLoginForm);
 				var isFormValidated = Edorble.Helpers.HTML5.validateForm(myForm);
   
 			  if(isFormValidated){
 			    var email = $(idLoginUserNameInput).val();
 			    var password = $(idLoginPasswordInput).val();
-			    Edorble.Logic.Authorisation.TryToLoginEmailPassword(email, password, loginHandler); 
+			    Edorble.Logic.Authorisation.TryToLoginEmailPassword(email, password, Edorble.Logic.Authorisation.loginHandler); 
 			  }
 			},
-
+			
+			//Add a function that takes care of login behavior for edorble
+			prepareLoginForm: function (idLoginButton, idLoginForm, idLoginUserNameInput, idLoginPasswordInput, idLoginFeedback)
+			{
+				Login_idLoginFeedback = idLoginFeedback;
+				
+				$(idLoginButton).click(function (){
+					Edorble.Logic.Authorisation.doLoginEmailPasswordBehavior(
+						idLoginForm, 
+						idLoginUserNameInput, 
+						idLoginPasswordInput);
+				});
+			},
+			
+			//***************************************
+			// 		Login with Facebook
+			//***************************************
+			
 			//Holds all business logic when clicking the login facebook button
 			doLoginFacebookBehavior: function (loginHandler){
 			    myFirebaseRef.authWithOAuthRedirect("facebook", 
@@ -79,22 +111,12 @@ var Edorble =
 						});
 			},
 			
-			//Add a function that takes care of login behavior for edorble
-			prepareLoginForm: function (idLoginButton, idLoginForm, idLoginUserNameInput, idLoginPasswordInput, loginHandler)
-			{
-				$(idLoginButton).click(function (){
-					Edorble.Logic.Authorisation.doLoginEmailPasswordBehavior(
-						idLoginForm, 
-						idLoginUserNameInput, 
-						idLoginPasswordInput, 
-						loginHandler);
-				});
-			},
-
 			//Preparation binding
-			prepareLoginFacebook: function (idFacebookLoginButton, loginHandler){
+			prepareLoginFacebook: function (idFacebookLoginButton, idLoginFeedback){
+				Login_idLoginFeedback = idLoginFeedback;
+				
 				$(idFacebookLoginButton).click(function(){
-					Edorble.Logic.Authorisation.doLoginFacebookBehavior(LoginHandler);
+					Edorble.Logic.Authorisation.doLoginFacebookBehavior();
 				});
 			},
 			
