@@ -6,11 +6,15 @@ var myFirebaseWorldsRef =
 var myFirebaseUsersRef = 
 	new Firebase("https://edorble-dev.firebaseio.com/users/");
 	
+//General settings
+	var dashboardpage = "http://cederiks-playground.webflow.io/dashboard-prototype";
+	
 //Register.js variables	
 var Register_emailholder = "";
 var Register_passwordholder = "";
 var Register_worldcode = null;
 var Register_idRegisterFeedback = "";
+var Register_idRegisterFacebookFeedback = "";
 	
 var Edorble = 
 {
@@ -99,6 +103,9 @@ var Edorble =
 			//***************************************
 			//***************************************
 			
+			//***************************************
+			// 				General
+			//***************************************
 			storeNewlyRegisteredUserInformation: function (userData){
 			var lockedWorldcode = Register_worldcode;
 			var newWorldRef = new Firebase(myFirebaseWorldsRef + "/"+ lockedWorldcode);
@@ -134,6 +141,43 @@ var Edorble =
 			  // Set mixpanel alias
 			},
 			
+			// Create a callback to handle the result of the login after auth. Normally this should never occur.
+			loginAfterRegisterHandler: function (error, authData) {
+			  if (error) {
+			    console.log("Login Failed!", error);
+			  } else {
+			    console.log("Authenticated successfully with payload:", authData);
+				
+				//Setup that upon login the user is redirected to the following page
+				window.location = dashboardpage;
+			  }
+			},
+			
+			//Value monitor of firebase entry
+			monitorWorldCounter: function(){
+				//Firebase value monitors
+				myFirebaseRef.child("worldcounter").on("value", function(snapshot) {
+					Register_worldcode = snapshot.val();
+				});
+			},
+			
+			//***************************************
+			//	Register using Email & Password
+			//***************************************
+			
+			// Create a callback to handle the result of the authentication
+			registerEmailPasswordHandler: function (error, userData) {
+			  if (error) {
+			    	$(Register_idRegisterFeedback).text(error);
+			  } else {
+			    Edorble.Logic.Authorisation.storeNewlyRegisteredUserInformation(userData);
+			    Edorble.Logic.Authorisation.TryToLoginEmailPassword(
+					Register_emailholder, 
+					Register_passwordholder, 
+					Edorble.Logic.Authorisation.loginAfterRegisterHandler); 
+			  }
+			},
+			
 			// Try the login details provided by the user
 			TryToRegisterEmailPassword: function (email, password, registerHandler){
 				// Try to auth using Firebase and with an email/password combination
@@ -146,28 +190,6 @@ var Edorble =
 				}, registerHandler);
 			},
 			
-			// Create a callback to handle the result of the authentication
-			loginHandler: function (error, authData) {
-			  if (error) {
-			    console.log("Login Failed!", error);
-			  } else {
-			    console.log("Authenticated successfully with payload:", authData);
-			  }
-			},
-			
-			// Create a callback to handle the result of the authentication
-			registerHandler: function (error, userData) {
-			  if (error) {
-			    	$(Register_idRegisterFeedback).text(error);
-			  } else {
-			    Edorble.Logic.Authorisation.storeNewlyRegisteredUserInformation(userData);
-			    Edorble.Logic.Authorisation.TryToLoginEmailPassword(
-					Register_emailholder, 
-					Register_passwordholder, 
-					Edorble.Logic.Authorisation.loginHandler); 
-			  }
-			},
-
 			//Holds all business logic when clicking the login button
 			doRegisterEmailPasswordBehavior: function (idRegisterForm, idRegisterUserNameInput, idRegisterPasswordInput){
 				var myForm = $(idRegisterForm);
@@ -176,16 +198,8 @@ var Edorble =
 			  if(isFormValidated){
 			    var email = $(idRegisterUserNameInput).val();
 			    var password = $(idRegisterPasswordInput).val();
-			    Edorble.Logic.Authorisation.TryToRegisterEmailPassword(email, password, Edorble.Logic.Authorisation.registerHandler); 
+			    Edorble.Logic.Authorisation.TryToRegisterEmailPassword(email, password, Edorble.Logic.Authorisation.registerEmailPasswordHandler); 
 			  }
-			},
-			
-			//Value monitor of firebase entry
-			monitorWorldCounter: function(){
-				//Firebase value monitors
-				myFirebaseRef.child("worldcounter").on("value", function(snapshot) {
-					Register_worldcode = snapshot.val();
-				});
 			},
 			
 			//Add a function that takes care of login behavior for edorble
@@ -195,6 +209,44 @@ var Edorble =
 				
 				$(idRegisterButton).click(function (){
 					Edorble.Logic.Authorisation.doRegisterEmailPasswordBehavior(idRegisterForm, idRegisterUserNameInput, idRegisterPasswordInput);
+				});
+								
+				Edorble.Logic.Authorisation.monitorWorldCounter();
+			},
+			
+			//***************************************
+			//	Register using Facebook
+			//***************************************
+			
+			continueFacebookHandler: function(error, authData){
+  			  if (error) {
+  			    	$(Register_idRegisterFacebookFeedback).text(error);
+  			  } else {
+				  	//Pull the email adress from facebook
+				  	Register_emailholder = authData.facebook.email
+				  	Edorble.Logic.Authorisation.storeNewlyRegisteredUserInformation(authData);
+				  
+				  	//Setup that upon login the user is redirected to the following page
+				  	window.location = dashboardpage;
+  			  }
+			}
+			
+			//Holds all business logic when clicking the login facebook button
+			doRegisterFacebookBehavior: function (loginHandler){
+			    myFirebaseRef.authWithOAuthPopup("facebook", 
+			    	continueFacebookHandler, //Logs in using facebook  
+			    	{
+			  			scope: "email" // the permissions requested
+						});
+			},
+			
+			//Add a function that takes care of login behavior for edorble
+			prepareRegisterFacebook: function (idRegisterFacebookButton, idRegisterFacebookFeedback)
+			{
+				Register_idRegisterFacebookFeedback = idRegisterFacebookFeedback;
+				
+				$(idRegisterFacebookButton).click(function (){
+					Edorble.Logic.Authorisation.doRegisterFacebookBehavior();
 				});
 								
 				Edorble.Logic.Authorisation.monitorWorldCounter();
