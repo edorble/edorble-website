@@ -1,13 +1,4 @@
 
-// Create a callback to handle the result of the authentication
-function LoginHandler(error, authData) {
-  if (error) {
-    $("#Login-AuthFeedback").text(error);
-  } else {
-    console.log("Authenticated successfully with payload:", authData);
-  }
-}
-
 //On page load
 $( document ).ready(function() {
 	Edorble.Logic.Authorisation.sendToPageIfAlreadyLoggedIn("http://cederiks-playground.webflow.io/dashboard-prototype");
