@@ -18,6 +18,7 @@ var Register_worldcode = null;
 var Register_idRegisterFeedback = "";
 var Register_idRegisterFacebookFeedback = "";
 var Register_idRegisterTwitterFeedback = "";
+var Register_idRegisterGoogleFeedback = "";
 	
 var Edorble = 
 {
@@ -298,7 +299,7 @@ var Edorble =
 			},
 			
 			//***************************************
-			//	Register using Facebook
+			//	Register using Twitter
 			//***************************************
 			
 			continueTwitterHandler: function(error, authData){
@@ -326,6 +327,44 @@ var Edorble =
 				
 				$(idRegisterTwitterButton).click(function (){
 					Edorble.Logic.Authorisation.doRegisterTwitterBehavior();
+				});
+								
+				Edorble.Logic.Authorisation.monitorWorldCounter();
+			},
+			
+			//***************************************
+			//	Register using Facebook
+			//***************************************
+			
+			continueGoogleHandler: function(error, authData){
+  			  if (error) {
+  			    	$(Register_idRegisterGoogleFeedback).text(error);
+  			  } else {
+				  	//Pull the email adress from facebook
+				  	Register_emailholder = authData.google.email
+				  	Edorble.Logic.Authorisation.storeNewlyRegisteredUserInformation(authData);
+				  
+				  	//Setup that upon login the user is redirected to the following page
+				  	window.location = dashboardpage;
+  			  }
+			},
+			
+			//Holds all business logic when clicking the login facebook button
+			doRegisterGoogleBehavior: function (loginHandler){
+			    myFirebaseRef.authWithOAuthPopup("google", 
+			    	Edorble.Logic.Authorisation.continueGoogleHandler, //Logs in using facebook  
+			    	{
+			  			scope: "email" // the permissions requested
+						});
+			},
+			
+			//Add a function that takes care of login behavior for edorble
+			prepareRegisterGoogle: function (idRegisterGoogleButton, idRegisterGoogleFeedback)
+			{
+				Register_idRegisterGoogleFeedback = idRegisterGoogleFeedback;
+				
+				$(idRegisterGoogleButton).click(function (){
+					Edorble.Logic.Authorisation.doRegisterGoogleBehavior();
 				});
 								
 				Edorble.Logic.Authorisation.monitorWorldCounter();

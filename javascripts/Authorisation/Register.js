@@ -24,4 +24,8 @@ $( document ).ready(function() {
 	//Prepare register using twitter
 	var idTwitterRegisterButton = "#button-register-twitter";
 	Edorble.Logic.Authorisation.prepareRegisterTwitter(idTwitterRegisterButton, idRegisterFeedback);
+	
+	//Prepare register using google
+	var idGoogleRegisterButton = "#button-register-google";
+	Edorble.Logic.Authorisation.prepareRegisterGoogle(idGoogleRegisterButton, idRegisterFeedback);
 });
