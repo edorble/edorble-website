@@ -58,6 +58,9 @@ var Edorble =
 			    $("#Login-AuthFeedback").text(error);
 			  } else {
 			    console.log("Authenticated successfully with payload:", authData);
+				
+				//Setup that upon login the user is redirected to the following page
+				window.location = dashboardpage;
 			  }
 			},
 			
@@ -206,18 +209,6 @@ var Edorble =
 			  // Set mixpanel alias
 			},
 			
-			// Create a callback to handle the result of the login after auth. Normally this should never occur.
-			loginAfterRegisterHandler: function (error, authData) {
-			  if (error) {
-			    console.log("Login Failed!", error);
-			  } else {
-			    console.log("Authenticated successfully with payload:", authData);
-				
-				//Setup that upon login the user is redirected to the following page
-				window.location = dashboardpage;
-			  }
-			},
-			
 			//Value monitor of firebase entry
 			monitorWorldCounter: function(){
 				//Firebase value monitors
@@ -238,8 +229,7 @@ var Edorble =
 			    Edorble.Logic.Authorisation.storeNewlyRegisteredUserInformation(userData);
 			    Edorble.Logic.Authorisation.TryToLoginEmailPassword(
 					Register_emailholder, 
-					Register_passwordholder, 
-					Edorble.Logic.Authorisation.loginAfterRegisterHandler); 
+					Register_passwordholder); 
 			  }
 			},
 			

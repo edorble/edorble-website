@@ -35,7 +35,4 @@ $( document ).ready(function() {
 	
 	var idGoogleLoginButton = "#button-login-google";
 	Edorble.Logic.Authorisation.prepareLoginGoogle(idGoogleLoginButton, idLoginFeedback);
-	
-	//Setup that upon login the user is redirected to the following page
-	Edorble.Logic.Authorisation.redirectToPageOnLogin("http://cederiks-playground.webflow.io/dashboard-prototype");
 });
