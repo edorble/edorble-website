@@ -31,7 +31,7 @@ var Edorble =
 			sendToPageIfAlreadyLoggedIn: function (page){
 			var authData = myFirebaseRef.getAuth();
 			if (authData) {
-			  		window.location = url_dashboardpage;
+			  		window.location = dashboardpage;
 				} 
 			},
 			
