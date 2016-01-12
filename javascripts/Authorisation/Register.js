@@ -18,6 +18,6 @@ $( document ).ready(function() {
 		idRegisterFeedback)
 	
 	//Prepare login using facebook
-	var idFacebookLoginButton = "#button-login-facebook";
+	var idFacebookLoginButton = "#button-register-facebook";
 	Edorble.Logic.Authorisation.prepareRegisterFacebook(idFacebookLoginButton, idRegisterFeedback);
 });
