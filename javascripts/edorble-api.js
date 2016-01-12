@@ -230,7 +230,7 @@ var Edorble =
 			//	Register using Email & Password
 			//***************************************
 			
-			// Create a callback to handle the result of the authentication
+			// Create a callback to handle the result of the registration
 			registerEmailPasswordHandler: function (error, userData) {
 			  if (error) {
 			    	$(Register_idRegisterFeedback).text(error);
@@ -252,7 +252,7 @@ var Edorble =
 				myFirebaseRef.createUser({
 				email    : email,
 				password : password
-				}, registerEmailPasswordHandler);
+				}, Edorble.Logic.Authorisation.registerEmailPasswordHandler);
 			},
 			
 			//Holds all business logic when clicking the login button
