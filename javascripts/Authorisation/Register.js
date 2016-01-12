@@ -17,7 +17,11 @@ $( document ).ready(function() {
 		idRegisterInputPassword, 
 		idRegisterFeedback)
 	
-	//Prepare login using facebook
-	var idFacebookLoginButton = "#button-register-facebook";
-	Edorble.Logic.Authorisation.prepareRegisterFacebook(idFacebookLoginButton, idRegisterFeedback);
+	//Prepare register using facebook
+	var idFacebookRegisterButton = "#button-register-facebook";
+	Edorble.Logic.Authorisation.prepareRegisterFacebook(idFacebookRegisterButton, idRegisterFeedback);
+	
+	//Prepare register using twitter
+	var idTwitterRegisterButton = "#button-register-twitter";
+	Edorble.Logic.Authorisation.prepareRegisterTwitter(idTwitterRegisterButton, idRegisterFeedback);
 });

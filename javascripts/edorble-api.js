@@ -15,6 +15,7 @@ var Register_passwordholder = "";
 var Register_worldcode = null;
 var Register_idRegisterFeedback = "";
 var Register_idRegisterFacebookFeedback = "";
+var Register_idRegisterTwitterFeedback = "";
 	
 var Edorble = 
 {
@@ -247,6 +248,40 @@ var Edorble =
 				
 				$(idRegisterFacebookButton).click(function (){
 					Edorble.Logic.Authorisation.doRegisterFacebookBehavior();
+				});
+								
+				Edorble.Logic.Authorisation.monitorWorldCounter();
+			},
+			
+			//***************************************
+			//	Register using Facebook
+			//***************************************
+			
+			continueTwitterHandler: function(error, authData){
+  			  if (error) {
+  			    	$(Register_idRegisterTwitterFeedback).text(error);
+  			  } else {
+				  	//Pull the email adress from facebook
+				  Register_emailholder = "";
+				  Edorble.Logic.Authorisation.storeNewlyRegisteredUserInformation(authData);
+				  
+				  //Setup that upon login the user is redirected to the following page
+				  window.location = dashboardpage;
+  			  }
+			},
+			
+			//Holds all business logic when clicking the login facebook button
+			doRegisterTwitterBehavior: function (loginHandler){
+			    myFirebaseRef.authWithOAuthPopup("twitter");
+			},
+			
+			//Add a function that takes care of login behavior for edorble
+			prepareRegisterFacebook: function (idRegisterTwitterButton, idRegisterTwitterFeedback)
+			{
+				Register_idRegisterTwitterFeedback = idRegisterTwitterFeedback;
+				
+				$(idRegisterTwitterButton).click(function (){
+					Edorble.Logic.Authorisation.doRegisterTwitterBehavior();
 				});
 								
 				Edorble.Logic.Authorisation.monitorWorldCounter();
