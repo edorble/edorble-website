@@ -30,7 +30,7 @@ $( document ).ready(function() {
 	Edorble.Logic.Authorisation.prepareLoginFacebook(idFacebookLoginButton, idLoginFeedback);
 	
 	//Prepare login using facebook
-	var idTwitterLoginButton = "#button-twitter-facebook";
+	var idTwitterLoginButton = "#button-login-twitter";
 	Edorble.Logic.Authorisation.prepareLoginTwitter(idTwitterLoginButton, idLoginFeedback);
 	
 	//Setup that upon login the user is redirected to the following page

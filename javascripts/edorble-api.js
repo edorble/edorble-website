@@ -103,9 +103,9 @@ var Edorble =
 			//***************************************
 			
 			//Holds all business logic when clicking the login facebook button
-			doLoginFacebookBehavior: function (loginHandler){
+			doLoginFacebookBehavior: function (){
 			    myFirebaseRef.authWithOAuthRedirect("facebook", 
-			    	loginHandler,  
+			    	Edorble.Logic.Authorisation.loginHandler,  
 			    	{
 			  			scope: "email" // the permissions requested
 						});
@@ -117,6 +117,25 @@ var Edorble =
 				
 				$(idFacebookLoginButton).click(function(){
 					Edorble.Logic.Authorisation.doLoginFacebookBehavior();
+				});
+			},
+			
+			//***************************************
+			// 		Login with Twitter
+			//***************************************
+			
+			//Holds all business logic when clicking the login twitter button
+			doLoginTwitterBehavior: function (){
+			    myFirebaseRef.authWithOAuthRedirect("twitter", 
+					Edorble.Logic.Authorisation.loginHandler);
+			},
+			
+			//Preparation binding
+			prepareLoginTwitter: function (idTwitterLoginButton, idLoginFeedback){
+				Login_idLoginFeedback = idLoginFeedback;
+				
+				$(idTwitterLoginButton).click(function(){
+					Edorble.Logic.Authorisation.doLoginTwitterBehavior();
 				});
 			},
 			
