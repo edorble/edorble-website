@@ -141,6 +141,25 @@ var Edorble =
 			},
 			
 			//***************************************
+			// 		Login with Google
+			//***************************************
+			
+			//Holds all business logic when clicking the login google button
+			doLoginGoogleBehavior: function (){
+			    myFirebaseRef.authWithOAuthRedirect("google", 
+					Edorble.Logic.Authorisation.loginHandler);
+			},
+			
+			//Preparation binding
+			prepareLoginGoogle: function (idGoogleLoginButton, idLoginFeedback){
+				Login_idLoginFeedback = idLoginFeedback;
+				
+				$(idGoogleLoginButton).click(function(){
+					Edorble.Logic.Authorisation.doLoginGoogleBehavior();
+				});
+			},
+			
+			//***************************************
 			//***************************************
 			// 				Registration
 			//***************************************

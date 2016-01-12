@@ -29,9 +29,12 @@ $( document ).ready(function() {
 	var idFacebookLoginButton = "#button-login-facebook";
 	Edorble.Logic.Authorisation.prepareLoginFacebook(idFacebookLoginButton, idLoginFeedback);
 	
-	//Prepare login using facebook
+	//Prepare login using twitter
 	var idTwitterLoginButton = "#button-login-twitter";
 	Edorble.Logic.Authorisation.prepareLoginTwitter(idTwitterLoginButton, idLoginFeedback);
+	
+	var idGoogleLoginButton = "#button-login-google";
+	Edorble.Logic.Authorisation.prepareLoginGoogle(idGoogleLoginButton, idLoginFeedback);
 	
 	//Setup that upon login the user is redirected to the following page
 	Edorble.Logic.Authorisation.redirectToPageOnLogin("http://cederiks-playground.webflow.io/dashboard-prototype");
