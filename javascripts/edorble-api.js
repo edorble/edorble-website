@@ -195,7 +195,7 @@ var Edorble =
 					  {
 						  email: Register_emailholder, 
 						  world: lockedWorldcode,
-						  provider: userData.provider
+						  provider: "emailandpassword"
 			          });
 			      //Increment worldcode
 			      myFirebaseRef.child("worldcounter").transaction(function (worldcounter){
