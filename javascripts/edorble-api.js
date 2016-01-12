@@ -276,7 +276,7 @@ var Edorble =
 			},
 			
 			//Add a function that takes care of login behavior for edorble
-			prepareRegisterFacebook: function (idRegisterTwitterButton, idRegisterTwitterFeedback)
+			prepareRegisterTwitter: function (idRegisterTwitterButton, idRegisterTwitterFeedback)
 			{
 				Register_idRegisterTwitterFeedback = idRegisterTwitterFeedback;
 				
