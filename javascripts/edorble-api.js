@@ -55,7 +55,7 @@ var Edorble =
 			// Create a callback to handle the result of the authentication
 			loginHandler: function (error, authData) {
 			  if (error) {
-			    $("#Login-AuthFeedback").text(error);
+			    $(Login_idLoginFeedback).text(error);
 			  } else {
 			    console.log("Authenticated successfully with payload:", authData);
 				
@@ -85,7 +85,7 @@ var Edorble =
 			  if(isFormValidated){
 			    var email = $(idLoginUserNameInput).val();
 			    var password = $(idLoginPasswordInput).val();
-			    Edorble.Logic.Authorisation.TryToLoginEmailPassword(email, password, Edorble.Logic.Authorisation.loginHandler); 
+			    Edorble.Logic.Authorisation.TryToLoginEmailPassword(email, password); 
 			  }
 			},
 			
