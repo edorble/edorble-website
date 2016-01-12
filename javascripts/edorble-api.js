@@ -234,7 +234,7 @@ var Edorble =
 			//Holds all business logic when clicking the login facebook button
 			doRegisterFacebookBehavior: function (loginHandler){
 			    myFirebaseRef.authWithOAuthPopup("facebook", 
-			    	continueFacebookHandler, //Logs in using facebook  
+			    	Edorble.Logic.Authorisation.continueFacebookHandler, //Logs in using facebook  
 			    	{
 			  			scope: "email" // the permissions requested
 						});
