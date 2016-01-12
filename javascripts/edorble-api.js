@@ -229,7 +229,7 @@ var Edorble =
 				  	//Setup that upon login the user is redirected to the following page
 				  	window.location = dashboardpage;
   			  }
-			}
+			},
 			
 			//Holds all business logic when clicking the login facebook button
 			doRegisterFacebookBehavior: function (loginHandler){
