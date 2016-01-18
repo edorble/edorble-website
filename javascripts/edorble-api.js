@@ -171,42 +171,73 @@ var Edorble =
 			//***************************************
 			// 				General
 			//***************************************
+		  	//CLAIM COMPLETED WITH WORLDNAME AND EMAIL 	
+		  	postSignupToVariousServices: function(email, uid, worldname, worldcode){
+
+		  		var d = new Date();
+		  		var month = d.getMonth()+1;
+				var day = d.getDate();
+				if(day <10){day = '0' + day}
+		  		if(month < 10){month = '0' + month}
+	  	  		
+		  		//post signup to various services
+		  		$.get("https://zapier.com/hooks/catch/3odf1t/?category=Site%20Signup&Email%20Address="+encodeURIComponent(email)+"&World%20Name="+encodeURIComponent(worldname));
+		  		mixpanel.alias(uid).html());
+				mixpanel.people.set({
+					"Class Name":worldname,
+					"World Code":worldcode,
+					$email : email,
+					$created : d.getFullYear() + '-' + month + '-' + day,
+					'Group' : 'Beta'
+				});
+
+		  		mixpanel.track("World Claimed");
+			},
+			
+			//Store the information in our backend
 			storeNewlyRegisteredUserInformation: function (userData){
 			var lockedWorldcode = Register_worldcode;
 			var newWorldRef = new Firebase(myFirebaseWorldsRef + "/"+ lockedWorldcode);
-			console.log("new world path " + newWorldRef.toString());
-			  newWorldRef.transaction(function(currentData) {
-			    if (currentData === null) {
-			      return { 
-			        admin_uid: userData.uid,
-			        name: "world " + lockedWorldcode};
+			var worldname = "world " + lockedWorldcode;
+			newWorldRef.transaction(function(currentData) {
+				if (currentData === null) {
+			    	return { 
+			        	admin_uid: userData.uid,
+			        	name: worldname
+					};
 			    } else {
-			      console.log('World already exists: ' + lockedWorldcode);
-			      return; // Abort the transaction.
+			      	console.log('World already exists: ' + lockedWorldcode);
+			      	return; // Abort the transaction.
 			    }
-			  }, function(error, committed, snapshot) {
-			    if (error) {
-			      console.log('Transaction failed abnormally!', error);
+			}, function(error, committed, snapshot) {
+			  	if (error) {
+			    	console.log('Transaction failed abnormally!', error);
 			    } else if (!committed) {
-			      console.log('We aborted the transaction (because world already exists).');
+			      	console.log('We aborted the transaction (because world already exists).');
 			    } else {
-			      console.log('world added! ' + lockedWorldcode );
-			      //add user
-			      var newUserRef = new Firebase(myFirebaseUsersRef + "/" + userData.uid);
-			      console.log("new user to be created: " + newUserRef.toString());
-			      myFirebaseUsersRef.child(userData.uid).set(
-					  {
+			      	console.log('world added! ' + lockedWorldcode );
+			      	//add user
+			      	var newUserRef = new Firebase(myFirebaseUsersRef + "/" + userData.uid);
+			      	console.log("new user to be created: " + newUserRef.toString());
+			      	myFirebaseUsersRef.child(userData.uid).set({
 						  email: Register_emailholder, 
 						  world: lockedWorldcode,
 						  provider: "emailandpassword"
-			          });
-			      //Increment worldcode
-			      myFirebaseRef.child("worldcounter").transaction(function (worldcounter){
-			          return worldcounter + 1;
+			       	});
+					  
+  					//post information to various services
+					Edorble.Logic.Authorisation.postSignupToVariousServices(
+						Register_emailholder, 
+						userData.uid, 
+						worldname, 
+						lockedWorldcode);
+					
+			      	//Increment worldcode
+			      	myFirebaseRef.child("worldcounter").transaction(function (worldcounter){
+			          	return worldcounter + 1;
 			        });
 			    }
 			  });
-			  // Set mixpanel alias
 			},
 			
 			//Value monitor of firebase entry
@@ -280,7 +311,7 @@ var Edorble =
 				  	//Pull the email adress from facebook
 				  	Register_emailholder = authData.facebook.email
 				  	Edorble.Logic.Authorisation.storeNewlyRegisteredUserInformation(authData);
-				  
+					
 				  	//Setup that upon login the user is redirected to the following page
 				  	window.location = dashboardpage;
   			  }

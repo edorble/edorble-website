@@ -12,8 +12,8 @@ $(document).ready(function(){
 	$("#slide1").css("display","block");
  	$("#overlay").css("display","none");
  	
- 	var edorble = new Firebase("https://edorble.firebaseio.com/");
- 	var counter = new Firebase("https://edorble.firebaseio.com/counter");
+ 	var edorble = new Firebase("https://edorble-dev.firebaseio.com/");
+ 	var counter = new Firebase("https://edorble-dev.firebaseio.com/worldcounter");
  	
  	var locked = false;
  	var worldCode = null;
@@ -105,65 +105,6 @@ $(document).ready(function(){
   		
   		//track in mixpanel
   		mixpanel.track("World Claim Click");
-
-	  	//CLAIM COMPLETED WITH WORLDNAME AND EMAIL 	
-	  	$("#continue").on("click", function(){
-  			$("#downloadScreen").css("top","0").css("left","0%").css("display","block").css("opacity","0");
-
-  			//do animations
-			$("#signupForm").animate({"opacity":"0"},350, function(){
-				$("#downloadScreen").animate({"opacity":"1"},350);
-				$("#signupForm").css("display","none");
-			});
-
-  	  		var d = new Date();
-  	  		var month = d.getMonth()+1;
-  			var day = d.getDate();
-  			if(day <10){day = '0' + day}
-  	  		if(month < 10){month = '0' + month}
-		  	  		
-  	  		//post signup to various services
-  	  		$.get("https://zapier.com/hooks/catch/3odf1t/?category=Site%20Signup&Email%20Address="+encodeURIComponent($("#email").val())+"&World%20Name="+encodeURIComponent($("#className").val()));
-  	  		mixpanel.alias($("#worldNameLabel2").html());
-  			mixpanel.people.set({
-  				"Class Name":$("#className").val(),
-  				"World Code":$("#worldNameLabel2").html(),
-  				$email : $("#email").val(),
-  				$created : d.getFullYear() + '-' + month + '-' + day,
-  				'Group' : 'Beta'
-  			});
-
-	  		mixpanel.track("World Claimed");
-  	  			
-			
-			$("#worldLink").attr("href", "http://www.edorble.com/?w="+worldCode);
-			$("#worldLink").html("edorble.com/?w="+worldCode);
-			
-			$("#copyLink").on("click", function(){
-			
-				$("#email").val($("#worldLink").html());
-  				var copyTextarea = document.querySelector('#email');
-  				copyTextarea.select();
-
-  				try {
-    				var successful = document.execCommand('copy');
-    				var msg = successful ? 'successful' : 'unsuccessful';
-    				console.log('Copying text command was ' + msg);
-  				} catch (err) {
-    				console.log('Oops, unable to copy');
-  				}
-				
-			
-				$("#copiedalert").css("opacity","0").css("display","block").animate({opacity:1}, 300, function(){
-					setTimeout(function(){
-						$("#copiedalert").animate({opacity:0}, 500, function(){
-							$("#copiedalert").css("display","none");
-						});
-					}, 500);
-				});
-			});
-			
-  		});	
   		
 	});
 	
