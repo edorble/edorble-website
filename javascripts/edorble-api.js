@@ -59,6 +59,10 @@ var Edorble =
 			  } else {
 			    console.log("Authenticated successfully with payload:", authData);
 				
+				//Tell mixpanel we're logged in
+				mixpanel.identify(authData.uid);
+				mixpanel.track("Login");
+				
 				//Setup that upon login the user is redirected to the following page
 				window.location = dashboardpage;
 			  }
@@ -313,7 +317,7 @@ var Edorble =
 				  	Edorble.Logic.Authorisation.storeNewlyRegisteredUserInformation(authData);
 					
 				  	//Setup that upon login the user is redirected to the following page
-				  	window.location = dashboardpage;
+				  	//window.location = dashboardpage;
   			  }
 			},
 			
