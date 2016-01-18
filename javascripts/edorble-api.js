@@ -7,7 +7,7 @@ var myFirebaseUsersRef =
 	new Firebase("https://edorble-dev.firebaseio.com/users/");
 	
 //General settings
-	var dashboardpage = "http://cederiks-playground.webflow.io/dashboard-prototype";
+	var dashboardpage = "http://edorble.com/dashboard/overview";
 
 //Login.js variables
 	var Login_idLoginFeedback = "";	
