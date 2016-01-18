@@ -98,10 +98,6 @@ $(document).ready(function(){
   		$("#signupForm").css("display","block").css("opacity","0").animate({"opacity":"1"},500);
   		$("#slide1").animate({"opacity":"0"},250);
   		$("#mainslide1").animate({"opacity":"0"},250);
-  		//put a reserve on the world code
-  		counter.transaction(function(count){
-  			return count+1;
-  		});
   		
   		//track in mixpanel
   		mixpanel.track("World Claim Click");
