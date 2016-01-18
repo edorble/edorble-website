@@ -182,7 +182,7 @@ var Edorble =
 	  	  		
 		  		//post signup to various services
 		  		$.get("https://zapier.com/hooks/catch/3odf1t/?category=Site%20Signup&Email%20Address="+encodeURIComponent(email)+"&World%20Name="+encodeURIComponent(worldname));
-		  		mixpanel.alias(uid).html());
+		  		mixpanel.alias(uid);
 				mixpanel.people.set({
 					"Class Name":worldname,
 					"World Code":worldcode,
