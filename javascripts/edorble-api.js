@@ -190,7 +190,7 @@ var Edorble =
 				mixpanel.alias(uid);
 				mixpanel.people.set({
 					"Class Name":worldname,
-					{"World codes": [worldcode]},
+					"World codes": {"code": [worldcode]},
 					$email : email,
 					$created : d.getFullYear() + '-' + month + '-' + day,
 					'Group' : 'Beta'
