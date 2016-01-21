@@ -229,22 +229,26 @@ var Edorble =
 			      	var newUserRef = new Firebase(myFirebaseUsersRef + "/" + userData.uid);
 			      	console.log("new user to be created: " + newUserRef.toString());
 					
-					if(newUserRef == null)
-					{
-				      	newUserRef.child(userData.uid).set(
-							{
-								email: Register_emailholder, 
-								worlds: {
-									lockedWorldcode:true
-								}
-							  	provider: "emailandpassword"
-				       	});
-					}
-					else{
-						newUserRef.update(
-							worlds:{lockedWorldcode:true}
-						)
-					}
+					newUserRef.once('value', function(snap) {
+						var result = snap.val();
+						if(result == null)
+						{
+							console.log("user does not exist");
+					      	newUserRef.child(userData.uid).set(
+								{
+									email: Register_emailholder, 
+									worlds: {
+										lockedWorldcode:true
+									}
+								  	provider: "emailandpassword"
+					       	});
+						}
+						else{
+							console.log("user not exists");
+							newUserRef.update(
+								worlds:{lockedWorldcode:true}
+							)
+						}
 					  
   					//post information to various services
 					Edorble.Logic.Authorisation.postSignupToVariousServices(
