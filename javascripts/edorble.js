@@ -47,7 +47,6 @@ $(document).ready(function(){
  	if(!result.w)
  	{
  		edorble.child("worldcounter").on("value", function(snapshot) {
-			console.log("the value of the worldcounter is different");
 	  	$("#worldCount").html(snapshot.val());
   		if(locked === false)
   			{
