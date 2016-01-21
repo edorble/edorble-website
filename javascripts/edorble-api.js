@@ -239,7 +239,7 @@ var Edorble =
 									email: Register_emailholder, 
 									worlds: {
 										lockedWorldcode:true
-									}
+									},
 								  	provider: "emailandpassword"
 					       	});
 						}
