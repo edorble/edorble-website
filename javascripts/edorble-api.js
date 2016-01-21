@@ -245,9 +245,9 @@ var Edorble =
 						}
 						else{
 							console.log("user not exists");
-							newUserRef.update(
+							newUserRef.update({
 								worlds:{lockedWorldcode:true}
-							)
+							});
 						}
 					  
   					//post information to various services
