@@ -186,7 +186,8 @@ var Edorble =
 	  	  		
 		  		//post signup to various services
 		  		$.get("https://zapier.com/hooks/catch/3odf1t/?category=Site%20Signup&Email%20Address="+encodeURIComponent(email)+"&World%20Name="+encodeURIComponent(worldname));
-		  		mixpanel.alias(uid);
+		  		
+				mixpanel.alias(uid);
 				mixpanel.people.set({
 					"Class Name":worldname,
 					"World Code":worldcode,
@@ -194,8 +195,6 @@ var Edorble =
 					$created : d.getFullYear() + '-' + month + '-' + day,
 					'Group' : 'Beta'
 				});
-
-		  		mixpanel.track("World Claimed");
 			},
 			
 			//Store the information in our backend
@@ -242,21 +241,29 @@ var Edorble =
 										},
 									  	provider: "emailandpassword"
 						       	});
+								
+								//post information on new user to various services
+								Edorble.Logic.Authorisation.postSignupToVariousServices(
+									Register_emailholder, 
+									userData.uid, 
+									worldname, 
+									lockedWorldcode);
 							}
 							else{
 								console.log("user exists");
 								newUserRef.child("worlds").update({
 									[lockedWorldcode]:true
 								});
+								
+								//Identify on mixpanel
+								mixpanel.identify(userData.uid);
+								mixpanel.people.append({
+									"World Code":lockedWorldcode
+								});
 							}
 						});
-				  
-						//post information to various services
-						Edorble.Logic.Authorisation.postSignupToVariousServices(
-							Register_emailholder, 
-							userData.uid, 
-							worldname, 
-							lockedWorldcode);
+
+				  		mixpanel.track("World Claimed");
 				  }
 				});
 			},
