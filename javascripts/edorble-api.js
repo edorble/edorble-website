@@ -245,8 +245,8 @@ var Edorble =
 							}
 							else{
 								console.log("user exists");
-								newUserRef.update({
-									worlds:{[lockedWorldcode]:true}
+								newUserRef.child("worlds").update({
+									[lockedWorldcode]:true
 								});
 							}
 						});
