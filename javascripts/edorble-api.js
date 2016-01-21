@@ -258,7 +258,7 @@ var Edorble =
 							worldname, 
 							lockedWorldcode);
 				  }
-				}
+				});
 			},
 			
 			//Value monitor of firebase entry
