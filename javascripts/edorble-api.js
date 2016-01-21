@@ -200,66 +200,65 @@ var Edorble =
 			
 			//Store the information in our backend
 			storeNewlyRegisteredUserInformation: function (userData){
-			var lockedWorldcode = Register_worldcode;
-			var newWorldRef = new Firebase(myFirebaseWorldsRef + "/"+ lockedWorldcode);
-			var worldname = "world " + lockedWorldcode;
-			newWorldRef.transaction(function(currentData) {
-				if (currentData === null) {
-			    	return { 
-			        	admin_uid: userData.uid,
-			        	name: worldname
-					};
-			    } else {
-			      	console.log('World already exists: ' + lockedWorldcode);
-			      	return; // Abort the transaction.
-			    }
-			}, function(error, committed, snapshot) {
-			  	if (error) {
-			    	console.log('Transaction failed abnormally!', error);
-			    } else if (!committed) {
-			      	console.log('We aborted the transaction (because world already exists).');
-			    } else {
-			      	//Increment worldcode
-			      	myFirebaseRef.child("worldcounter").transaction(function (worldcounter){
-			          	return worldcounter + 1;
-			        });
-					
-			      	console.log('world added! ' + lockedWorldcode );
-			      	//add user
-			      	var newUserRef = new Firebase(myFirebaseUsersRef + "/" + userData.uid);
-			      	console.log("new user to be created: " + newUserRef.toString());
-					
-					newUserRef.once('value', function(snap) {
-						var result = snap.val();
-						if(result == null)
-						{
-							console.log("user does not exist");
-					      	newUserRef.child(userData.uid).set(
-								{
-									email: Register_emailholder, 
-									worlds: {
-										lockedWorldcode:true
-									},
-								  	provider: "emailandpassword"
-					       	});
-						}
-						else{
-							console.log("user not exists");
-							newUserRef.update({
-								worlds:{lockedWorldcode:true}
-							});
-						}
-					  
-  					//post information to various services
-					Edorble.Logic.Authorisation.postSignupToVariousServices(
-						Register_emailholder, 
-						userData.uid, 
-						worldname, 
-						lockedWorldcode);
-					
-			      	
-			    }
-			  });
+				var lockedWorldcode = Register_worldcode;
+				var newWorldRef = new Firebase(myFirebaseWorldsRef + "/"+ lockedWorldcode);
+				var worldname = "world " + lockedWorldcode;
+				newWorldRef.transaction(function(currentData) {
+					if (currentData === null) {
+				    	return { 
+				        	admin_uid: userData.uid,
+				        	name: worldname
+						};
+				    } else {
+				      	console.log('World already exists: ' + lockedWorldcode);
+				      	return; // Abort the transaction.
+				    }
+				}, function(error, committed, snapshot) {
+				  	if (error) {
+				    	console.log('Transaction failed abnormally!', error);
+				    } else if (!committed) {
+				      	console.log('We aborted the transaction (because world already exists).');
+				    } else {
+				      	//Increment worldcode
+				      	myFirebaseRef.child("worldcounter").transaction(function (worldcounter){
+				          	return worldcounter + 1;
+				        });
+				
+				      	console.log('world added! ' + lockedWorldcode );
+				      	//add user
+				      	var newUserRef = new Firebase(myFirebaseUsersRef + "/" + userData.uid);
+				      	console.log("new user to be created: " + newUserRef.toString());
+				
+						newUserRef.once('value', function(snap) {
+							var result = snap.val();
+							if(result == null)
+							{
+								console.log("user does not exist");
+						      	newUserRef.child(userData.uid).set(
+									{
+										email: Register_emailholder, 
+										worlds: {
+											lockedWorldcode:true
+										},
+									  	provider: "emailandpassword"
+						       	});
+							}
+							else{
+								console.log("user not exists");
+								newUserRef.update({
+									worlds:{lockedWorldcode:true}
+								});
+							}
+						});
+				  
+						//post information to various services
+						Edorble.Logic.Authorisation.postSignupToVariousServices(
+							Register_emailholder, 
+							userData.uid, 
+							worldname, 
+							lockedWorldcode);
+				  }
+				}
 			},
 			
 			//Value monitor of firebase entry
