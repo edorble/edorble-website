@@ -256,7 +256,7 @@ var Edorble =
 								
 								//Identify on mixpanel
 								mixpanel.identify(userData.uid);
-								mixpanel.people.append({
+								mixpanel.people.union({
 									"World Code":lockedWorldcode
 								});
 							}
