@@ -238,8 +238,7 @@ var Edorble =
 										email: Register_emailholder, 
 										worlds: {
 											[lockedWorldcode]:true
-										},
-									  	provider: "emailandpassword"
+										}
 						       	});
 								
 								//post information on new user to various services
