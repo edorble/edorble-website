@@ -219,15 +219,32 @@ var Edorble =
 			    } else if (!committed) {
 			      	console.log('We aborted the transaction (because world already exists).');
 			    } else {
+			      	//Increment worldcode
+			      	myFirebaseRef.child("worldcounter").transaction(function (worldcounter){
+			          	return worldcounter + 1;
+			        });
+					
 			      	console.log('world added! ' + lockedWorldcode );
 			      	//add user
 			      	var newUserRef = new Firebase(myFirebaseUsersRef + "/" + userData.uid);
 			      	console.log("new user to be created: " + newUserRef.toString());
-			      	myFirebaseUsersRef.child(userData.uid).set({
-						  email: Register_emailholder, 
-						  world: lockedWorldcode,
-						  provider: "emailandpassword"
-			       	});
+					
+					if(newUserRef == null)
+					{
+				      	newUserRef.child(userData.uid).set(
+							{
+								email: Register_emailholder, 
+								worlds: {
+									lockedWorldcode:true
+								}
+							  	provider: "emailandpassword"
+				       	});
+					}
+					else{
+						newUserRef.update(
+							worlds:{lockedWorldcode:true}
+						)
+					}
 					  
   					//post information to various services
 					Edorble.Logic.Authorisation.postSignupToVariousServices(
@@ -236,10 +253,7 @@ var Edorble =
 						worldname, 
 						lockedWorldcode);
 					
-			      	//Increment worldcode
-			      	myFirebaseRef.child("worldcounter").transaction(function (worldcounter){
-			          	return worldcounter + 1;
-			        });
+			      	
 			    }
 			  });
 			},
