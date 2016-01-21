@@ -233,7 +233,7 @@ var Edorble =
 							if(result == null)
 							{
 								console.log("user does not exist");
-						      	newUserRef.child(userData.uid).set(
+						      	myFirebaseUsersRef.child(userData.uid).set(
 									{
 										email: Register_emailholder, 
 										worlds: {
