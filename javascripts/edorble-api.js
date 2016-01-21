@@ -238,15 +238,15 @@ var Edorble =
 									{
 										email: Register_emailholder, 
 										worlds: {
-											lockedWorldcode:true
+											[lockedWorldcode]:true
 										},
 									  	provider: "emailandpassword"
 						       	});
 							}
 							else{
-								console.log("user not exists");
+								console.log("user exists");
 								newUserRef.update({
-									worlds:{lockedWorldcode:true}
+									worlds:{[lockedWorldcode]:true}
 								});
 							}
 						});
