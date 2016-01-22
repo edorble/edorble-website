@@ -195,7 +195,7 @@ var Edorble =
 					'Group' : 'Beta'
 				});
 				mixpanel.people.union({
-					"World codes":lockedWorldcode
+					"World codes":worldcode
 				});
 			},
 			
