@@ -1,7 +1,7 @@
 
 //On page load
 $( document ).ready(function() {
-	Edorble.Logic.Authorisation.sendToPageIfAlreadyLoggedIn("http://cederiks-playground.webflow.io/dashboard-prototype");
+	Edorble.Logic.Authorisation.sendToPageIfAlreadyLoggedIn("http://edorble.com/dashboard/myedorble");
 	
 	//Prepare the login form if you want to enable loggin in using a form
 	var idLoginButton = '#button-login';
