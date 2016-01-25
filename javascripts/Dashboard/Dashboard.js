@@ -9,9 +9,10 @@ function checkAuthState(){
 var authData = myFirebaseUsersRef.getAuth();
 if (authData) {
   $('#welcome-message').text("Welcome User " + authData.uid);
+  $("#Requires-login-section").css("display","none"); //Hide the 'you need to login' part
 } else {
   $('#welcome-message').text("You need to be logged in for this page");
-  $("#dashboard-section").css("display","none");
+  $("#dashboard-section").css("display","none"); //Hide the 'information you can see when logged in' part
 }
 }
 
