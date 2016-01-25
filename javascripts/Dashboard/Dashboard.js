@@ -11,7 +11,7 @@ if (authData) {
   $('#welcome-message').text("Welcome User " + authData.uid);
 } else {
   $('#welcome-message').text("You need to be logged in for this page");
-  $('#dashboard-section').style.opacity="0.0";
+  $("#dashboard-section").style.opacity="0.0";
 }
 }
 
