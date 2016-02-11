@@ -471,9 +471,12 @@ var Edorble =
 				
 			    user.once("value", function(data) {
 			        var userInfo = data.val();
-					console.log(Object.keys(userInfo.worlds)[0]);
+					//Hack to get the first worldcode out the list. In the future we can provide multiple world support.
+					//Backend is ready for users to claim multiple worlds.
+					var worldcode = Object.keys(userInfo.worlds)[0];
+					
 			        //Bind data to dom
-			        $(viewWorldCode).text(userInfo.world);
+			        $(viewWorldCode).text(worldcode);
 			      });
 			},
 			
