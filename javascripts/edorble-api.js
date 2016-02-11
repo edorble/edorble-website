@@ -8,6 +8,7 @@ var myFirebaseUsersRef =
 	
 //General settings
 	var dashboardpage = "http://edorble.com/dashboard/myedorble";
+	var logoutpage = "http://edorble.com";
 
 //Login.js variables
 	var Login_idLoginFeedback = "";	
@@ -51,6 +52,24 @@ var Edorble =
 			// 				Login
 			//***************************************
 			//***************************************
+			
+			//***************************************
+			// 				Logout
+			//***************************************
+			
+			// Try the login details provided by the user
+			logout: function (){
+				// Try to auth using Firebase and with an email/password combination
+				myFirebaseRef.unauth();
+			  	window.location = logoutpage;
+			},
+			
+			//Preparation binding
+			prepareLogout: function (idLogoutButton){
+				$(idLogoutButton).click(function(){
+					Edorble.Logic.Authorisation.logout();
+				});
+			},
 			
 			// Create a callback to handle the result of the authentication
 			loginHandler: function (error, authData) {
@@ -437,6 +456,17 @@ var Edorble =
 				});
 								
 				Edorble.Logic.Authorisation.monitorWorldCounter();
+			},
+		},
+		Dashboard:
+		{
+			adjustViewBasedOnLoginState: function(idRequiresLoginSection, idDashboardSection){
+				var authData = myFirebaseUsersRef.getAuth();
+				if (authData) {
+					$(idRequiresLoginSection).css("display","none"); //Hide the 'you need to login' part
+				} else {
+					$(idDashboardSection).css("display","none"); //Hide the 'information you can see when logged in' part
+				}
 			},
 		}
 	},
