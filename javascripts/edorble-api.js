@@ -465,7 +465,7 @@ var Edorble =
 				var viewWorldCode = "#data-world-code";
 				
 			  	var user = myFirebaseUsersRef.child(authData.uid);
-				
+				console.log("looking for data");
 			    user.once("value", function(data) {
 			        var userInfo = data.val();
 			        //Bind data to dom
