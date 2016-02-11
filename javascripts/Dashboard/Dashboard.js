@@ -34,8 +34,7 @@ function bindViewData(){
     user.once("value", function(data) {
         var userInfo = data.val();
         //Bind data to dom
-        $("#placeholder-email").text(userInfo.email);
-        $("#placeholder-world").text(userInfo.world);
+        $("#data-world-code").text(userInfo.world);
       });
   }
   else{

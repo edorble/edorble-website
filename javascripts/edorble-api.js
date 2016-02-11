@@ -460,10 +460,27 @@ var Edorble =
 		},
 		Dashboard:
 		{
+			bindDashboardData: function(authData){
+				//define view fields
+				var viewWorldCode = "#data-world-code";
+				
+			  	var user = myFirebaseUsersRef.child(authData.uid);
+				
+			    user.once("value", function(data) {
+			        var userInfo = data.val();
+			        //Bind data to dom
+			        $(viewWorldCode).text(userInfo.world);
+			      });
+			},
+			
 			adjustViewBasedOnLoginState: function(idRequiresLoginSection, idDashboardSection){
 				var authData = myFirebaseUsersRef.getAuth();
 				if (authData) {
-					$(idRequiresLoginSection).css("display","none"); //Hide the 'you need to login' part
+					//Bind the model to the data
+					Edorble.Logic.Dashboard.bindDashboardData(authData);
+					
+					//Hide the 'you need to login' part
+					$(idRequiresLoginSection).css("display","none"); 					
 				} else {
 					$(idDashboardSection).css("display","none"); //Hide the 'information you can see when logged in' part
 				}
