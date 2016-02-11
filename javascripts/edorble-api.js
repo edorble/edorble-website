@@ -466,9 +466,6 @@ var Edorble =
 				
 			  	var user = myFirebaseUsersRef.child(authData.uid);
 				
-			    console.log("uid " + authData.uid);
-			    console.log("user string " + user.toString());
-				
 			    user.once("value", function(data) {
 			        var userInfo = data.val();
 					//Hack to get the first worldcode out the list. In the future we can provide multiple world support.
@@ -478,6 +475,18 @@ var Edorble =
 			        //Bind data to dom
 			        $(viewWorldCode).text(worldcode);
 			      });
+				  
+				$.ajaxSetup({ cache: true });
+				$.getScript('//connect.facebook.net/en_US/sdk.js', function(){
+					FB.init({
+					  appId: '{202707533407670}',
+				      version: 'v2.5' // or v2.0, v2.1, v2.2, v2.3
+				  });     
+				  FB.ui({
+				    method: 'send',
+				    link: 'http://www.nytimes.com/interactive/2015/04/15/travel/europe-favorite-streets.html',
+				  });
+				  });
 			},
 			
 			adjustViewBasedOnLoginState: function(idRequiresLoginSection, idDashboardSection){
