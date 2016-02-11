@@ -468,6 +468,7 @@ var Edorble =
 				console.log("looking for data");
 			    user.once("value", function(data) {
 			        var userInfo = data.val();
+					console.log(userInfo.world);
 			        //Bind data to dom
 			        $(viewWorldCode).text(userInfo.world);
 			      });
