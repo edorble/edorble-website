@@ -463,7 +463,7 @@ var Edorble =
 			bindDashboardData: function(authData){
 				//define view fields
 				var viewWorldCode = "#data-world-code";
-				var idTweetInviteOthersButton = "tweet-invite-others-button";
+				var idTweetInviteOthersButton = "#tweet-invite-others-button";
 				
 			  	var user = myFirebaseUsersRef.child(authData.uid);
 				
