@@ -506,10 +506,9 @@ var Edorble =
 				var urlPart = "&" + url;
 				var textPart = "&" + text;
 				var hashtagPart = "&" + hashtags;
-				
-				//$(idTwitterButton).href = "https://twitter.com/intent/tweet?" + urlPart + textPart + hashtagPart;
+
 				var a = document.getElementById('tweet-invite-others-button'); //or grab it by tagname etc
-				a.href = "somelink url"
+				a.href = "https://twitter.com/intent/tweet?" + urlPart + textPart + hashtagPart;
 			}
 		},
 	},
