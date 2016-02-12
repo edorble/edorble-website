@@ -504,7 +504,9 @@ var Edorble =
 			bindTweetToButton: function(idTwitterButton, url, text, hashtags)
 			{
 				console.log("binding tweet button");
+				console.log(idTwitterButton);
 				var a = $(idTwitterButton); 
+				console.log(a.href);
 				var urlPart = "&" + url;
 				var textPart = "&" + text;
 				var hashtagPart = "&" + hashtags;
