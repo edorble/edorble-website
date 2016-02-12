@@ -503,15 +503,11 @@ var Edorble =
 			//hashtags=<comma separated list of hashtags, with no # on them>
 			bindTweetToButton: function(idTwitterButton, url, text, hashtags)
 			{
-				console.log("binding tweet button");
-				console.log(idTwitterButton);
-				var a = $(idTwitterButton); 
-				console.log(a.href);
 				var urlPart = "&" + url;
 				var textPart = "&" + text;
 				var hashtagPart = "&" + hashtags;
 				
-				a.href = "https://twitter.com/intent/tweet?" + urlPart + textPart + hashtagPart;
+				$(idTwitterButton).href = "https://twitter.com/intent/tweet?" + urlPart + textPart + hashtagPart;
 			}
 		},
 	},
