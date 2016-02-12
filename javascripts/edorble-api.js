@@ -503,9 +503,9 @@ var Edorble =
 			//hashtags=<comma separated list of hashtags, with no # on them>
 			bindTweetToButton: function(idTwitterButton, url, text, hashtags)
 			{
-				var urlPart = "&" + url;
-				var textPart = "&" + text;
-				var hashtagPart = "&" + hashtags;
+				var urlPart = "&url=" + url;
+				var textPart = "&text=" + text;
+				var hashtagPart = "&hashtags=" + hashtags;
 
 				var a = document.getElementById('tweet-invite-others-button'); //or grab it by tagname etc
 				a.href = "https://twitter.com/intent/tweet?" + urlPart + textPart + hashtagPart;
