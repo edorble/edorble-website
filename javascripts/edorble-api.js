@@ -463,6 +463,7 @@ var Edorble =
 			bindDashboardData: function(authData){
 				//define view fields
 				var viewWorldCode = "#data-world-code";
+				var idTweetInviteOthersButton = "tweet-invite-others-button";
 				
 			  	var user = myFirebaseUsersRef.child(authData.uid);
 				
@@ -474,6 +475,11 @@ var Edorble =
 					
 			        //Bind data to dom
 			        $(viewWorldCode).text(worldcode);
+					
+					//Bind twitter info
+					var urlAndWorldCode = "www.edorble.com/?w=" + worldcode;
+					Edorble.Logic.Twitter.bindTweetToButton(idTweetInviteOthersButton, urlAndWorldCode, "Come join me in my edorble world!", "edtech, edchat")
+					
 			      });
 			},
 			
@@ -489,7 +495,22 @@ var Edorble =
 					$(idDashboardSection).css("display","none"); //Hide the 'information you can see when logged in' part
 				}
 			},
-		}
+		},
+		Twitter:
+		{
+			//url=<url to tweet>
+			//text=<text to tweet>
+			//hashtags=<comma separated list of hashtags, with no # on them>
+			bindTweetToButton: function(idTwitterButton, url, text, hashtags)
+			{
+				var a = $(idTwitterButton); 
+				var urlPart = "&" + url;
+				var textPart = "&" + text;
+				var hashtagPart = "&" + hashtags;
+				
+				a.href = "https://twitter.com/intent/tweet?" + urlPart + textPart + hashtagPart;
+			}
+		},
 	},
 	Helpers:
 	{
