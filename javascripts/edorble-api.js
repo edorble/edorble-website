@@ -477,7 +477,7 @@ var Edorble =
 			        $(viewWorldCode).text(worldcode);
 					
 					//Bind twitter info
-					var urlAndWorldCode = "www.edorble.com";//"/?w=" + worldcode;
+					var urlAndWorldCode = "http://www.edorble.com/?w=" + worldcode;
 					Edorble.Logic.Twitter.bindTweetToButton(idTweetInviteOthersButton, urlAndWorldCode, "Come join me in my edorble world!", "edtech, edchat")
 					
 			      });
