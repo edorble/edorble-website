@@ -12,8 +12,8 @@ $(document).ready(function(){
 	$("#slide1").css("display","block");
  	$("#overlay").css("display","none");
  	
- 	var edorble = new Firebase("https://edorble-dev.firebaseio.com/");
- 	var counter = new Firebase("https://edorble-dev.firebaseio.com/worldcounter");
+ 	var edorble = new Firebase("https://edorble.firebaseio.com/");
+ 	var counter = new Firebase("https://edorble.firebaseio.com/worldcounter");
  	
  	var locked = false;
  	var worldCode = null;

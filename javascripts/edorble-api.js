@@ -1,10 +1,10 @@
 //Prepare variables
 var myFirebaseRef = 
-	new Firebase("https://edorble-dev.firebaseio.com/");
+	new Firebase("https://edorble.firebaseio.com/");
 var myFirebaseWorldsRef = 
-	new Firebase("https://edorble-dev.firebaseio.com/worlds/");
+	new Firebase("https://edorble.firebaseio.com/worlds/");
 var myFirebaseUsersRef = 
-	new Firebase("https://edorble-dev.firebaseio.com/users/");
+	new Firebase("https://edorble.firebaseio.com/users/");
 	
 //General settings
 	var dashboardpage = "http://edorble.com/dashboard/myedorble";
