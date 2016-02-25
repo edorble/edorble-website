@@ -77,6 +77,7 @@ var Edorble =
 			loginHandler: function (error, authData) {
 			  if (error) {
 			    $(Login_idLoginFeedback).text(error);
+				Edorble.Helpers.Animation.fadeIn(Login_idLoginFeedback);
 			  } else {
 			   				
 				//Tell mixpanel we're logged in
@@ -92,7 +93,7 @@ var Edorble =
 					{ 	
 						//Inform user he should register first
 						$(Login_idLoginFeedback).text("You are not registered, please claim a world first.");
-						Edorble.Helpers.Animation.showAndDissapear(Login_idLoginFeedback);
+						Edorble.Helpers.Animation.fadeIn(Login_idLoginFeedback);
 					}
 					else{
 						//Setup that upon login the user is redirected to the following page
@@ -548,6 +549,12 @@ var Edorble =
 									5000)
 								}
 							);
+			},
+			fadeIn: function (jqueryID)
+			{
+				$(jqueryID).animate(
+					{opacity:100}, 
+					1000);
 			},
 		},
 		HTML5:
