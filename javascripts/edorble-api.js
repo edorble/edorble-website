@@ -39,7 +39,6 @@ var Edorble =
 					var result = snap.val();
 					return result != null;
 					});
-				} 
 			},
 			
 			// ---- Auth check ----
