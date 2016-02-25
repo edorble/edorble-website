@@ -46,7 +46,7 @@ $(document).ready(function(){
  	//if no student world code, GET AVAILABLE WORLD. Update whenever world is claimed.
  	if(!result.w)
  	{
- 		edorble.child("worldcounter").on("value", function(snapshot) {
+ 		counter.on("value", function(snapshot) {
 	  	$("#worldCount").html(snapshot.val());
   		if(locked === false)
   			{
