@@ -74,6 +74,7 @@ $(document).ready(function(){
 	
 
 	$("#inlineDownload").on("click", function(){
+		console.log("click");
 		downloadApp()
 		window.location=downloadURL;
 	});	
