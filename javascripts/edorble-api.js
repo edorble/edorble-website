@@ -541,14 +541,13 @@ var Edorble =
 			{
 				$(jqueryID).animate(
 					{opacity:100}, 
-					500,
+					1000,
 					function(){
-						setTimeout(
-							function(){
 								$(jqueryID).animate(
 									{opacity:0},
-									500)
-								}, 5000)});
+									5000)
+								}
+							);
 			},
 		},
 		HTML5:
