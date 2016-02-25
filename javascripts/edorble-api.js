@@ -104,7 +104,7 @@ var Edorble =
 					if(result == null)
 					{ 	
 						//Inform user he should register first
-						$(Login_idLoginFeedback).text("You are not registered, please claim a world first.");
+						$(Login_idLoginFeedback).text("You are not registered, please claim a world on the home page first.");
 						$(Login_idLoginFeedback).css("display","block");
 						Edorble.Helpers.Animation.fadeIn(Login_idLoginFeedback);
 					}
