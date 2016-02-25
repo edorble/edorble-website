@@ -295,6 +295,7 @@ var Edorble =
 				//Firebase value monitors
 				myFirebaseCounterRef.on("value", function(snapshot) {
 					Register_worldcode = snapshot.val();
+					console.log(Register_worldcode);
 				});
 			},
 			
