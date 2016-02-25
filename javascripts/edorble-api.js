@@ -48,7 +48,7 @@ var Edorble =
 				
 				console.log("does user exist: " + Edorble.Logic.Authorisation.doesUserExist());
 				
-		      		if(Edorble.Logic.Authorisation.doesUserExist())
+		      		if(Edorble.Logic.Authorisation.doesUserExist(authData))
 					{ 	
 						//Setup that upon login the user is redirected to the following page
 						window.location = dashboardpage;
