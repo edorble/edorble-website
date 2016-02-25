@@ -480,23 +480,12 @@ var Edorble =
 					//Backend is ready for users to claim multiple worlds.
 					var worldcode = Object.keys(userInfo.worlds)[0];
 					
-					//Bind data to dom
-					if(worldcode == null)
-					{
-						$(viewWorldCode).text("No world found, did you already claim a world?");
-						
-						//Bind twitter info
-						var urlAndWorldCode = "http://www.edorble.com";
-						Edorble.Logic.Twitter.bindTweetToButton(idTweetInviteOthersButton, urlAndWorldCode, "Give your class a 3D world!", "edtech, edchat")
+			        //Bind data to dom
+			        $(viewWorldCode).text(worldcode);
 					
-					}
-					else
-					{
-						$(viewWorldCode).text(worldcode);
-						//Bind twitter info
-						var urlAndWorldCode = "http://www.edorble.com/?w=" + worldcode;
-						Edorble.Logic.Twitter.bindTweetToButton(idTweetInviteOthersButton, urlAndWorldCode, "Come join me in my edorble world!", "edtech, edchat")
-					}
+					//Bind twitter info
+					var urlAndWorldCode = "http://www.edorble.com/?w=" + worldcode;
+					Edorble.Logic.Twitter.bindTweetToButton(idTweetInviteOthersButton, urlAndWorldCode, "Come join me in my edorble world!", "edtech, edchat")
 					
 			      });
 			},
