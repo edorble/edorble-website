@@ -74,7 +74,10 @@ $(document).ready(function(){
 	}
 	
 
-
+	$("#inlineDownload").on("click", function(){
+		downloadApp()
+		window.location=downloadURL;
+	});	
 	$("#download2").on("click", function(){
 		downloadApp()
 		window.location=downloadURL;
