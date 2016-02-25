@@ -30,22 +30,30 @@ var Edorble =
 	{
 		Authorisation:
 		{
-			// ---- Auth check ----
-			sendToPageIfAlreadyLoggedIn: function (page){
-			var authData = myFirebaseRef.getAuth();
-			if (authData) {
+			doesUserExist: function(authData)
+			{
 		      	//check if user exists
 		      	var userRef = new Firebase(myFirebaseUsersRef + "/" + authData.uid);
 		
 				userRef.once('value', function(snap) {
 					var result = snap.val();
-					if(result != null)
+					return result != null;
+					});
+				} 
+			},
+			
+			// ---- Auth check ----
+			sendToPageIfAlreadyLoggedIn: function (page){
+			var authData = myFirebaseRef.getAuth();
+			if (authData) {
+				
+				console.log("does user exist: " + Edorble.Logic.Authorisation.doesUserExist());
+				
+		      		if(Edorble.Logic.Authorisation.doesUserExist())
 					{ 	
 						//Setup that upon login the user is redirected to the following page
 						window.location = dashboardpage;
 					}
-					//else do nothing -> user will try login module and be informed he should first register.
-					});
 				} 
 			},
 			
