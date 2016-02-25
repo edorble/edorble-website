@@ -70,7 +70,6 @@ $(document).ready(function(){
 	{
 		downloadURL = macURL;//"https://edorble.blob.core.windows.net/client/Edorble_mac_64bit.zip";
 		OS = "mac";
-
 	}
 	
 
