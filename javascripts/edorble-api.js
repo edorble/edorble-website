@@ -307,6 +307,8 @@ var Edorble =
 			  if (error) {
 			    	$(Register_idRegisterFeedback).text(error);
 			  } else {
+				  mixpanel.track("World Claim Email");
+				  
 			    Edorble.Logic.Authorisation.storeNewlyRegisteredUserInformation(userData);
 			    Edorble.Logic.Authorisation.TryToLoginEmailPassword(
 					Register_emailholder, 
@@ -358,6 +360,8 @@ var Edorble =
   			  if (error) {
   			    	$(Register_idRegisterFacebookFeedback).text(error);
   			  } else {
+				  	mixpanel.track("World Claim Facebook");
+					
 				  	//Pull the email adress from facebook
 				  	Register_emailholder = authData.facebook.email
 				  	Edorble.Logic.Authorisation.storeNewlyRegisteredUserInformation(authData);
@@ -396,12 +400,13 @@ var Edorble =
   			  if (error) {
   			    	$(Register_idRegisterTwitterFeedback).text(error);
   			  } else {
+				  mixpanel.track("World Claim Twitter");
 				  	//Pull the email adress from facebook
 				  Register_emailholder = "";
 				  Edorble.Logic.Authorisation.storeNewlyRegisteredUserInformation(authData);
 				  
 				  //Setup that upon login the user is redirected to the following page
-				  //window.location = dashboardpage; 
+				  window.location = dashboardpage; 
   			  }
 			},
 			
@@ -430,12 +435,13 @@ var Edorble =
   			  if (error) {
   			    	$(Register_idRegisterGoogleFeedback).text(error);
   			  } else {
+				  mixpanel.track("World Claim Google");
 				  	//Pull the email adress from google
 				  Register_emailholder = authData.google.email;
 				  	Edorble.Logic.Authorisation.storeNewlyRegisteredUserInformation(authData);
 				  
 				  	//Setup that upon login the user is redirected to the following page
-				  	//window.location = dashboardpage;
+				  	window.location = dashboardpage;
   			  }
 			},
 			
