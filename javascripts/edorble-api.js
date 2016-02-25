@@ -88,6 +88,7 @@ var Edorble =
 			loginHandler: function (error, authData) {
 			  if (error) {
 			    $(Login_idLoginFeedback).text(error);
+				$(Login_idLoginFeedback).css("display","block");
 				Edorble.Helpers.Animation.fadeIn(Login_idLoginFeedback);
 			  } else {
 			   				
@@ -104,6 +105,7 @@ var Edorble =
 					{ 	
 						//Inform user he should register first
 						$(Login_idLoginFeedback).text("You are not registered, please claim a world first.");
+						$(Login_idLoginFeedback).css("display","block");
 						Edorble.Helpers.Animation.fadeIn(Login_idLoginFeedback);
 					}
 					else{
