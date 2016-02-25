@@ -78,8 +78,7 @@ var Edorble =
 			  if (error) {
 			    $(Login_idLoginFeedback).text(error);
 			  } else {
-			    console.log("Authenticated successfully with payload:", authData);
-				
+			   				
 				//Tell mixpanel we're logged in
 				mixpanel.identify(authData.uid);
 				mixpanel.track("Login");
