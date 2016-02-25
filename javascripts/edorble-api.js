@@ -542,9 +542,11 @@ var Edorble =
 				$(jqueryID).animate(
 					{opacity:100}, 
 					100,
-					function(
+					function(){
 						$(jqueryID).animate(
-							{opacity:0},100)));
+							{opacity:0},
+							100)
+						});
 			},
 		}
 		HTML5:
