@@ -46,7 +46,7 @@ var Edorble =
 			var authData = myFirebaseRef.getAuth();
 			if (authData) {
 				
-				console.log("does user exist: " + Edorble.Logic.Authorisation.doesUserExist());
+				console.log("does user exist: " + Edorble.Logic.Authorisation.doesUserExist(authData));
 				
 		      		if(Edorble.Logic.Authorisation.doesUserExist(authData))
 					{ 	
