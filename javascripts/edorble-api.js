@@ -435,14 +435,14 @@ var Edorble =
 				  	Edorble.Logic.Authorisation.storeNewlyRegisteredUserInformation(authData);
 				  
 				  	//Setup that upon login the user is redirected to the following page
-				  	window.location = dashboardpage;
+				  	//window.location = dashboardpage;
   			  }
 			},
 			
-			//Holds all business logic when clicking the login facebook button
+			//Holds all business logic when clicking the login google button
 			doRegisterGoogleBehavior: function (loginHandler){
 			    myFirebaseRef.authWithOAuthPopup("google", 
-			    	Edorble.Logic.Authorisation.continueGoogleHandler, //Logs in using facebook  
+			    	Edorble.Logic.Authorisation.continueGoogleHandler, //Logs in using google  
 			    	{
 			  			scope: "email" // the permissions requested
 						});
