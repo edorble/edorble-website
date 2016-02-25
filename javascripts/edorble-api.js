@@ -222,6 +222,11 @@ var Edorble =
 			
 			//Store the information in our backend
 			storeNewlyRegisteredUserInformation: function (userData){
+		      	//Put a reserve on the worldcode - Increment worldcode
+		      	myFirebaseCounterRef.transaction(function (worldcounter){
+		          	return worldcounter + 1;
+		        });
+				//Use the now reserved worldcode to create what is required.
 				var lockedWorldcode = Register_worldcode;
 				var newWorldRef = new Firebase(myFirebaseWorldsRef + "/"+ lockedWorldcode);
 				var worldname = "world " + lockedWorldcode;
@@ -241,11 +246,6 @@ var Edorble =
 				    } else if (!committed) {
 				      	console.log('We aborted the transaction (because world already exists).');
 				    } else {
-				      	//Increment worldcode
-				      	myFirebaseCounterRef.transaction(function (worldcounter){
-				          	return worldcounter + 1;
-				        });
-				
 				      	console.log('world added! ' + lockedWorldcode );
 				      	//add user
 				      	var newUserRef = new Firebase(myFirebaseUsersRef + "/" + userData.uid);
