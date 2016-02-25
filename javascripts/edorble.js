@@ -13,7 +13,7 @@ $(document).ready(function(){
  	$("#overlay").css("display","none");
  	
  	var edorble = new Firebase("https://edorble.firebaseio.com/");
- 	var counter = new Firebase("https://edorble.firebaseio.com/worldcounter");
+ 	var counter = new Firebase("https://edorble.firebaseio.com/counter");
  	
  	var locked = false;
  	var worldCode = null;
