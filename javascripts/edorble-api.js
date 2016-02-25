@@ -85,7 +85,7 @@ var Edorble =
 				mixpanel.track("Login");
 				
 				//Setup that upon login the user is redirected to the following page
-				//window.location = dashboardpage;
+				window.location = dashboardpage;
 			  }
 			},
 			
