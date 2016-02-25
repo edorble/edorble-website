@@ -34,7 +34,18 @@ var Edorble =
 			sendToPageIfAlreadyLoggedIn: function (page){
 			var authData = myFirebaseRef.getAuth();
 			if (authData) {
-			  		window.location = dashboardpage;
+		      	//check if user exists
+		      	var userRef = new Firebase(myFirebaseUsersRef + "/" + authData.uid);
+		
+				userRef.once('value', function(snap) {
+					var result = snap.val();
+					if(result != null)
+					{ 	
+						//Setup that upon login the user is redirected to the following page
+						window.location = dashboardpage;
+					}
+					//else do nothing -> user will try login module and be informed he should first register.
+					});
 				} 
 			},
 			
@@ -84,7 +95,7 @@ var Edorble =
 				mixpanel.identify(authData.uid);
 				mixpanel.track("Login");
 				
-		      	//add user
+		      	//check if user exists
 		      	var userRef = new Firebase(myFirebaseUsersRef + "/" + authData.uid);
 		
 				userRef.once('value', function(snap) {
