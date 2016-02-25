@@ -60,7 +60,7 @@ var Edorble =
 				myFirebaseRef.onAuth(function(authData) {
 					  if (authData) {
 					    console.log("Authenticated with uid:", authData.uid);
-					    window.location = page;
+					    window.location = page; 
 					  } else {
 					    console.log("Client unauthenticated.")
 					  }
