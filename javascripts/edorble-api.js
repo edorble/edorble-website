@@ -92,6 +92,7 @@ var Edorble =
 					{ 	
 						//Inform user he should register first
 						$(Login_idLoginFeedback).text("You are not registered, please claim a world first.");
+						Edorble.Helpers.Animation.showAndDissapear(Login_idLoginFeedback);
 					}
 					else{
 						//Setup that upon login the user is redirected to the following page
@@ -534,6 +535,18 @@ var Edorble =
 	},
 	Helpers:
 	{
+		Animation:
+		{
+			showAndDissapear: function (jqueryID)
+			{
+				$(jqueryID).animate(
+					{opacity:100}, 
+					100,
+					function(
+						$(jqueryID).animate(
+							{opacity:0},100)));
+			},
+		}
 		HTML5:
 		{
 			validateForm: function (myForm)
