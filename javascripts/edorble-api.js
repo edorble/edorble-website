@@ -5,6 +5,8 @@ var myFirebaseWorldsRef =
 	new Firebase("https://edorble.firebaseio.com/worlds/");
 var myFirebaseUsersRef = 
 	new Firebase("https://edorble.firebaseio.com/users/");
+var myFirebaseCounterRef = 
+	new Firebase("https://edorble.firebaseio.com/counter");
 	
 //General settings
 	var dashboardpage = "http://edorble.com/dashboard/myedorble";
@@ -240,7 +242,7 @@ var Edorble =
 				      	console.log('We aborted the transaction (because world already exists).');
 				    } else {
 				      	//Increment worldcode
-				      	myFirebaseRef.child("worldcounter").transaction(function (worldcounter){
+				      	myFirebaseCounterRef.transaction(function (worldcounter){
 				          	return worldcounter + 1;
 				        });
 				
@@ -291,7 +293,7 @@ var Edorble =
 			//Value monitor of firebase entry
 			monitorWorldCounter: function(){
 				//Firebase value monitors
-				myFirebaseRef.child("worldcounter").on("value", function(snapshot) {
+				myFirebaseCounterRef.on("value", function(snapshot) {
 					Register_worldcode = snapshot.val();
 				});
 			},

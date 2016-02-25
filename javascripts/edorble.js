@@ -1,7 +1,6 @@
 var worldCode = null;
 
 $(document).ready(function(){
-	console.log("here");
  	///DOM Start state
  	if($(window).width() <= 480)
  	{
