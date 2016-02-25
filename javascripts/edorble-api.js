@@ -423,7 +423,7 @@ var Edorble =
 			},
 			
 			//***************************************
-			//	Register using Facebook
+			//	Register using Google
 			//***************************************
 			
 			continueGoogleHandler: function(error, authData){
