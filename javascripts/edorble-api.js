@@ -37,7 +37,7 @@ var Edorble =
 		
 				userRef.once('value', function(snap) {
 					var result = snap.val();
-					return result !== null;
+					return result != null;
 					});
 			},
 			
