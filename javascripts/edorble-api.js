@@ -548,7 +548,7 @@ var Edorble =
 							100)
 						});
 			},
-		}
+		},
 		HTML5:
 		{
 			validateForm: function (myForm)
