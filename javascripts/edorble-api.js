@@ -83,8 +83,21 @@ var Edorble =
 				mixpanel.identify(authData.uid);
 				mixpanel.track("Login");
 				
-				//Setup that upon login the user is redirected to the following page
-				window.location = dashboardpage;
+		      	//add user
+		      	var userRef = new Firebase(myFirebaseUsersRef + "/" + authData.uid);
+		
+				userRef.once('value', function(snap) {
+					var result = snap.val();
+					if(result == null)
+					{ 	
+						//Inform user he should register first
+						$(Login_idLoginFeedback).text("You are not registered, please claim a world first.");
+					}
+					else{
+						//Setup that upon login the user is redirected to the following page
+						window.location = dashboardpage;
+					}
+				});
 			  }
 			},
 			
