@@ -92,7 +92,11 @@ $(document).ready(function(){
 		mixpanel.track("Download",{"OS":OS});
 	}
 
-  	
+	var authData = edorble.getAuth();
+	if (authData) {
+      	//If user is logged in, change the text on the login button to dashboard
+		$("#claimWorld").text("Dashboard");
+		} 
   	
   	//CLAIM WORLD INITIATED
   	$("#claimWorld").on("click", function(){
