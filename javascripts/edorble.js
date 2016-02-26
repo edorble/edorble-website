@@ -95,7 +95,7 @@ $(document).ready(function(){
 	var authData = edorble.getAuth();
 	if (authData) {
       	//If user is logged in, change the text on the login button to dashboard
-		$("#claimWorld").text("Dashboard");
+		$("#navbar-login").text("Dashboard");
 		} 
   	
   	//CLAIM WORLD INITIATED
