@@ -49,7 +49,7 @@ $(document).ready(function(){
 	  	$("#worldCount").html(snapshot.val());
   		if(locked === false)
   			{
- 			$("#worldNumber").html(snapshot.val());
+ 			$("#worldNumber").html(snapshot.val()+1);
  			$("#finalButtonCode").html(snapshot.val());
  			$("#worldNameLabel2").html(snapshot.val());
  			$("#worldNumber").html(snapshot.val());
