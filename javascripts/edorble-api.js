@@ -394,7 +394,7 @@ var Edorble =
 				  	Edorble.Logic.Authorisation.storeNewlyRegisteredUserInformation(authData);
 					
 				  	//Setup that upon login the user is redirected to the following page
-				  	window.location = dashboardpage;
+				  	//window.location = dashboardpage;
   			  }
 			},
 			
