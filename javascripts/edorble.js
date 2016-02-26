@@ -46,10 +46,10 @@ $(document).ready(function(){
  	if(!result.w)
  	{
  		counter.on("value", function(snapshot) {
-	  	$("#worldCount").html(snapshot.val());
+	  	$("#worldCount").html(snapshot.val()+1);
   		if(locked === false)
   			{
- 			$("#worldNumber").html(snapshot.val()+1);
+ 			$("#worldNumber").html(snapshot.val());
  			$("#finalButtonCode").html(snapshot.val());
  			$("#worldNameLabel2").html(snapshot.val());
  			$("#worldNumber").html(snapshot.val());
