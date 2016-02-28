@@ -73,6 +73,12 @@ $(document).ready(function(){
 	}
 	
 
+
+	$("#downloadEdorble").on("click", function(){
+		console.log("click");
+		downloadApp()
+		window.location=downloadURL;
+	});	
 	$("#inlineDownload").on("click", function(){
 		console.log("click");
 		downloadApp()
