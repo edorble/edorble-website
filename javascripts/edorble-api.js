@@ -28,6 +28,33 @@ var Edorble =
 	Model: true, //no models for now
 	Logic:
 	{
+                World:
+                {
+                        setPassword: function (worldId, password)
+                        {
+                                if(worldId == null || worldId.length == 0)
+                                {
+                                        console.log("setPassword: bad worldId: " + worldId);
+                                        return;
+                                }
+
+                                if(password == null || password.length == 0)
+                                {
+                                        console.log("setPassword: bad password " + password);
+                                        return;
+                                }
+
+                                var ref = new Firebase(myFirebaseWorldsRef + "/" + worldId);
+                                ref.once("value", function(snapshot)
+                                {
+                                    if ( snapshot.exists() === true ) // world exists
+                                    {
+                                        var obj = {}; obj[password] = true;
+                                        ref.child("password").set(obj);
+                                    }
+                                });
+                        },
+                },		
 		Authorisation:
 		{	
 			// ---- Auth check ----
