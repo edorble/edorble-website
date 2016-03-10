@@ -44,6 +44,13 @@ var Edorble =
                                         return;
                                 }
 
+                                if(password == "remove_password")
+                                {
+                                        new Firebase(myFirebaseWorldsRef + "/" + worldId + "/password").remove();
+                                        new Firebase(myFirebaseWorldsRef + "/" + worldId + "/stricted").remove();
+                                        return;
+                                }
+
                                 var ref = new Firebase(myFirebaseWorldsRef + "/" + worldId);
                                 ref.once("value", function(snapshot)
                                 {
@@ -51,6 +58,7 @@ var Edorble =
                                     {
                                         var obj = {}; obj[password] = true;
                                         ref.child("password").set(obj);
+                                        ref.update({stricted : true});
                                     }
                                 });
                         },
