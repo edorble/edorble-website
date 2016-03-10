@@ -492,6 +492,48 @@ var Edorble =
 								
 				Edorble.Logic.Authorisation.monitorWorldCounter();
 			},
+                        //***************************************
+                        //      Change and reset the password
+                        //***************************************
+                        resetPassword : function(uemail)
+                        {
+                            myFirebaseRef.resetPassword({ email: uemail }, function(error) {
+                                    if (error) {
+                                        switch (error.code) {
+                                             case "INVALID_USER":
+                                                console.log("The specified user account does not exist.");
+                                            break;
+                                        default:
+                                            console.log("Error resetting password:", error);
+                                        }
+                                    } else {
+                                        console.log("Password reset email sent successfully!");
+                                    }
+                            });
+                        },
+                        changePassword : function(uemail, oldpsw, newpsw)
+                        {
+                            myFirebaseRef.changePassword({
+                                    email: uemail,
+                                    oldPassword: oldpsw,
+                                    newPassword: newpsw
+                                }, function(error) {
+                                  if (error) {
+                                    switch (error.code) {
+                                      case "INVALID_PASSWORD":
+                                        console.log("The specified user account password is incorrect.");
+                                        break;
+                                      case "INVALID_USER":
+                                        console.log("The specified user account does not exist.");
+                                        break;
+                                      default:
+                                        console.log("Error changing password:", error);
+                                    }
+                                } else {
+                                    console.log("User password changed successfully!");
+                                }
+                            });
+                        },
 		},
 		Dashboard:
 		{
