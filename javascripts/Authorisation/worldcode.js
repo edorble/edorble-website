@@ -71,7 +71,7 @@ engine.on("AttachControls", function()
 
     		console.log("--value--" + worldCodeField.value);
 
-    		    var newWorldRef = new Firebase(myFirebaseWorldsRef + "/"+ worldCodeField.value + "/public/stricted");
+    		    var newWorldRef = new Firebase(myFirebaseWorldsRef + "/"+ worldCodeField.value + "/stricted");
         	    newWorldRef.once('value', function(snap)
 		    {
 			var result = snap.val();
@@ -96,14 +96,14 @@ engine.on("AttachControls", function()
 			if(worldPwdField == null)  
 			    worldPwdField = document.querySelector('#input-world-password');
 
-			if(worldPwdField.value.length < 1)
+			if(worldPwdField == null || worldPwdField.value.length < 1)
 			{
-			    console.log("-too short password-");
+			    console.log("-too short password or worldPwdField is not found-");
 			    return;
 			}
 
     			console.log("-- try world with given password --");
-    			var newWorldPwdRef = new Firebase(myFirebaseWorldsRef + "/"+ worldCodeField.value + "/private/password/" + worldPwdField.value);
+    			var newWorldPwdRef = new Firebase(myFirebaseWorldsRef + "/"+ worldCodeField.value + "/password/" + worldPwdField.value);
         		newWorldPwdRef.once('value', function(snap)
 			{
 			    var result = snap.val();
