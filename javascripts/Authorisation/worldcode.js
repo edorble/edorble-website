@@ -21,7 +21,13 @@ var errorMessage;
 var passField;
 
 //Firebase
-var myFirebaseWorldsRef = new Firebase("https://edorble-dev.firebaseio.com/worlds/");
+var myFirebaseWorldsRef;
+if (typeof FirebaseURL === 'undefined' || FirebaseURL === null)
+     // by default work with dev firebase
+    myFirebaseWorldsRef = new Firebase("https://edorble-dev.firebaseio.com/worlds/");
+else
+    // use given db
+    myFirebaseWorldsRef = new Firebase(FirebaseURL);
 
 //$(document).ready(function(){});
 
