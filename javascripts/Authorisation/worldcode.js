@@ -27,7 +27,7 @@ if (typeof FirebaseURL === 'undefined' || FirebaseURL === null)
     myFirebaseWorldsRef = new Firebase("https://edorble-dev.firebaseio.com/worlds/");
 else
     // use given db
-    myFirebaseWorldsRef = new Firebase(FirebaseURL);
+    myFirebaseWorldsRef = new Firebase(FirebaseURL + "/worlds/");
 
 //$(document).ready(function(){});
 
