@@ -591,7 +591,7 @@ var Edorble =
 					
 			        //Bind data to dom
 			        $(viewWorldCode).text(worldcode);
-					$(viewWolrdUrl).text(urlAndWorldCode);
+					$(viewWorldUrl).text(urlAndWorldCode);
 					
 					//Bind twitter info
 					Edorble.Logic.Twitter.bindTweetToButton(idTweetInviteOthersButton, urlAndWorldCode, "Come join me in my edorble world!", "edtech, edchat")
