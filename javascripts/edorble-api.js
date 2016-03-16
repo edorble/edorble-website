@@ -575,6 +575,7 @@ var Edorble =
 			bindDashboardData: function(authData){
 				//define view fields
 				var viewWorldCode = "#data-world-code";
+				var viewWorldUrl = "#data-world-url";
 				var idTweetInviteOthersButton = "#tweet-invite-others-button";
 				
 			  	var user = myFirebaseUsersRef.child(authData.uid);
@@ -585,11 +586,14 @@ var Edorble =
 					//Backend is ready for users to claim multiple worlds.
 					var worldcode = Object.keys(userInfo.worlds)[0];
 					
+					//Build share Url
+					var urlAndWorldCode = "http://www.edorble.com/?w=" + worldcode;
+					
 			        //Bind data to dom
 			        $(viewWorldCode).text(worldcode);
+					$(viewWolrdUrl).text(urlAndWorldCode);
 					
 					//Bind twitter info
-					var urlAndWorldCode = "http://www.edorble.com/?w=" + worldcode;
 					Edorble.Logic.Twitter.bindTweetToButton(idTweetInviteOthersButton, urlAndWorldCode, "Come join me in my edorble world!", "edtech, edchat")
 					
 			      });
