@@ -205,7 +205,7 @@ engine.on("ErrorMessage", function(errorId, name, message) {
   if(errorId == 5) // password error
   {
 	if(errorName) errorName.innerHTML = "Wrong password";
-	if(errorMessage)	errorMessage.innerHTML = "This world requires right password to enter.";
+	if(errorMessage)	errorMessage.innerHTML = "Sorry, that's not the right password. Give it another try!";
     }    
   else // unknown error
   {
