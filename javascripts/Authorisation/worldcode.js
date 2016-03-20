@@ -119,11 +119,13 @@ engine.on("AttachControls", function()
 			        // password is correct
 			        console.log("-- correct password --");
 			        engine.trigger('OnPlayButtonClick', worldCodeField.value);
+			        engine.trigger('ErrorMessage', -1);
             		    }
             		    else
             		    {
 			        //incorrect password
 			        console.log("-- incorrect password --");
+			        engine.trigger('ErrorMessage', 5);
             		    }
         		});
         	    });
@@ -198,6 +200,12 @@ engine.on("ErrorMessage", function(errorId, name, message) {
   {
 	if(errorName) errorName.innerHTML = "Error when connecting to Lobby";
 	if(errorMessage)	errorMessage.innerHTML = "Connection error. Please contact us at support@edorble.com";
+    }    
+  else
+  if(errorId == 5) // password error
+  {
+	if(errorName) errorName.innerHTML = "Wrong password";
+	if(errorMessage)	errorMessage.innerHTML = "This world requires right password to enter.";
     }    
   else // unknown error
   {
