@@ -1,12 +1,16 @@
 //Prepare variables
-var myFirebaseRef = 
-	new Firebase("https://edorble.firebaseio.com/");
-var myFirebaseWorldsRef = 
-	new Firebase("https://edorble.firebaseio.com/worlds/");
-var myFirebaseUsersRef = 
-	new Firebase("https://edorble.firebaseio.com/users/");
-var myFirebaseCounterRef = 
-	new Firebase("https://edorble.firebaseio.com/counter");
+
+var myFirebaseRef =
+        new Firebase("https://edorble-dev.firebaseio.com/");
+//      new Firebase("https://edorble.firebaseio.com/");
+var myFirebaseWorldsRef =
+        new Firebase(myFirebaseRef + "worlds/");
+var myFirebaseUsersRef =
+        new Firebase(myFirebaseRef + "users/");
+var myFirebaseCounterRef =
+        new Firebase(myFirebaseRef + "counter");
+
+var worldMapsPath = "public/WorldMaps/";
 	
 //General settings
 	var dashboardpage = "http://edorble.com/dashboard/myedorble";
@@ -30,24 +34,17 @@ var Edorble =
 	{
                 World:
                 {
-                        setPassword: function (worldId, password)
+                        SetPassword: function (worldId, password)
                         {
                                 if(worldId == null || worldId.length == 0)
                                 {
-                                        console.log("setPassword: bad worldId: " + worldId);
+                                        console.error("SetPassword: bad worldId.");
                                         return;
                                 }
 
                                 if(password == null || password.length == 0)
                                 {
-                                        console.log("setPassword: bad password " + password);
-                                        return;
-                                }
-
-                                if(password == "remove_password")
-                                {
-                                        new Firebase(myFirebaseWorldsRef + "/" + worldId + "/password").remove();
-                                        new Firebase(myFirebaseWorldsRef + "/" + worldId + "/stricted").remove();
+                                        console.error("SetPassword: bad password.");
                                         return;
                                 }
 
@@ -56,10 +53,59 @@ var Edorble =
                                 {
                                     if ( snapshot.exists() === true ) // world exists
                                     {
+                                        if(password == "remove_password")
+                                        {
+                                            new Firebase(myFirebaseWorldsRef + "/" + worldId + "/password").remove();
+                                            new Firebase(myFirebaseWorldsRef + "/" + worldId + "/stricted").remove();
+                                            return;
+                                        }
+
                                         var obj = {}; obj[password] = true;
                                         ref.child("password").set(obj);
                                         ref.update({stricted : true});
                                     }
+                                    else
+                                        console.error("SetPassword: World " + worldId + " does not exist.");
+                                });
+                        },
+                        SetMap: function (worldId, mapId)
+                        {
+                                if(worldId == null || worldId.length == 0)
+                                {
+                                        console.error("SetMap: null or empty worldId.");
+                                        return;
+                                }
+
+                                if(mapId == null || mapId.length == 0)
+                                {
+                                        console.error("SetMap: null or empty mapId.");
+                                        return;
+                                }
+
+                                var ref = new Firebase(myFirebaseWorldsRef + "/" + worldId);
+                                ref.once("value", function(snapshot)
+                                {
+                                    if ( snapshot.exists() === true ) // world exists
+                                    {
+                                        if(mapId.toLowerCase() == "default")
+                                        {
+                                            new Firebase(myFirebaseWorldsRef + "/" + worldId + "/MapId").remove();
+                                            return;
+                                        }
+
+                                        var mapref = new Firebase(myFirebaseRef + worldMapsPath + "/" + mapId);
+                                        mapref.once("value", function(mapsnapshot)
+                                        {
+                                            if ( mapsnapshot.exists() === true ) // map exists
+                                            {
+                                                ref.update({'MapId' : mapId});
+                                            }
+                                            else
+                                                console.error("SetMap: mapId does not exists: " + mapId);
+                                        });
+                                    }
+                                    else
+                                        console.error("SetMap: worldId does not exists: " + worldId);
                                 });
                         },
                 },		
