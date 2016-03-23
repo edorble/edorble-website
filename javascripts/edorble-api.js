@@ -1,8 +1,8 @@
 //Prepare variables
 
 var myFirebaseRef =
-        new Firebase("https://edorble-dev.firebaseio.com/");
-//      new Firebase("https://edorble.firebaseio.com/");
+//        new Firebase("https://edorble-dev.firebaseio.com/");
+      new Firebase("https://edorble.firebaseio.com/");
 var myFirebaseWorldsRef =
         new Firebase(myFirebaseRef + "worlds/");
 var myFirebaseUsersRef =
