@@ -1,25 +1,45 @@
-//header#banner.hero-unit
-  .container
-    h1 'Allo, 'Allo!
-    p.lead Kick-start your next web app with Angular Fullstack
-    img(src='assets/images/yeoman.png', alt='I\'m Yeoman')
-
-.container
-  .row
-    .col-md-8.col-md-offset-2
-      h2(style="text-align:center;color:#888") WORK IN PROGRESS
-      .col-md-offset-2
-        img(src="assets/images/cone.svg", style="width:75%")
-      //h1.page-header Features:
-      //ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='thing in $ctrl.awesomeThings')
-        li
-          a(href='#', uib-tooltip='{{thing.info}}')
-            | {{thing.name}}
-            button.close(type='button', ng-click='$ctrl.deleteThing(thing)') &times;
-
-  //form.thing-form
-    label Syncs in realtime across clients
-    p.input-group
-      input.form-control(type='text', placeholder='Add a new thing here.', ng-model='$ctrl.newThing')
-      span.input-group-btn
-        button.btn.btn-primary(type='submit', ng-click='$ctrl.addThing()') Add New
+#navBar.w-clearfix.navbarcontainer
+  .nav-menu
+    a.w-inline-block.inline-download-link.noborder(href='pricing.html')
+      div Pricing
+    a.w-inline-block.inline-download-link.noborder(href='dashboard/login.html')
+      #navbar-login Login
+    a#inlineDownload.w-inline-block.inline-download-link(href='#')
+      div Download
+    a.w-inline-block.navlinks(href='http://support.edorble.com')
+      img.navlinks-image(width='25', src='assets/images/500px-Question_mark_white-transparent.svg.png')
+    a.w-inline-block.navlinks(href='http://facebook.com/edorble')
+      img.navlinks-image(width='25', src='assets/images/Facebook.svg')
+    a.w-inline-block.navlinks(href='http://twitter.com/edorble')
+      img.navlinks-image(width='25', src='assets/images/Twitter.svg')
+    a.w-inline-block.navlinks(href='#MAIL', mailbutton='1')
+      img.navlinks-image(width='25', src='assets/images/Email.svg')
+    a#download2.download-link(href='#') Download
+  .brand
+    a.w-inline-block(href='index.html')
+      img#logo.brand-logo(width='175', src='assets/images/Edorble-TextOnly-White.png')
+      img.logo-icon(width='66', src='assets/images/Edorble-LogoOnly.png', data-ix='new-interaction')
+      .beta Beta
+.videocontainer
+  #bgVideo.bgvideo
+    .video-overlay
+    #bgVideoHolder.bg-video-holder.hidevideo
+#mainslide1.w-section.hero-content.video-overlay-version.slide1
+  div
+    h1.hero Your 3D World Awaits.
+    a.w-inline-block.button.hero-button(href='#')
+      img.play-button(width='30', src='assets/images/Play%20button.png')
+      .button-text How it works
+.w-section.patchersection
+  .w-container.loadingbar
+    .w-row.patchercolumn
+      .w-col.w-col-11.w-col-medium-6.w-col-small-6.w-col-tiny-6.patchercolumn-1
+        #progressbartextfield.progressbar-text(data-ix='loading-fade-loop') Edorble is loading ...
+        .progress-bar-container
+          .progressbar-fill
+      .w-col.w-col-1.w-col-medium-6.w-col-small-6.w-col-tiny-6
+        a.w-button.patcher-play-button(href='#') Go!
+//- script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js')
+//- script(type='text/javascript', src='js/webflow.js')
+//if lte IE 9
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js')
