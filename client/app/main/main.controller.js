@@ -3,15 +3,18 @@
 angular.module('launcherApp')
   .controller('MainController', function ($scope) {
 
-    console.log(window.engine);
-
-
     // dom element - progress bar
     var progressbarFill;
     var goButton;
     var progressText;
-    var macURL;
-    var winURL;
+    // var macURL;
+    // var winURL;
+    // 
+    $scope.progressBarTextField = 'Edorble is loading ...'
+
+    angular.element(document).ready(function () {
+        mixpanel.track("Application Launched");
+    });
 
     // $( document ).ready(function() {
     //   mixpanel.track("Application Launched");
@@ -19,9 +22,8 @@ angular.module('launcherApp')
 
     // remove old go button for new launcher
     engine.on("RemoveGoButton", function(state, percent) {
-
       if(goButton == null)
-        goButton = document.querySelector('a.w-button.patcher-play-button');    
+        goButton = document.querySelector('a.w-button.patcher-play-button');
         if(goButton)
         {
           //  read old GO button pos
@@ -38,7 +40,8 @@ angular.module('launcherApp')
       
       if(state == 1)
       { 
-        $( "#progressbartextfield" ).text( "Looking for updates ..." );
+        $scope.progressBarTextField = "Looking for updates ...";
+        // $( "#progressbartextfield" ).text( "Looking for updates ..." );
         
         if(goButton == null)
           goButton = document.querySelector('a.w-button.patcher-play-button');    
@@ -91,7 +94,9 @@ angular.module('launcherApp')
       else
         if(state == 2)
         {
-          $( "#progressbartextfield" ).text( "Downloading updates ..." );
+          $scope.progressBarTextField = "Downloading updates ...";
+
+          // $( "#progressbartextfield" ).text( "Downloading updates ..." );
           // 2- downloading updates, updates 3 times per second   
           //console.log("UpdateState: state " + state + ", percent " + percent + "%");
           if(progressbarFill != null)
@@ -108,7 +113,10 @@ angular.module('launcherApp')
       else
         if(state == 3)
         {
-          $( "#progressbartextfield" ).text( "Ready! Click the button to launch Edorble." );
+
+          $scope.progressBarTextField = "Ready! Click the button to launch Edorble.";
+
+          // $( "#progressbartextfield" ).text( "Ready! Click the button to launch Edorble." );
           // 3- ready
           if(goButton)
           {
@@ -126,8 +134,10 @@ angular.module('launcherApp')
       else
         if(state == 4)
         {
+          $scope.progressBarTextField = "An error occured. Please go to www.support.edorble.com";
+
           // 4- fail
-          $( "#progressbartextfield" ).text( "An error occured. Please go to www.support.edorble.com" );
+          // $( "#progressbartextfield" ).text( "An error occured. Please go to www.support.edorble.com" );
         } 
       else  
         {
