@@ -30,3 +30,31 @@ Run `grunt build` for building and `grunt serve` for preview.
 ## Testing
 
 Running `npm test` will run the unit tests with karma.
+
+
+### Pushing to Docker
+
+We use Dokku (https://github.com/dokku/dokku) for deployment to Digital Ocean. Dokku is a platform similar to Heroku based on Docker. 
+
+Following is an example to push the code to launcher:
+
+1. Run `grunt --force` to create a new build.
+ 
+2. The build creates a `dist` folder, which has all the production ready code minified and compressed.
+ 
+3. Change folder `cd dist`
+ 
+4. The first time you deploy, you need to add a git root in this folder, so `git init`
+ 
+5. `git add .`
+ 
+6. `git remote add staging dokku@staging.edorble.com:launcher` 
+ 
+7. `git commit -m 'new build'`
+
+8. `git push staging master`
+
+And you are all set!
+
+Questions? krishna@bitbakery.io
+
