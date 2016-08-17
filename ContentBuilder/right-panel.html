@@ -1,0 +1,54 @@
+<html lang="en-US">
+<head>
+    <meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="css/core.css" />
+	<script type="text/javascript" src="http://dev.edorble.com/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="http://dev.edorble.com/js/coherent.js"></script>
+	<script type="text/javascript">
+
+		// every stored link should have unique id, it filled in to this script from unity when user clicks on some link in left panel
+	  var Id = ""; // unique Id from array in lift-panel.html
+		var Icon = ""; // links icon
+		var Title = ""; // links title
+		var Description = ""; 
+		
+		//receive data for fill in the HTML template
+		engine.on("OnReceiveData", function (id, json_string)
+		{
+			console.log("OnReceiveData " + id + ", json_string " + json_string);		
+			if(id==null || id===false)
+					return;  // wrong data input
+			
+			var arr_from_json = JSON.parse( json_string );
+			
+			Id = id;
+		    Icon = arr_from_json[0];
+			Title = arr_from_json[1];
+			Description = arr_from_json[2];;
+			
+			console.log( "OnReceiveData " + Id + ", linkIcon " + Icon + ", title " +  Title + ", desc " + Description);
+			
+			FillInData();
+		});
+
+		// fill in this HTML template
+		function FillInData()
+		{
+			var obj = $("#icon");
+			obj.removeClass();
+			obj.addClass(Icon);
+		
+			$("#title").html(Title);
+			$("#description").html(Description);
+		}
+		
+	</script>	
+</head>
+<body width=200 height=512 class=yellow>
+<table>
+<tr><td id="title" class="myTitle">...</td><td id="icon" class="myIcon"></td></tr>
+<tr><td colspan=2>&nbsp;</td></tr>
+<tr><td id="description" class="myDescription" colspan=2>...</td></tr>
+</table>
+</body>
+</html>
