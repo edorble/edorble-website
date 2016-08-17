@@ -1,0 +1,67 @@
+
+
+/*html,body,div,table,tr,td {  -webkit-user-select: none; user-select: none; }*/
+/*body { opacity: 0.5;}		*/
+	
+.bigText { font-size: 20pt; }
+.yellow { background-color: yellow; }
+.green { background-color: green; }
+
+table { border-collapse:collapse;  background-color: rgba(200, 200, 200, 0.4); height:100%;}
+table#links  td { width:70px; height:70px;}
+
+.iconAdd {
+    background-image: url("../i/Add_Dragging_Icon.png");    
+	background-size: 70px 70px;
+	background-repeat: no-repeat;
+}
+
+.iconLink {
+    background-image: url("../i/Link_Icon.png");    
+	background-size: 70px 70px;
+	background-repeat: no-repeat;
+}
+
+.iconVideo {
+    background-image: url("../i/Video_Icon.png");    
+	background-size: 70px 70px;
+	background-repeat: no-repeat;
+}
+
+.iconPicture{
+    background-image: url("../i/Picture_Icon.png");    
+	background-size: 70px 70px;
+	background-repeat: no-repeat;
+}
+
+.iconAssessment{
+    background-image: url("../i/Assessment_Icon.png");    
+	background-size: 70px 70px;
+	background-repeat: no-repeat;
+}
+
+.iconPresentation {
+    background-image: url("../i/Presentation_Icon.png");    
+	background-size: 70px 70px;
+	background-repeat: no-repeat;
+}
+
+.iconExitWebcast {
+    background-image: url("../i/ExitWebcast_Icon.png");
+	background-size: 70px 70px;
+	background-repeat: no-repeat;
+}
+
+
+.myTitle{  font-size: 20pt; width:90px; height:90px; background-color: green; }
+.myIcon { 
+	background-image: url("../i/Link_Icon.png"); 
+	background-size: 95px 95px; 
+	background-repeat: no-repeat;
+	background-color: orange;
+}
+.myDescription { 
+	width:200px; height:100%;
+	background-color: red;
+	vertical-align: text-top;
+}
