@@ -2,11 +2,12 @@
 <head>
     <meta charset="utf-8" />
 	<link rel="stylesheet" type="text/css" href="css/core.css" />
-	<script type="text/javascript" src="http://dev.edorble.com/js/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="http://dev.edorble.com/js/coherent.js"></script>
+	<script type="text/javascript" src="javascript/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="javascript/coherent.js"></script>
 	<script type="text/javascript">
 
-    // the set of info fore every link should be filled in from FireBase
+		var WorldcodeId = ""; // current worldcode
+	
 		var linksData = new Array();		
 		linksData[0] = '["iconLink", "George Orwell. 1984", "It was a bright cold day in April, and the clocks were striking thirteen. Winston Smith, his chin nuzzled into his breast in an effort to escape the vile wind, slipped quickly through the glass doors of Victory Mansions, though not quickly enough to prevent a swirl of gritty dust from entering along with him. <br><br>The hallway smelt of boiled cabbage and old rag mats."]';
 		linksData[1] = '["iconVideo", "Independence day 2", "We always knew they were coming back. The next epic chapter delivers global catastrophe on an unimaginable scale. Using recovered alien technology, the nations of Earth have collaborated on an immense defence program to protect the planet. But nothing can prepare us for the aliens’ advanced and unprecedented force."]';
@@ -77,6 +78,14 @@
 			obj.removeClass("iconLink");
 			obj.addClass("iconAdd");
 		});
+
+		// Unity sends there a worldcode just after interface is finished to load in Unity
+		engine.on("OnWorldcodeSet", function (value)
+		{
+			console.log( "OnWorldcodeSet " + value );
+			WorldcodeId = value;
+		});
+		
 	</script>	
 </head>
 <body>
