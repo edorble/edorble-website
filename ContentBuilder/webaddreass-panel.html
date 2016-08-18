@@ -72,6 +72,25 @@
 			console.log( "OnSetURL: value " +  value);		
 			$("#AddressBar").val(value)
 		});
+		
+		// deactivate the hand icon and drag option
+		function RemoveHand()
+		{
+			var obj = $("#Drag");			
+			obj.removeClass("iconDrag");
+			obj.removeClass("source");
+		}
+
+		// activate the hand icon and drag option
+		function AddHand()
+		{
+			var obj = $("#Drag");
+			obj.removeClass("iconDrag");
+			obj.removeClass("source");
+			obj.addClass("iconDrag");
+			obj.addClass("source");
+		}
+		
 	</script>	
 </head>
 <body>
