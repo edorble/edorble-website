@@ -1,0 +1,90 @@
+<html lang="en-US">
+<head>
+    <meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="css/core.css" />
+	<script type="text/javascript" src="javascript/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="javascript/coherent.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+	
+			$(".source").mousedown(
+				function (event)
+				{
+					console.log( "address  " +  $("#AddressBar").val());
+					engine.trigger('OnSourceClicked', "0", $("#AddressBar").val());	
+				}
+			);
+			
+			$("#Back").click(
+				function (event)
+				{
+					engine.trigger('OnHistoryBack');
+				}
+			);			
+			
+			$("#Forward").click(
+				function (event)
+				{
+					engine.trigger('OnHistoryForward');
+				}
+			);
+			
+			$("#Play").click(
+				function (event)
+				{
+					engine.trigger('OnOpenURL');
+				}
+			);
+			
+			$("#Reload").click(
+				function (event)
+				{
+					engine.trigger('OnReload');
+				}
+			);			
+
+			$("#AddressBar").keyup(
+				function (event)
+				{					
+					//there should be: 
+					//1) do not send empty web address
+					engine.trigger('OnAddressChaged', $("#AddressBar").val()); // Value (string)
+				}
+			);
+						
+			$("#Back, #Forward, #Drag, #Play, #Reload").mouseenter(function() {
+				engine.trigger('OnMouseEnter', 1); // 1 - show hand cursor
+			})
+			.mouseleave(function() {
+				engine.trigger('OnMouseLeave'); // back to normal cursor
+			});
+			
+			$("#AddressBar").mouseenter(function() {
+				engine.trigger('OnMouseEnter', 2); // 1 - show mouse cursor for the text input 
+			})
+			.mouseleave(function() {
+				engine.trigger('OnMouseLeave'); // back to normal cursor
+			});			
+		});
+		
+		engine.on("OnSetURL", function (value)
+		{
+			console.log( "OnSetURL: value " +  value);		
+			$("#AddressBar").val(value)
+		});
+	</script>	
+</head>
+<body>
+<table id="WebAddressBar" width=100%>
+<tr>
+	<td id="Back" class="iconBack"></td>
+	<td id="Forward" class="iconForward"></td>
+	<!--td width=10px>&nbsp;</td-->
+	<td id="Drag" class="iconDrag source" style="width:100px;left:20px;position:relative"></td>
+	<td><input id=AddressBar type=text style="width:620px;height:70px;text-align:left;font-size:20pt;padding-left:10px" placeholder="Enter the webaddress here" value="http://edorble.com/applications/overview"/></td>
+	<td id="Play" class="destination iconPlay"></td>
+	<td id="Reload" class="iconReload"></td>
+</tr>
+</table>
+</body>
+</html>
