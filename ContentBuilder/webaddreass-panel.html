@@ -4,7 +4,9 @@
 	<link rel="stylesheet" type="text/css" href="css/core.css" />
 	<script type="text/javascript" src="javascript/jquery-1.7.2.min.js"></script>
 	<script type="text/javascript" src="javascript/coherent.js"></script>
-	<script type="text/javascript">
+	<script type="text/javascript">\
+	
+		var WorldcodeId = ""; // current worldcode	
 		$(document).ready(function() {
 	
 			$(".source").mousedown(
@@ -71,6 +73,13 @@
 		{
 			console.log( "OnSetURL: value " +  value);		
 			$("#AddressBar").val(value)
+		});
+		
+		// Unity sends there a worldcode just after interface is finished to load in Unity
+		engine.on("OnWorldcodeSet", function (value)
+		{
+			console.log( "OnWorldcodeSet " + value );
+			WorldcodeId = value;
 		});
 		
 		// deactivate the hand icon and drag option
