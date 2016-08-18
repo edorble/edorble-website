@@ -9,6 +9,7 @@
 
 table { border-collapse:collapse;  background-color: rgba(200, 200, 200, 0.4); height:100%;}
 table#links  td { width:70px; height:70px;}
+table#WebAddressBar  td { width:70px; height:70px;}
 
 .iconAdd {
     background-image: url("../i/Add_Dragging_Icon.png");    
@@ -48,6 +49,36 @@ table#links  td { width:70px; height:70px;}
 
 .iconExitWebcast {
     background-image: url("../i/ExitWebcast_Icon.png");
+	background-size: 70px 70px;
+	background-repeat: no-repeat;
+}
+
+.iconForward {
+    background-image: url("../i/Forward_Browser.png");
+	background-size: 70px 70px;
+	background-repeat: no-repeat;
+}
+
+.iconBack {
+    background-image: url("../i/Back_Browser.png");
+	background-size: 70px 70px;
+	background-repeat: no-repeat;
+}
+
+.iconDrag {
+    background-image: url("../i/DragDrop_Icon.png");
+	background-size: 70px 70px;
+	background-repeat: no-repeat;
+}
+
+.iconReload {
+    background-image: url("../i/LoadPage_Browser.png");
+	background-size: 70px 70px;
+	background-repeat: no-repeat;
+}
+
+.iconPlay {
+    background-image: url("../i/Play_Icon.png");
 	background-size: 70px 70px;
 	background-repeat: no-repeat;
 }
