@@ -2,15 +2,17 @@
 <head>
     <meta charset="utf-8" />
 	<link rel="stylesheet" type="text/css" href="css/core.css" />
-	<script type="text/javascript" src="http://dev.edorble.com/js/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="http://dev.edorble.com/js/coherent.js"></script>
+	<script type="text/javascript" src="javascript/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="javascript/coherent.js"></script>
 	<script type="text/javascript">
 
-		// every stored link should have unique id, it filled in to this script from unity when user clicks on some link in left panel
-	  var Id = ""; // unique Id from array in lift-panel.html
-		var Icon = ""; // links icon
-		var Title = ""; // links title
-		var Description = ""; 
+		var WorldcodeId = ""; // current worldcode	
+		
+		// every stored link should have unique id, it filled in this script by unity when user clicks on some link in left panel
+	    	var Id = "";
+		var Icon = "";
+		var Title = "";
+		var Description = "";
 		
 		//receive data for fill in the HTML template
 		engine.on("OnReceiveData", function (id, json_string)
@@ -41,6 +43,13 @@
 			$("#title").html(Title);
 			$("#description").html(Description);
 		}
+		
+		// Unity sends there a worldcode just after interface is finished to load in Unity
+		engine.on("OnWorldcodeSet", function (value)
+		{
+			console.log( "OnWorldcodeSet " + value );
+			WorldcodeId = value;
+		});
 		
 	</script>	
 </head>
