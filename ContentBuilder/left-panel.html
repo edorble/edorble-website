@@ -63,6 +63,8 @@
 			obj.removeClass("iconAdd");
 			obj.removeClass("iconLink");
 			obj.addClass("iconLink");
+			
+			StoreScreenLinkToFirebase(id, value);
 		});
 
 		engine.on("OnLinkCleared", function (id)
@@ -77,6 +79,8 @@
 			obj.removeClass("iconAdd");
 			obj.removeClass("iconLink");
 			obj.addClass("iconAdd");
+			
+			RemoveScreenLink(id);
 		});
 
 		// Unity sends there a worldcode just after interface is finished to load in Unity
@@ -86,6 +90,16 @@
 			WorldcodeId = value;
 		});
 		
+		function StoreScreenLinkToFirebase(id, url)
+		{
+			// insert them to the firebase
+		}
+
+		function RemoveScreenLink(id)
+		{
+			// remove it from the firebase
+		}
+				
 	</script>	
 </head>
 <body>
