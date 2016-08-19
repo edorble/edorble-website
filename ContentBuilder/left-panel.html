@@ -33,7 +33,7 @@
 			
 			//Fill links from firebase
 			fb.child('worldContent/' + worldcodeId 
-										//+ 'worldMap/' + mapId 
+										//+ '/Maps/' + mapId 
 										+ '/Regions/' + regionId 
 										+ '/Screens/' + screenId 
 										+ '/links' ).once("value", function(snap) {   
@@ -43,11 +43,11 @@
 											console.log(theLinks);
 											console.log(theLinks.linkOne.Url);
 										
-			links[0] = theLinks.linkOne.Url;
-			links[1] = theLinks.linkTwo.Url;
-			links[2] = theLinks.linkThree.Url;
-			links[3] = theLinks.linkFour.Url;
-			links[4] = theLinks.linkFive.Url;
+			if(theLinks.linkOne.Url != null) { links[0] = theLinks.linkOne.Url; };
+			if(theLinks.linkTwo.Url != null) { links[1] = theLinks.linkTwo.Url; };
+			if(theLinks.linkThree.Url != null) { links[2] = theLinks.linkThree.Url; };
+			if(theLinks.linkFour.Url != null) { links[3] = theLinks.linkFour.Url; };
+			if(theLinks.linkFive.Url != null) { links[4] = theLinks.linkFive.Url; };
 			
 			//testing
 			console.log("first Link: " + links[0]);
