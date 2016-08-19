@@ -6,7 +6,9 @@
 	<script type="text/javascript" src="javascript/coherent.js"></script>
 	<script type="text/javascript">
 
+		
 		var WorldcodeId = ""; // current worldcode
+		var ScreenId = ""; // unique num of the screen in WorldcodeId
 	
 		var linksData = new Array(); // linksData[id] -> JSON data for right panel, Unity will not parse this array and sends it tio the right panel as-is
 		linksData[0] = '["iconLink", "George Orwell. 1984", "It was a bright cold day in April, and the clocks were striking thirteen. Winston Smith, his chin nuzzled into his breast in an effort to escape the vile wind, slipped quickly through the glass doors of Victory Mansions, though not quickly enough to prevent a swirl of gritty dust from entering along with him. <br><br>The hallway smelt of boiled cabbage and old rag mats."]';
@@ -17,31 +19,31 @@
 		
 		var links = new Object(); // contains relation links[id] -> URL for webscreen
 		$(document).ready(function() {
-	
+		
 			$(".destination").mouseup(
 				function (event)
 				{
-					var attrId = event.target.id;
-					engine.trigger('OnDestinationUP', attrId);						
+					var id = event.target.id; // it is the same as link id
+					engine.trigger('OnDestinationUP', id);						
 				}
 			);
 
 			$(".destination").mousedown(
 				function (event)
 				{
-					var attrId = event.target.id;
-					engine.trigger('OnLinkDown', attrId);						
+					var id = event.target.id; // it is the same as link id
+					engine.trigger('OnLinkDown', id);						
 				}
 			);
 			
 			$(".destination").click(
 				function (event)
 				{
-					var attrId = event.target.id;
-					if (links.hasOwnProperty(attrId)) 
+					var id = event.target.id; // it is the same as link id
+					if (links.hasOwnProperty(id)) 
 					{
-						//console.log( "objId " + attrId + ", " + links[attrId]);
-						engine.trigger('OnLinkClicked', links[attrId], attrId, linksData[Math.floor(Math.random() * linksData.length)]);
+						//console.log( "objId " + id + ", " + links[id]);
+						engine.trigger('OnLinkClicked', links[id], id, linksData[Math.floor(Math.random() * linksData.length)]);
 					}
 				}
 			);
@@ -51,20 +53,20 @@
 				{
 					engine.trigger('OnExitWebcastClicked');
 				}
-			);			
+			);
 		});
 		
-		engine.on("OnReceiveData", function (id, value)
+		engine.on("OnReceiveData", function (id, url)
 		{
-			console.log( "OnReceiveData " + id + ", value " +  value);		
-			links[id] = value;
+			console.log( "OnReceiveData " + id + ", url " +  url);		
+			links[id] = url;
 			
 			var obj = $("#" + id);			
 			obj.removeClass("iconAdd");
 			obj.removeClass("iconLink");
 			obj.addClass("iconLink");
 			
-			StoreScreenLinkToFirebase(id, value);
+			StoreScreenLinkToFirebase(id, url);
 		});
 
 		engine.on("OnLinkCleared", function (id)
@@ -83,23 +85,24 @@
 			RemoveScreenLink(id);
 		});
 
-		// Unity sends there a worldcode just after interface is finished to load in Unity
-		engine.on("OnWorldcodeSet", function (value)
+		// Unity sends there data just after interface is finished loading in Unity
+		engine.on("OnBackendReady", function (worldcodeId, screenId)
 		{
-			console.log( "OnWorldcodeSet " + value );
-			WorldcodeId = value;
+			console.log( "OnBackendReady LP: " + worldcodeId + ", screen " + screenId);
+			WorldcodeId = worldcodeId;
+			ScreenId = screenId;
 		});
 		
 		function StoreScreenLinkToFirebase(id, url)
 		{
-			// insert them to the firebase
+			// insert them to the Firebase, use WorldcodeId and ScreenId
 		}
 
 		function RemoveScreenLink(id)
 		{
-			// remove it from the firebase
+			// remove it from the Firebase, use WorldcodeId and ScreenId
 		}
-				
+		
 	</script>	
 </head>
 <body>
