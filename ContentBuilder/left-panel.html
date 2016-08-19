@@ -32,35 +32,34 @@
 			console.log( "Loading links from firebase: " + worldcodeId + ", screen " + screenId);
 			
 			//Fill links from firebase
-			var theLinks = fb.child('worldContent/' + worldcodeId 
+			fb.child('worldContent/' + worldcodeId 
 										//+ 'worldMap/' + mapId 
 										+ '/Regions/' + regionId 
 										+ '/Screens/' + screenId 
-										+ '/links' );
+										+ '/links' ).once(“value”, function(snap) {   
+											
+											var theLinks = snap.val()
 										
-			var testObject = fb.child('worldContent/' + worldcodeId 
-										//+ 'worldMap/' + mapId 
-										+ '/Regions/' + regionId 
-										+ '/Screens/' + screenId 
-										+ '/links/linkOne');
+											console.log(theLinks);
+											console.log(theLinks.linkOne.Url);
 										
-										console.log("testobject: " + testObject.Url);
-										
-			links[0] = theLinks.child('linkOne').Url;
-			links[1] = theLinks.child('linkTwo').Url;
-			links[2] = theLinks.child('linkThree').Url;
-			links[3] = theLinks.child('linkFour').Url;
-			links[4] = theLinks.child('linkFive').Url;
+			links[0] = theLinks.linkOne.Url;
+			links[1] = theLinks.linkTwo.Url;
+			links[2] = theLinks.linkThree.Url;
+			links[3] = theLinks.linkFour.Url;
+			links[4] = theLinks.linkFive.Url;
 			
 			//testing
 			console.log("first Link: " + links[0]);
 			
 			//I think this part has to move to right panel and updating as well for editing
-			linksData[0] = '[' + theLinks.child('linkOne').Type + ',' + theLinks.child('linkOne').title + ',' + theLinks.child('linkOne').Description + ']';
-			linksData[1] = '[' + theLinks.child('linkTwo').Type + ',' + theLinks.child('linkTwo').title + ',' + theLinks.child('linkTwo').Description + ']';
-			linksData[2] = '[' + theLinks.child('linkThree').Type + ',' + theLinks.child('linkThree').title + ',' + theLinks.child('linkThree').Description + ']';
-			linksData[3] = '[' + theLinks.child('linkFour').Type + ',' + theLinks.child('linkFour').title + ',' + theLinks.child('linkFour').Description + ']';
-			linksData[4] = '[' + theLinks.child('linkFive').Type + ',' + theLinks.child('linkFive').title + ',' + theLinks.child('linkFive').Description + ']';
+			//linksData[0] = '[' + theLinks.child('linkOne').Type + ',' + theLinks.child('linkOne').title + ',' + theLinks.child('linkOne').Description + ']';
+			//linksData[1] = '[' + theLinks.child('linkTwo').Type + ',' + theLinks.child('linkTwo').title + ',' + theLinks.child('linkTwo').Description + ']';
+			//linksData[2] = '[' + theLinks.child('linkThree').Type + ',' + theLinks.child('linkThree').title + ',' + theLinks.child('linkThree').Description + ']';
+			//linksData[3] = '[' + theLinks.child('linkFour').Type + ',' + theLinks.child('linkFour').title + ',' + theLinks.child('linkFour').Description + ']';
+			//linksData[4] = '[' + theLinks.child('linkFive').Type + ',' + theLinks.child('linkFive').title + ',' + theLinks.child('linkFive').Description + ']';
+			
+			});
 			
 			//testing
 			console.log("first Data JSON: " + linksData[0]);
