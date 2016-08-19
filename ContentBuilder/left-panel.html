@@ -57,6 +57,8 @@
 					engine.trigger('OnExitWebcastClicked');
 				}
 			);
+			
+			$.storage('clear'); //clear coherent cache, needs only during developing
 		});
 		
 		engine.on("OnReceiveData", function (id, url)
