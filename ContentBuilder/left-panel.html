@@ -147,12 +147,12 @@
 		});
 
 		// Unity sends there data just after interface is finished loading in Unity
-		engine.on("OnBackendReady", function (worldcodeId, screenId)
+		engine.on("OnBackendReady", function (worldcodeId, regionId, screenId)
 		{
 			console.log( "OnBackendReady LP: " + worldcodeId + ", screen " + screenId);
 			WorldcodeId = worldcodeId;
 			MapId = "greenscene" //TODO Dmitrii please add MapID
-			RegionId = 1;//TODO Dmitrii please add regionID
+			RegionId = regionId;
 			ScreenId = screenId;
 			
 			LoadLinksFromFireBase(WorldcodeId, MapId, RegionId, ScreenId)
