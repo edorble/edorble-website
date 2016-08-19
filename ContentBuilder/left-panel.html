@@ -47,20 +47,20 @@
 											{
 												if(theLinks.linkOne.Url != null) 
 													{ 
-														links[0] = theLinks.linkOne.Url; 
+														links[0] = theLinks.linkOne.url; 
 													};
 													
 													linksData[0] = theLinks.linkOne;
 											}
 			
-			//if(theLinks.linkTwo.Url != null) { links[1] = theLinks.linkTwo.Url; };
-			//if(theLinks.linkThree.Url != null) { links[2] = theLinks.linkThree.Url; };
-			//if(theLinks.linkFour.Url != null) { links[3] = theLinks.linkFour.Url; };
-			//if(theLinks.linkFive.Url != null) { links[4] = theLinks.linkFive.Url; };
+			//if(theLinks.linkTwo.url != null) { links[1] = theLinks.linkTwo.url; };
+			//if(theLinks.linkThree.url != null) { links[2] = theLinks.linkThree.url; };
+			//if(theLinks.linkFour.url != null) { links[3] = theLinks.linkFour.url; };
+			//if(theLinks.linkFive.url != null) { links[4] = theLinks.linkFive.url; };
 			
 			//testing
 			console.log("first Link: " + links[0]);
-			consle.log("first data: " + linksData[0];);
+			consle.log("first data: " + linksData[0]);
 			
 			//I think this part has to move to right panel and updating as well for editing
 			//linksData[0] = '[' + theLinks.child('linkOne').Type + ',' + theLinks.child('linkOne').title + ',' + theLinks.child('linkOne').Description + ']';
@@ -176,10 +176,10 @@
 			if(id == 4) linkName = 'linkFive';
 			
 			fb.child('worldContent/' + WorldcodeId 
-										+ 'worldMap/' + MapId 
+										+ '/Maps/' + MapId 
 										+ '/Regions/' + RegionId 
 										+ '/Screens/' + ScreenId
-				 						+ '/links/'+ linkName + 'url').set(url);
+				 						+ '/links/'+ linkName + '/url').set(url);
 		}
 
 		function RemoveScreenLink(id)
@@ -194,7 +194,7 @@
 			
 			// remove it from the Firebase, use WorldcodeId and ScreenId
 			fb.child('worldContent/' + WorldcodeId 
-								+ 'worldMap/' + MapId 
+								+ '/Maps/' + MapId 
 								+ '/Regions/' + RegionId 
 								+ '/Screens/' + ScreenId
 	 							+ '/links/'+ linkName).remove();
