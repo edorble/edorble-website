@@ -64,6 +64,9 @@
 				}
 			);
 			
+			//for debugging
+			LoadLinksFromFirebase("greenscene","greenscene",1,1);
+			
 		});
 		
 		engine.on("OnReceiveData", function (id, url)
@@ -99,17 +102,23 @@
 		engine.on("OnBackendReady", function (worldcodeId, screenId)
 		{
 			console.log( "OnBackendReady LP: " + worldcodeId + ", screen " + screenId);
-			//WorldcodeId = worldcodeId;
-			WorldcodeId = "greenscene";
+			WorldcodeId = worldcodeId;
 			MapId = "greenscene" //TODO Dmitrii please add MapID
 			RegionId = 1;//TODO Dmitrii please add regionID
 			ScreenId = screenId;
 			
+			LoadLinksFromFireBase(WorldcodeId, MapId, RegionId, ScreenId)
+		});
+		
+		function LoadLinksFromFireBase(worldcodeId, mapId, regionId, screenId)
+		{
+			console.log( "Loading links from firebase: " + worldcodeId + ", screen " + screenId);
+			
 			//Fill links from firebase
-			var theLinks = fb.child('worldContent/' + WorldcodeId 
-										//+ 'worldMap/' + MapId 
-										+ '/Regions/' + RegionId 
-										+ '/Screens/' + ScreenId 
+			var theLinks = fb.child('worldContent/' + worldcodeId 
+										//+ 'worldMap/' + mapId 
+										+ '/Regions/' + regionId 
+										+ '/Screens/' + screenId 
 										+ '/links/' );
 										
 			links[0] = theLinks.child('linkOne').Url;
@@ -119,7 +128,7 @@
 			links[4] = theLinks.child('linkFive').Url;
 			
 			//testing
-			console.log(links[0]);
+			console.log("first Link: " + links[0]);
 			
 			//I think this part has to move to right panel and updating as well for editing
 			linksData[0] = '[' + theLinks.child('linkOne').Type + ',' + theLinks.child('linkOne').title + ',' + theLinks.child('linkOne').Description + ']';
@@ -129,8 +138,8 @@
 			linksData[4] = '[' + theLinks.child('linkFive').Type + ',' + theLinks.child('linkFive').title + ',' + theLinks.child('linkFive').Description + ']';
 			
 			//testing
-			console.log(linksData[0]);
-		});
+			console.log("first Data JSON: " + linksData[0]);
+		}
 		
 		function StoreScreenLinkToFirebase(id, url)
 		{
