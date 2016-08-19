@@ -118,6 +118,9 @@
 			links[3] = theLinks.child('linkFour').Url;
 			links[4] = theLinks.child('linkFive').Url;
 			
+			//testing
+			console.log(links[0]);
+			
 			//I think this part has to move to right panel and updating as well for editing
 			linksData[0] = '[' + theLinks.child('linkOne').Type + ',' + theLinks.child('linkOne').title + ',' + theLinks.child('linkOne').Description + ']';
 			linksData[1] = '[' + theLinks.child('linkTwo').Type + ',' + theLinks.child('linkTwo').title + ',' + theLinks.child('linkTwo').Description + ']';
@@ -125,6 +128,8 @@
 			linksData[3] = '[' + theLinks.child('linkFour').Type + ',' + theLinks.child('linkFour').title + ',' + theLinks.child('linkFour').Description + ']';
 			linksData[4] = '[' + theLinks.child('linkFive').Type + ',' + theLinks.child('linkFive').title + ',' + theLinks.child('linkFive').Description + ']';
 			
+			//testing
+			console.log(linksData[0]);
 		});
 		
 		function StoreScreenLinkToFirebase(id, url)
