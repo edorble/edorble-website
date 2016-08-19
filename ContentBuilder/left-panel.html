@@ -105,9 +105,10 @@
 			
 			//Fill links from firebase
 			var theLinks = fb.child('worldContent/' + WorldcodeId 
-										+ 'worldMap/' + MapId 
+										//+ 'worldMap/' + MapId 
 										+ '/Regions/' + RegionId 
-										+ '/Screens/' + ScreenId);
+										+ '/Screens/' + ScreenId 
+										+ '/links/' +);
 										
 			links[0] = theLinks.child('linkOne').Url;
 			links[1] = theLinks.child('linkTwo').Url;
