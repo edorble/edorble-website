@@ -6,10 +6,11 @@
 	<script type="text/javascript" src="javascript/coherent.js"></script>
 	<script type="text/javascript">
 
-		var WorldcodeId = ""; // current worldcode	
+		var WorldcodeId = ""; // current worldcode
+		var ScreenId = ""; // unique num of the screen in WorldcodeId
 		
-		// every stored link should have unique id, it filled in this script by unity when user clicks on some link in left panel
-	    	var Id = "";
+		// every stored link should have unique id (at least inside the left panel), it filled in this script by unity when user clicks on some link in left panel
+	    var Id = ""; // link id
 		var Icon = "";
 		var Title = "";
 		var Description = "";
@@ -33,7 +34,7 @@
 			FillInData();
 		});
 
-		// fill in this HTML template
+		// fill in data to this HTML template
 		function FillInData()
 		{
 			var obj = $("#icon");
@@ -42,18 +43,21 @@
 		
 			$("#title").html(Title);
 			$("#description").html(Description);
+			
+			$("#InfoPanel").show(); // show info, it not displayed by default
 		}
 		
-		// Unity sends there a worldcode just after interface is finished to load in Unity
-		engine.on("OnWorldcodeSet", function (value)
+		// Unity sends there data just after interface is finished loading in Unity
+		engine.on("OnBackendReady", function (worldcodeId, screenId)
 		{
-			console.log( "OnWorldcodeSet " + value );
-			WorldcodeId = value;
+			console.log( "OnBackendReady LP: " + worldcodeId + ", screen " + screenId);
+			WorldcodeId = worldcodeId;
+			ScreenId = screenId;
 		});
-		
+
 	</script>	
 </head>
-<body width=200 height=512 class=yellow>
+<body id=InfoPanel width=200 height=512 class=yellow>
 <table>
 <tr><td id="title" class="myTitle">...</td><td id="icon" class="myIcon"></td></tr>
 <tr><td colspan=2>&nbsp;</td></tr>
