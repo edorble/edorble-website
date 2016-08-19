@@ -38,6 +38,14 @@
 										+ '/Screens/' + screenId 
 										+ '/links' );
 										
+			var testObject = fb.child('worldContent/' + worldcodeId 
+										//+ 'worldMap/' + mapId 
+										+ '/Regions/' + regionId 
+										+ '/Screens/' + screenId 
+										+ '/links/linkOne');
+										
+										console.log("testobject: " testObject.Url);
+										
 			links[0] = theLinks.child('linkOne').Url;
 			links[1] = theLinks.child('linkTwo').Url;
 			links[2] = theLinks.child('linkThree').Url;
