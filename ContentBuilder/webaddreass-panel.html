@@ -6,7 +6,9 @@
 	<script type="text/javascript" src="javascript/coherent.js"></script>
 	<script type="text/javascript">
 	
-		var WorldcodeId = ""; // current worldcode	
+		var WorldcodeId = ""; // current worldcode
+		var ScreenId = ""; // unique num of the screen in WorldcodeId
+
 		$(document).ready(function() {
 	
 			$(".source").mousedown(
@@ -68,20 +70,30 @@
 				engine.trigger('OnMouseLeave'); // back to normal cursor
 			});
 			
-
+			$("#AddressBar").keypress(
+					function(event) 
+					{
+						if (event.which == 13) {
+							event.preventDefault();
+							engine.trigger('OnOpenURL');
+						}
+					}
+				);
+	
 		});
 		
-		engine.on("OnSetURL", function (value)
+		engine.on("OnSetURL", function (url)
 		{
-			console.log( "OnSetURL: value " +  value);		
-			$("#AddressBar").val(value)
+			console.log( "OnSetURL: url " +  url);		
+			$("#AddressBar").val(url)
 		});
 		
-		// Unity sends there a worldcode just after interface is finished to load in Unity
-		engine.on("OnWorldcodeSet", function (value)
+		// Unity sends there data just after interface is finished loading in Unity
+		engine.on("OnBackendReady", function (worldcodeId, screenId)
 		{
-			console.log( "OnWorldcodeSet: " + value );
-			WorldcodeId = value;
+			console.log( "OnBackendReady LP: " + worldcodeId + ", screen " + screenId);
+			WorldcodeId = worldcodeId;
+			ScreenId = screenId;
 		});
 		
 		// deactivate the hand icon and drag option
