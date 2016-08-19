@@ -58,7 +58,6 @@
 				}
 			);
 			
-			$.storage('clear'); //clear coherent cache, needs only during developing
 		});
 		
 		engine.on("OnReceiveData", function (id, url)
@@ -107,7 +106,7 @@
 		{
 			// remove it from the Firebase, use WorldcodeId and ScreenId
 		}
-		
+		$.storage('clear'); //clear coherent cache, needs only during developing
 	</script>	
 </head>
 <body>
