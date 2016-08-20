@@ -134,8 +134,8 @@
 			links[id] = url;
 			
 			var obj = $("#" + id);			
-			obj.removeClass("iconAdd");
-			obj.removeClass("iconLink");
+			obj.removeClass(); //clear aLL classes
+			obj.addClass("destination");
 			obj.addClass("iconLink");
 			
 			StoreScreenLinkToFirebase(id, url);
@@ -150,8 +150,8 @@
 			}
 			
 			var obj = $("#" + id);			
-			obj.removeClass("iconAdd");
-			obj.removeClass("iconLink");
+			obj.removeClass(); //clear aLL classes
+			obj.addClass("destination");
 			obj.addClass("iconAdd");
 			
 			RemoveScreenLink(id);
@@ -209,6 +209,26 @@
 								+ '/Regions/' + RegionId 
 								+ '/Screens/' + ScreenId
 	 							+ '/links/'+ linkName).remove();
+		}
+		
+		function UpdateTableIcons() //update table icons
+		{
+			for(i=1; i < 7; i++) //we have 6 icons
+			{
+				var obj = $("#d" + i);			
+				obj.removeClass(); //clear aLL classes
+				obj.addClass("destination");
+				if (typeof linksData[i] !== 'undefined' && linksData[i] !== null) 
+				{
+					var arr_from_json = JSON.parse( linksData[i] );
+					if (Array.isArray(arr_from_json))
+						obj.addClass(arr_from_json[0]);
+					else
+						obj.addClass("iconAdd");
+				}
+				else
+					obj.addClass("iconAdd");
+			}
 		}
 		
 		//$.storage('clear'); //clear coherent cache, needs only during developing
