@@ -32,47 +32,59 @@
 			console.log( "Loading links from firebase: " + worldcodeId + ", screen " + screenId);
 			
 			//Fill links from firebase
-			fb.child('worldContent/' + worldcodeId 
+			if(fb.child('worldContent/' + worldcodeId 
 										+ '/Maps/' + mapId 
 										+ '/Regions/' + regionId 
 										+ '/Screens/' + screenId 
-										+ '/links' ).once("value", function(snap) {   
+			+ '/links' ).existis())
+			{
+				fb.child('worldContent/' + worldcodeId 
+											+ '/Maps/' + mapId 
+											+ '/Regions/' + regionId 
+											+ '/Screens/' + screenId 
+											+ '/links' ).once("value", function(snap) {   
 											
-											var theLinks = snap.val()
+												var theLinks = snap.val()
 										
-											console.log(theLinks);
-											console.log(theLinks.linkOne.Url);
+												console.log(theLinks);
+												console.log(theLinks.linkOne.Url);
 								
-											if(theLinks.linkOne != null)
-											{
-												if(theLinks.linkOne.Url != null) 
-													{ 
-														links[0] = theLinks.linkOne.url; 
-													};
+												if(theLinks.linkOne != null)
+												{
+													if(theLinks.linkOne.Url != null) 
+														{ 
+															links[0] = theLinks.linkOne.url; 
+														};
 													
-													linksData[0] = theLinks.linkOne;
-											}
+														linksData[0] = theLinks.linkOne;
+												}
 			
-			//if(theLinks.linkTwo.url != null) { links[1] = theLinks.linkTwo.url; };
-			//if(theLinks.linkThree.url != null) { links[2] = theLinks.linkThree.url; };
-			//if(theLinks.linkFour.url != null) { links[3] = theLinks.linkFour.url; };
-			//if(theLinks.linkFive.url != null) { links[4] = theLinks.linkFive.url; };
+				//if(theLinks.linkTwo.url != null) { links[1] = theLinks.linkTwo.url; };
+				//if(theLinks.linkThree.url != null) { links[2] = theLinks.linkThree.url; };
+				//if(theLinks.linkFour.url != null) { links[3] = theLinks.linkFour.url; };
+				//if(theLinks.linkFive.url != null) { links[4] = theLinks.linkFive.url; };
 			
-			//testing
-			console.log("first Link: " + links[0]);
-			console.log("first data: " + linksData[0]);
+				//testing
+				console.log("first Link: " + links[0]);
+				console.log("first data: " + linksData[0]);
 			
-			//I think this part has to move to right panel and updating as well for editing
-			//linksData[0] = '[' + theLinks.child('linkOne').Type + ',' + theLinks.child('linkOne').title + ',' + theLinks.child('linkOne').Description + ']';
-			//linksData[1] = '[' + theLinks.child('linkTwo').Type + ',' + theLinks.child('linkTwo').title + ',' + theLinks.child('linkTwo').Description + ']';
-			//linksData[2] = '[' + theLinks.child('linkThree').Type + ',' + theLinks.child('linkThree').title + ',' + theLinks.child('linkThree').Description + ']';
-			//linksData[3] = '[' + theLinks.child('linkFour').Type + ',' + theLinks.child('linkFour').title + ',' + theLinks.child('linkFour').Description + ']';
-			//linksData[4] = '[' + theLinks.child('linkFive').Type + ',' + theLinks.child('linkFive').title + ',' + theLinks.child('linkFive').Description + ']';
+				//I think this part has to move to right panel and updating as well for editing
+				//linksData[0] = '[' + theLinks.child('linkOne').Type + ',' + theLinks.child('linkOne').title + ',' + theLinks.child('linkOne').Description + ']';
+				//linksData[1] = '[' + theLinks.child('linkTwo').Type + ',' + theLinks.child('linkTwo').title + ',' + theLinks.child('linkTwo').Description + ']';
+				//linksData[2] = '[' + theLinks.child('linkThree').Type + ',' + theLinks.child('linkThree').title + ',' + theLinks.child('linkThree').Description + ']';
+				//linksData[3] = '[' + theLinks.child('linkFour').Type + ',' + theLinks.child('linkFour').title + ',' + theLinks.child('linkFour').Description + ']';
+				//linksData[4] = '[' + theLinks.child('linkFive').Type + ',' + theLinks.child('linkFive').title + ',' + theLinks.child('linkFive').Description + ']';
 			
-			});
-			
-			//testing
-			console.log("first Data JSON: " + linksData[0]);
+				});
+			}
+			else
+			{
+				console.log ('worldContent/' + worldcodeId 
+										+ '/Maps/' + mapId 
+										+ '/Regions/' + regionId 
+										+ '/Screens/' + screenId 
+				+ '/links' + " does not exist");
+			}
 		}
 		
 		$(document).ready(function() {
