@@ -19,12 +19,13 @@
 		var ScreenId = ""; // unique num of the screen in WorldcodeId
 	
 		var linksData = new Array(); // linksData[id] -> JSON data for right panel, Unity will not parse this array and sends it tio the right panel as-is
+		/*
 		linksData[0] = '["iconLink", "Title", "Description"]';
 		linksData[1] = '["iconVideo", "Title", "Description"]';
 		linksData[2] = '["iconPicture", "Title", "Description"]';
 		linksData[3] = '["iconAssessment", "Title", "Description"]';
 		linksData[4] = '["iconPresentation", "Title", "Description"]';
-		
+		*/
 		var links = new Object(); // contains relation links[id] -> URL for webscreen
 		
 		function LoadLinksFromFireBase(worldcodeId, mapId, regionId, screenId)
