@@ -29,62 +29,89 @@
 		
 		function LoadLinksFromFireBase(worldcodeId, mapId, regionId, screenId)
 		{
-			console.log( "Loading links from firebase: " + worldcodeId + ", screen " + screenId);
-			
-			//Fill links from firebase
-			if(fb.child('worldContent/' + worldcodeId 
-										+ '/Maps/' + mapId 
-										+ '/Regions/' + regionId 
-										+ '/Screens/' + screenId 
-			+ '/links' ).exists())
-			{
-				fb.child('worldContent/' + worldcodeId 
-											+ '/Maps/' + mapId 
-											+ '/Regions/' + regionId 
-											+ '/Screens/' + screenId 
-											+ '/links' ).once("value", function(snap) {   
-											
-												var theLinks = snap.val()
+			var path = 'worldContent' 
+						+ '/'+ worldcodeId 
+						+ '/Maps/' + mapId 
+						+ '/Regions/' + regionId 
+						+ '/Screens/' + screenId 
+						+ '/links';
 										
-												console.log("found json for requested parameters: " + theLinks);
-								
-												if(theLinks.linkOne != null)
-												{
-													if(theLinks.linkOne.url != null) 
-														{ 
-															links[0] = theLinks.linkOne.url; 
-														};
-													
-														linksData[0] = theLinks.linkOne;
-												}
+			var ref = new Firebase( fb + path);
+			ref.once("value", function(snapshot) 
+			{
+				FillInLinksFromFireBase(snapshot, worldcodeId, mapId, regionId, screenId);
+			}, function (err) 
+			{
+				// code to handle read error
+				console.error('Cannot retrieve snapshot from the Firebase by worldcodeId ' + worldcodeId+ ', mapId ' + mapId+ ', regionId ' + regionId+ ', screenId ' + screenId + ', path '+ path );
+			});
+		}
+				
+		function FillInLinksFromFireBase(snapshot)
+		{
+			//console.log( "Loading links from firebase by snapshot: " + (snapshot == true));
+			var theLinks = snapshot.val()
 			
-				//if(theLinks.linkTwo.url != null) { links[1] = theLinks.linkTwo.url; };
-				//if(theLinks.linkThree.url != null) { links[2] = theLinks.linkThree.url; };
-				//if(theLinks.linkFour.url != null) { links[3] = theLinks.linkFour.url; };
-				//if(theLinks.linkFive.url != null) { links[4] = theLinks.linkFive.url; };
-			
-				//testing
-				console.log("first Link: " + links[0]);
-				console.log("first data: " + linksData[0]);
-			
-				//I think this part has to move to right panel and updating as well for editing
-				//linksData[0] = '[' + theLinks.child('linkOne').Type + ',' + theLinks.child('linkOne').title + ',' + theLinks.child('linkOne').Description + ']';
-				//linksData[1] = '[' + theLinks.child('linkTwo').Type + ',' + theLinks.child('linkTwo').title + ',' + theLinks.child('linkTwo').Description + ']';
-				//linksData[2] = '[' + theLinks.child('linkThree').Type + ',' + theLinks.child('linkThree').title + ',' + theLinks.child('linkThree').Description + ']';
-				//linksData[3] = '[' + theLinks.child('linkFour').Type + ',' + theLinks.child('linkFour').title + ',' + theLinks.child('linkFour').Description + ']';
-				//linksData[4] = '[' + theLinks.child('linkFive').Type + ',' + theLinks.child('linkFive').title + ',' + theLinks.child('linkFive').Description + ']';
-			
-					UpdateTableIcons(); //update icons
-				});
+			if (typeof theLinks !== 'undefined' && theLinks !== null) 
+			{
+				// Will in links data
+				FillInOneLinkData(0, theLinks.linkOne);
+				FillInOneLinkData(1, theLinks.linkTwo);
+				FillInOneLinkData(2, theLinks.linkThree);
+				FillInOneLinkData(3, theLinks.linkFour);
+				FillInOneLinkData(4, theLinks.linkFive);
+				FillInOneLinkData(5, theLinks.linkSix);		
+				
+				UpdateTableIcons(); //update icons
 			}
 			else
 			{
-				console.log ('worldContent/' + worldcodeId 
-										+ '/Maps/' + mapId 
-										+ '/Regions/' + regionId 
-										+ '/Screens/' + screenId 
-				+ '/links' + " does not exist");
+				console.error("Cannot get an array from the snapshot.");
 			}
+		}
+		
+		function FillInOneLinkData(id, data)
+		{
+			if ( typeof data !== 'undefined' && data !== null && data.hasOwnProperty('url') && data.url.length > 0 )
+			{				
+				var type = ( data.hasOwnProperty('type') && data.type.length > 0 ) ? GetLinkClassByType(data.type) : "iconAdd";
+				var title = ( data.hasOwnProperty('title') && data.title.length > 0 )? data.title : "";
+				var desc = ( data.hasOwnProperty('description') && data.description.length > 0 ) ? data.description : "";
+				
+				//fill in
+				links[id] = data.url; 
+				linksData[id] = '["' + type + '" ,"' + title + '","' + desc + '"]';
+			}
+			else
+			{
+			    console.warn( "FillInOneLinkData: link id " + id + " has no data!");
+				linksData[id] = '["iconAdd","", ""]';
+			}
+		}
+		
+		function GetLinkClassByType(type)
+		{
+			var cssType = "iconAdd";
+			if (typeof type !== 'undefined' && type !== null) 
+			{
+				switch (type) {
+					case 'link':
+						cssType = "iconLink";
+						break;
+					case 'video':
+						cssType = "iconVideo";
+						break;
+					case 'picture':
+						cssType = "iconPicture";
+						break;
+					case 'assessment':
+						cssType = "iconAssessment";
+						break;
+					case 'presentation':
+						cssType = "iconPresentation";
+				} 
+			}
+			return cssType;
 		}
 		
 		$(document).ready(function() {
@@ -214,21 +241,29 @@
 		
 		function UpdateTableIcons() //update table icons
 		{
+			//console.log( "UpdateTableIcons.");
 			for(i=1; i < 7; i++) //we have 6 icons
 			{
 				var obj = $("#d" + i);			
 				obj.removeClass(); //clear aLL classes
 				obj.addClass("destination");
-				if (typeof linksData[i] !== 'undefined' && linksData[i] !== null) 
+				var data = linksData[i-1];
+				if (typeof data !== 'undefined' && data !== null) 
 				{
-					var arr_from_json = JSON.parse( linksData[i] );
+					var arr_from_json = JSON.parse( data );
 					if (Array.isArray(arr_from_json))
+					{
 						obj.addClass(arr_from_json[0]);
+					}
 					else
+					{
 						obj.addClass("iconAdd");
+					}
 				}
 				else
+				{
 					obj.addClass("iconAdd");
+				}
 			}
 		}
 		
