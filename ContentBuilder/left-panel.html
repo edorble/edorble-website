@@ -75,7 +75,7 @@
 		function FillInOneLinkData(id, data)
 		{
 			if ( typeof data !== 'undefined' && data !== null && data.hasOwnProperty('url') && data.url.length > 0 )
-			{				
+			{		
 				var type = ( data.hasOwnProperty('type') && data.type.length > 0 ) ? GetLinkClassByType(data.type) : "iconAdd";
 				var title = ( data.hasOwnProperty('title') && data.title.length > 0 )? data.title : "";
 				var desc = ( data.hasOwnProperty('description') && data.description.length > 0 ) ? data.description : "";
@@ -83,10 +83,13 @@
 				//fill in
 				links['d' + (id+1)] = data.url; 
 				linksData[id] = '["' + type + '" ,"' + title + '","' + desc + '"]';
+				
+				console.log( "-------------: link id " + (id+1) + " , " + links['d' + (id+1)] + ", " + linksData[id]);
+				
 			}
 			else
 			{
-			    console.warn( "FillInOneLinkData: link id " + id + " has no data!");
+			    console.warn( "FillInOneLinkData: link id " + (id+1) + " has no data!");
 				linksData[id] = '["iconAdd","", ""]';
 				delete links['d' + (id+1)];
 			}
@@ -144,8 +147,9 @@
 					var id = event.target.id; // it is the same as link id
 					if (links.hasOwnProperty(id)) 
 					{
-						console.log( "objId " + id + ", " + links[id]);
-						engine.trigger('OnLinkClicked', links[id], id, linksData[Math.floor(Math.random() * linksData.length)]);
+						console.log( "objId " + id + ", " + links[id] + ", " + linksData[(parseInt(id.replace(/d/,""))-1)]);
+						//engine.trigger('OnLinkClicked', links[id], id, linksData[Math.floor(Math.random() * linksData.length)]);
+						engine.trigger('OnLinkClicked', links[id], id, linksData[(parseInt(id.replace(/d/,""))-1)]);
 					}
 					else
 					{
