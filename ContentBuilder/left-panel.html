@@ -198,10 +198,16 @@
 		
 		function RequestMapId(worldcodeId)
 		{
-			fb.once("worlds/" + worldcodeId + "/MapId", function(mapId) {
+ 			var path = "worlds/" + worldcodeId + "/MapId";
+			var ref = new Firebase( fb + path);
+			ref.once("value", function(mapId) {
 	      			MapId = mapId;
 	      			LoadLinksFromFireBase(WorldcodeId, MapId, RegionId, ScreenId);
-    			});
+    			}, function (err) 
+			{
+				// code to handle read error
+				console.error('Cannot retrieve snapshot from the Firebase by path ' + path);
+			});
 		}
 		
 		function StoreScreenLinkToFirebase(id, url)
