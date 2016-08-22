@@ -38,7 +38,7 @@
 						+ '/Screens/' + screenId 
 						+ '/links';
 		
-			console.log("LoadLinksFromFireBase: path " + path);
+			//console.log("LoadLinksFromFireBase: path " + path);
 			var ref = new Firebase( fb + path);
 			ref.on("value", function(snapshot) 
 			{
@@ -81,13 +81,14 @@
 				var desc = ( data.hasOwnProperty('description') && data.description.length > 0 ) ? data.description : "";
 				
 				//fill in
-				links[id] = data.url; 
+				links['d' + id] = data.url; 
 				linksData[id] = '["' + type + '" ,"' + title + '","' + desc + '"]';
 			}
 			else
 			{
 			    console.warn( "FillInOneLinkData: link id " + id + " has no data!");
 				linksData[id] = '["iconAdd","", ""]';
+				delete links['d' + id];
 			}
 		}
 		
@@ -143,9 +144,14 @@
 					var id = event.target.id; // it is the same as link id
 					if (links.hasOwnProperty(id)) 
 					{
-						//console.log( "objId " + id + ", " + links[id]);
+						console.log( "objId " + id + ", " + links[id]);
 						engine.trigger('OnLinkClicked', links[id], id, linksData[Math.floor(Math.random() * linksData.length)]);
 					}
+					else
+					{
+						console.log('Links array has no link for id ' + id);
+					}
+					
 				}
 			);
 			
@@ -200,15 +206,12 @@
 		
 		function RequestMapId(worldcodeId)
 		{
-			console.log("222 fb " + fb + ", fbURL " + fbURL);
  			var path = "worlds/" + worldcodeId + "/MapId";
 			var ref = new Firebase( fb + path);
-			//var ref = new Firebase("https://edorble-dev.firebaseio.com/worlds/" + worldcodeId + "/MapId");
 			ref.once("value", function(snapshot) {
 				if ( snapshot.exists() === true )
 				{
 	      				MapId = snapshot.val();
-	      				console.log("444 fb MapId " + MapId);
 	      				LoadLinksFromFireBase(WorldcodeId, MapId, RegionId, ScreenId);
 				}
 				else
