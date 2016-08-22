@@ -198,8 +198,9 @@
 		
 		function RequestMapId(worldcodeId)
 		{
- 			var path = "worlds/" + worldcodeId + "/MapId";
-			var ref = new Firebase( fb + path);
+ 			//var path = "worlds/" + worldcodeId + "/MapId";
+			//var ref = new Firebase( fb + path);
+			var ref = new Firebase("https://edorble-dev.firebaseio.com/worlds/" + worldcodeId + "/MapId");
 			ref.once("value", function(mapId) {
 	      			MapId = mapId;
 	      			LoadLinksFromFireBase(WorldcodeId, MapId, RegionId, ScreenId);
