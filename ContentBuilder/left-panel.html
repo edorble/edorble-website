@@ -76,7 +76,7 @@
 		{
 			if ( typeof data !== 'undefined' && data !== null && data.hasOwnProperty('url') && data.url.length > 0 )
 			{		
-				var type = ( data.hasOwnProperty('type') && data.type.length > 0 ) ? GetLinkClassByType(data.type) : "iconAdd";
+				var type = ( data.hasOwnProperty('type') && data.type.length > 0 ) ? GetLinkClassByType(data.type) : "iconLink";
 				var title = ( data.hasOwnProperty('title') && data.title.length > 0 )? data.title : "";
 				var desc = ( data.hasOwnProperty('description') && data.description.length > 0 ) ? data.description : "";
 				
