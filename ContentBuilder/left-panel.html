@@ -147,7 +147,7 @@
 					var id = event.target.id; // it is the same as link id
 					if (links.hasOwnProperty(parseInt(id))) 
 					{
-						console.log( "objId " + id + ", " + links[parseInt(id)] + ", " + linksData[parseInt(id)])+ ", " + links[id] + ", " + linksData[id]);
+						console.log( "objId " + id + ", " + links[parseInt(id)] + ", " + linksData[parseInt(id)] + ", " + links[id] + ", " + linksData[id]);
 						//engine.trigger('OnLinkClicked', links[id], id, linksData[Math.floor(Math.random() * linksData.length)]);
 						engine.trigger('OnLinkClicked', links[id], id, linksData[id]);
 					}
