@@ -11,7 +11,8 @@
 	<script type="text/javascript" src="js/coherent.js"></script>
 	<script type="text/javascript">
 
-		var fb = new Firebase("https://edorble-dev.firebaseio.com/");
+		var fbURL = "https://edorble-dev.firebaseio.com/";
+		var fb = new Firebase(fbURL);
 		
 		var WorldcodeId = ""; // current worldcode
 		var MapId = ""; // current MapId
@@ -30,6 +31,7 @@
 		
 		function LoadLinksFromFireBase(worldcodeId, mapId, regionId, screenId)
 		{
+			console.log("fb " + fb + ", fbURL " + fbURL);
 			var path = 'worldContent' 
 						+ '/'+ worldcodeId 
 						+ '/Maps/' + mapId 
