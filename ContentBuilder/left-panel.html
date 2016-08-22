@@ -38,7 +38,7 @@
 						+ '/links';
 										
 			var ref = new Firebase( fb + path);
-			ref.once("value", function(snapshot) 
+			ref.on("value", function(snapshot) 
 			{
 				FillInLinksFromFireBase(snapshot, worldcodeId, mapId, regionId, screenId);
 			}, function (err) 
