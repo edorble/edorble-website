@@ -81,14 +81,14 @@
 				var desc = ( data.hasOwnProperty('description') && data.description.length > 0 ) ? data.description : "";
 				
 				//fill in
-				links['d' + id] = data.url; 
+				links['d' + (id+1)] = data.url; 
 				linksData[id] = '["' + type + '" ,"' + title + '","' + desc + '"]';
 			}
 			else
 			{
 			    console.warn( "FillInOneLinkData: link id " + id + " has no data!");
 				linksData[id] = '["iconAdd","", ""]';
-				delete links['d' + id];
+				delete links['d' + (id+1)];
 			}
 		}
 		
