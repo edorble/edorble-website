@@ -43,6 +43,12 @@ table#WebAddressBar  td { width:70px; height:70px;}
 	background-repeat: no-repeat;
 }
 
+.iconAudio{
+    background-image: url("../i/Audio_Icon.png");    
+	background-size: 70px 70px;
+	background-repeat: no-repeat;
+}
+
 .iconPresentation {
     background-image: url("../i/Presentation_Icon.png");    
 	background-size: 70px 70px;
