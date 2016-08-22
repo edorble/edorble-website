@@ -31,14 +31,14 @@
 		
 		function LoadLinksFromFireBase(worldcodeId, mapId, regionId, screenId)
 		{
-			console.log("fb " + fb + ", fbURL " + fbURL);
 			var path = 'worldContent' 
 						+ '/'+ worldcodeId 
 						+ '/Maps/' + mapId 
 						+ '/Regions/' + regionId 
 						+ '/Screens/' + screenId 
 						+ '/links';
-										
+		
+			console.log("LoadLinksFromFireBase: path " + path);
 			var ref = new Firebase( fb + path);
 			ref.on("value", function(snapshot) 
 			{
@@ -201,12 +201,20 @@
 		function RequestMapId(worldcodeId)
 		{
 			console.log("222 fb " + fb + ", fbURL " + fbURL);
- 			//var path = "worlds/" + worldcodeId + "/MapId";
-			//var ref = new Firebase( fb + path);
-			var ref = new Firebase("https://edorble-dev.firebaseio.com/worlds/" + worldcodeId + "/MapId");
-			ref.once("value", function(mapId) {
-	      			MapId = mapId;
-	      			LoadLinksFromFireBase(WorldcodeId, MapId, RegionId, ScreenId);
+ 			var path = "worlds/" + worldcodeId + "/MapId";
+			var ref = new Firebase( fb + path);
+			//var ref = new Firebase("https://edorble-dev.firebaseio.com/worlds/" + worldcodeId + "/MapId");
+			ref.once("value", function(snapshot) {
+				if ( snapshot.exists() === true )
+				{
+	      				MapId = snapshot.val();
+	      				console.log("444 fb MapId " + MapId);
+	      				LoadLinksFromFireBase(WorldcodeId, MapId, RegionId, ScreenId);
+				}
+				else
+				{
+					console.error('Cannot retrieve MapId by worldcodeId ' + worldcodeId);
+				}
     			}, function (err) 
 			{
 				// code to handle read error
