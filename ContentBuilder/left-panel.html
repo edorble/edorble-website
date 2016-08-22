@@ -81,17 +81,17 @@
 				var desc = ( data.hasOwnProperty('description') && data.description.length > 0 ) ? data.description : "";
 				
 				//fill in
-				links['d' + (id+1)] = data.url; 
+				links[id] = data.url; 
 				linksData[id] = '["' + type + '" ,"' + title + '","' + desc + '"]';
 				
-				console.log( "-------------: link id " + (id+1) + " , " + links['d' + (id+1)] + ", " + linksData[id]);
+				console.log( "-------------: link id " + id + " , " + links[id] + ", " + linksData[id]);
 				
 			}
 			else
 			{
-			    console.warn( "FillInOneLinkData: link id " + (id+1) + " has no data!");
+			    console.warn( "FillInOneLinkData: link id " + id + " has no data!");
 				linksData[id] = '["iconAdd","", ""]';
-				delete links['d' + (id+1)];
+				delete links[id];
 			}
 		}
 		
@@ -145,11 +145,11 @@
 				function (event)
 				{
 					var id = event.target.id; // it is the same as link id
-					if (links.hasOwnProperty(id)) 
+					if (links.hasOwnProperty(parseInt(id))) 
 					{
-						console.log( "objId " + id + ", " + links[id] + ", " + linksData[(parseInt(id.replace(/d/,""))-1)]);
+						console.log( "objId " + id + ", " + links[parseInt(id)] + ", " + linksData[parseInt(id)])+ ", " + links[id] + ", " + linksData[id]);
 						//engine.trigger('OnLinkClicked', links[id], id, linksData[Math.floor(Math.random() * linksData.length)]);
-						engine.trigger('OnLinkClicked', links[id], id, linksData[(parseInt(id.replace(/d/,""))-1)]);
+						engine.trigger('OnLinkClicked', links[id], id, linksData[id]);
 					}
 					else
 					{
@@ -171,22 +171,22 @@
 		engine.on("OnReceiveData", function (id, url)
 		{
 			console.log( "OnReceiveData " + id + ", url " +  url);		
-			links[id] = url;
+			links[parseInt(id)] = url;
 			
 			var obj = $("#" + id);			
 			obj.removeClass(); //clear aLL classes
 			obj.addClass("destination");
 			obj.addClass("iconLink");
 			
-			StoreScreenLinkToFirebase(id, url);
+			StoreScreenLinkToFirebase(parseInt(id), url);
 		});
 
 		engine.on("OnLinkCleared", function (id)
 		{
 			console.log( "OnLinkCleared " + id );
-			if (links.hasOwnProperty(id))
+			if (links.hasOwnProperty(parseInt(id)))
 			{
-				delete links[id];				
+				delete links[parseInt(id)];				
 			}
 			
 			var obj = $("#" + id);			
@@ -194,7 +194,7 @@
 			obj.addClass("destination");
 			obj.addClass("iconAdd");
 			
-			RemoveScreenLink(id);
+			RemoveScreenLink(parseInt(id));
 		});
 
 		// Unity sends there data just after interface is finished loading in Unity
@@ -267,12 +267,12 @@
 		function UpdateTableIcons() //update table icons
 		{
 			//console.log( "UpdateTableIcons.");
-			for(i=1; i < 7; i++) //we have 6 icons
+			for(i=0; i < 6; i++) //we have 5 icons
 			{
-				var obj = $("#d" + i);			
+				var obj = $("#" + i);			
 				obj.removeClass(); //clear aLL classes
 				obj.addClass("destination");
-				var data = linksData[i-1];
+				var data = linksData[i];
 				if (typeof data !== 'undefined' && data !== null) 
 				{
 					var arr_from_json = JSON.parse( data );
@@ -298,11 +298,11 @@
 </head>
 <body>
 <table id="links">
-<tr><td id="d1" class="destination iconAdd"></td></tr>
-<tr><td id="d2" class="destination iconAdd"></td></tr>
-<tr><td id="d3" class="destination iconAdd"></td></tr>
-<tr><td id="d4" class="destination iconAdd"></td></tr>
-<tr><td id="d5" class="destination iconAdd"></td></tr>
+<tr><td id="0" class="destination iconAdd"></td></tr>
+<tr><td id="1" class="destination iconAdd"></td></tr>
+<tr><td id="2" class="destination iconAdd"></td></tr>
+<tr><td id="3" class="destination iconAdd"></td></tr>
+<tr><td id="4" class="destination iconAdd"></td></tr>
 <tr><td id="Exit" class="iconExitWebcast"></td></tr>
 </table>
 </body>
