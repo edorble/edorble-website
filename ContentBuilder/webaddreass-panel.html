@@ -57,6 +57,13 @@
 					engine.trigger('OnAddressChaged', $("#AddressBar").val()); // Value (string)
 				}
 			);
+			
+			$("#AddressBar").click(
+				function (event)
+				{					
+				    engine.trigger('OnTextFieldClick'); // needs for vr keyboard
+				}
+			);
 						
 			$("#Back, #Forward, #Drag, #Play, #Reload").mouseenter(function() {
 				engine.trigger('OnMouseEnter', 1); // 1 - show hand cursor
