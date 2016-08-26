@@ -69,6 +69,59 @@
 			ScreenId = screenId;
 		});
 		
+		engine.on("AddCharacter", function (value)
+    		{
+			console.log( "AddCharacter " + value);
+			if(value == "-1")
+	    			removeAtCursor($("#Worldcode"));
+			else
+	    			insertAtCursor($("#Worldcode"), value);
+    		});		
+		
+		function removeAtCursor(myField) 
+		{
+		    var pos = myField.getCursorPosition();
+		    myField.val( myField.val().substring(0, pos-1)
+		        + myField.val().substring(pos, myField.val().length));
+		    pos -= 1;
+			myField[0].setSelectionRange(pos, pos);
+		
+		    engine.trigger('OnWorldcodeChaged', myField.val());
+		}
+		
+		function insertAtCursor(myField, myValue) 
+		{
+		    var pos = myField.getCursorPosition();
+		
+			console.log( "insertAtCursor " + myField + ", " + myValue + ", pos " +  pos + ", " + myField.val());
+		
+		        myField.val( myField.val().substring(0, pos)
+		            + myValue
+		            + myField.val().substring(pos, myField.val().length));
+		
+		    pos += myValue.length;
+			myField[0].setSelectionRange(pos, pos);
+		
+		    engine.trigger('OnWorldcodeChaged', myField.val());
+		}
+		
+		(function ($, undefined) {
+		    $.fn.getCursorPosition = function() {
+		        var el = $(this).get(0);
+		        var pos = 0;
+		        if('selectionStart' in el) {
+		            pos = el.selectionStart;
+		        } else if('selection' in document) {
+		            el.focus();
+		            var Sel = document.selection.createRange();
+		            var SelLength = document.selection.createRange().text.length;
+		            Sel.moveStart('character', -el.value.length);
+		            pos = Sel.text.length - SelLength;
+		        }
+		        return pos;
+		    }
+		})(jQuery);		
+		
            	//$.storage('clear'); //clear coherent cache, needs only during developing
 	</script>	
 </head>
