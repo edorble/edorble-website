@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8" />
         <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-    <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+    	<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 
 	<link rel="stylesheet" type="text/css" href="css/core.css" />
 	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
@@ -13,10 +13,21 @@
 		var ScreenId = ""; // unique num of the screen in WorldcodeId
 		
 		// every stored link should have unique id (at least inside the left panel), it filled in this script by unity when user clicks on some link in left panel
-	    var Id = ""; // link id
+		var Id = ""; // link id
 		var Icon = "";
 		var Title = "";
 		var Description = "";
+		
+		// uncomment and edit SomeInputField to real value if you want to activate VR keyboard in VR mode after click on some web element
+		//$(document).ready(function() 
+		//{
+		//	$("#SomeInputField").click(
+		//		function (event)
+		//		{					
+		//		    engine.trigger('OnTextFieldClick'); // needs for vr keyboard
+		//		}
+		//	);
+		//});
 		
 		//receive data for fill in the HTML template
 		engine.on("OnReceiveData", function (id, json_string)
@@ -57,7 +68,8 @@
 			WorldcodeId = worldcodeId;
 			ScreenId = screenId;
 		});
-           $.storage('clear'); //clear coherent cache, needs only during developing
+		
+           	//$.storage('clear'); //clear coherent cache, needs only during developing
 	</script>	
 </head>
 <body id=InfoPanel width=200 height=512 class=yellow>
