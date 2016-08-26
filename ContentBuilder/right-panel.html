@@ -24,7 +24,7 @@
 		//	$("#SomeInputField").click(
 		//		function (event)
 		//		{					
-		//		    engine.trigger('OnTextFieldClick'); // needs for vr keyboard
+		//		    engine.trigger('OnTextFieldClick'); // needs for vr keyboard, works with AddCharacter below
 		//		}
 		//	);
 		//});
@@ -73,9 +73,9 @@
     		{
 			console.log( "AddCharacter " + value);
 			if(value == "-1")
-	    			removeAtCursor($("#Worldcode"));
+	    			removeAtCursor($("#SomeInputField"));
 			else
-	    			insertAtCursor($("#Worldcode"), value);
+	    			insertAtCursor($("#SomeInputField"), value);
     		});		
 		
 		function removeAtCursor(myField) 
@@ -86,7 +86,7 @@
 		    pos -= 1;
 			myField[0].setSelectionRange(pos, pos);
 		
-		    engine.trigger('OnWorldcodeChaged', myField.val());
+		    engine.trigger('OnSomeInputField', myField.val()); // change SomeInputField to yours callback or commen if does not need
 		}
 		
 		function insertAtCursor(myField, myValue) 
@@ -102,7 +102,7 @@
 		    pos += myValue.length;
 			myField[0].setSelectionRange(pos, pos);
 		
-		    engine.trigger('OnWorldcodeChaged', myField.val());
+		    engine.trigger('OnSomeInputField', myField.val()); // change SomeInputField to yours callback or commen if does not need
 		}
 		
 		(function ($, undefined) {
