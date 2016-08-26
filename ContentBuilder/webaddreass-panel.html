@@ -128,9 +128,9 @@
     		{
 			console.log( "AddCharacter " + value);
 			if(value == "-1")
-	    			removeAtCursor($("#Worldcode"));
+	    			removeAtCursor($("#AddressBar"));
 			else
-	    			insertAtCursor($("#Worldcode"), value);
+	    			insertAtCursor($("#AddressBar"), value);
     		});
     
 		function removeAtCursor(myField) 
@@ -141,7 +141,7 @@
 		    pos -= 1;
 			myField[0].setSelectionRange(pos, pos);
 		
-		    engine.trigger('OnWorldcodeChaged', myField.val());
+		    engine.trigger('OnAddressChaged', myField.val());
 		}
 		
 		function insertAtCursor(myField, myValue) 
@@ -157,7 +157,7 @@
 		    pos += myValue.length;
 			myField[0].setSelectionRange(pos, pos);
 		
-		    engine.trigger('OnWorldcodeChaged', myField.val());
+		    engine.trigger('OnAddressChaged', myField.val());
 		}
 		
 		(function ($, undefined) {
