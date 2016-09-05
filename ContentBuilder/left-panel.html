@@ -225,11 +225,11 @@
 
 		function LinkClicked(id)
 		{
-			if (links.hasOwnProperty(parseInt(id))) 
+			if (links.hasOwnProperty(id)) 
 			{
-				console.log( "LinkClicked " + id + ", " + links[parseInt(id)] + ", " + linksData[parseInt(id)] + ", " + links[id] + ", " + linksData[id]);
+				console.log( "LinkClicked " + id + ", " + links[id] + ", " + linksData[id]);
 				//engine.trigger('OnLinkClicked', links[id], id, linksData[Math.floor(Math.random() * linksData.length)]);
-				engine.trigger('OnLinkClicked', links[id], id, linksData[id]);
+				engine.trigger('OnLinkClicked', links[id], ""+id, linksData[id]);
 			}
 			else
 			{
