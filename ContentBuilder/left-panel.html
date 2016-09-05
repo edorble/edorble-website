@@ -57,12 +57,37 @@
 			
 			if (typeof theLinks !== 'undefined' && theLinks !== null) 
 			{
+				var link_opened = false;
 				// Will in links data
-				FillInOneLinkData(0, theLinks.linkOne);
-				FillInOneLinkData(1, theLinks.linkTwo);
-				FillInOneLinkData(2, theLinks.linkThree);
-				FillInOneLinkData(3, theLinks.linkFour);
-				FillInOneLinkData(4, theLinks.linkFive);
+				if( FillInOneLinkData(0, theLinks.linkOne) && !link_opened )
+				{
+				  link_opened = true;
+				  LinkClicked(0);
+				}
+				
+				if( FillInOneLinkData(1, theLinks.linkTwo) && !link_opened )
+				{
+				  link_opened = true;
+				  LinkClicked(1);
+				}
+				
+				if( FillInOneLinkData(2, theLinks.linkThree) && !link_opened )
+				{
+				  link_opened = true;
+				  LinkClicked(2);
+				}
+				
+				if( FillInOneLinkData(3, theLinks.linkFour) && !link_opened )
+				{
+				  link_opened = true;
+			           LinkClicked(3);
+				}
+				
+				if( FillInOneLinkData(4, theLinks.linkFive) && !link_opened )
+				{
+				  link_opened = true;
+				  LinkClicked(4);
+				}
 				
 				UpdateTableIcons(); //update icons
 			}
@@ -85,13 +110,14 @@
 				linksData[id] = '["' + type + '" ,"' + title + '","' + desc + '"]';
 				
 				console.log( "-------------: link id " + id + " , " + links[id] + ", " + linksData[id]);
-				
+				return true;
 			}
 			else
 			{
-			    console.warn( "FillInOneLinkData: link id " + id + " has no data!");
+				console.warn( "FillInOneLinkData: link id " + id + " has no data!");
 				linksData[id] = '["iconAdd","", ""]';
 				delete links[id];
+				return false;
 			}
 		}
 		
@@ -144,21 +170,10 @@
 			$(".destination").click(
 				function (event)
 				{
-					var id = event.target.id; // it is the same as link id
-					if (links.hasOwnProperty(parseInt(id))) 
-					{
-						console.log( "objId " + id + ", " + links[parseInt(id)] + ", " + linksData[parseInt(id)] + ", " + links[id] + ", " + linksData[id]);
-						//engine.trigger('OnLinkClicked', links[id], id, linksData[Math.floor(Math.random() * linksData.length)]);
-						engine.trigger('OnLinkClicked', links[id], id, linksData[id]);
-					}
-					else
-					{
-						console.log('Links array has no link for id ' + id);
-					}
-					
+					LinkClicked(event.target.id);
 				}
 			);
-			
+
 			$("#Exit").click(
 				function (event)
 				{
@@ -207,6 +222,20 @@
 			
 			RequestMapId(WorldcodeId);
 		});
+
+		function LinkClicked(id)
+		{
+			if (links.hasOwnProperty(parseInt(id))) 
+			{
+				console.log( "LinkClicked " + id + ", " + links[parseInt(id)] + ", " + linksData[parseInt(id)] + ", " + links[id] + ", " + linksData[id]);
+				//engine.trigger('OnLinkClicked', links[id], id, linksData[Math.floor(Math.random() * linksData.length)]);
+				engine.trigger('OnLinkClicked', links[id], id, linksData[id]);
+			}
+			else
+			{
+				console.log('LinkClicked: Links array has no link for id ' + id);
+			}
+		}
 		
 		function RequestMapId(worldcodeId)
 		{
