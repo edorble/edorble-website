@@ -3,7 +3,7 @@
 /*html,body,div,table,tr,td {  -webkit-user-select: none; user-select: none; }*/
 /*body { opacity: 0.5;}		*/
 	
-body#InfoPanel { display:none;}
+/* body#InfoPanel { display:none;} */
 	
 .bigText { font-size: 20pt; }
 .yellow { background-color: yellow; }
