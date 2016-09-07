@@ -1,17 +1,18 @@
 
 
 /*html,body,div,table,tr,td {  -webkit-user-select: none; user-select: none; }*/
-/*body { opacity: 0.5;}		*/
-	
-/* body#InfoPanel { display:none;} */
+
+body#InfoPanel { margin:0px; display:none;}
 	
 .bigText { font-size: 20pt; }
 .yellow { background-color: yellow; }
 .green { background-color: green; }
+.graytrbg{ background-color: rgba(200, 200, 200, 0.4); }
 
 table { border-collapse:collapse;  background-color: rgba(200, 200, 200, 0.4); height:100%;}
 table#links  td { width:70px; height:70px;}
 table#WebAddressBar  td { width:70px; height:70px;}
+table#Info  { background-color: inherit; } 
 
 .iconAdd {
     background-image: url("../i/Add_Dragging_Icon.png");    
@@ -92,15 +93,24 @@ table#WebAddressBar  td { width:70px; height:70px;}
 }
 
 
-.myTitle{  font-size: 20pt; width:90px; height:90px; background-color: green; }
+.myTitle{  font-size: 20pt; width:90px; height:90px; }
+.divIcon {
+position: absolute;
+left: 0px;
+top: 0px;
+width: 252px;
+height: 552px;
+
+}
 .myIcon { 
 	background-image: url("../i/Link_Icon.png"); 
-	background-size: 95px 95px; 
-	background-repeat: no-repeat;
-	background-color: orange;
+	background-size: 400px 400px; 
+	background-repeat: no-repeat;	
+	left: -50px;
+	top: -50px;
 }
 .myDescription { 
 	width:200px; height:100%;
-	background-color: red;
 	vertical-align: text-top;
 }
+
