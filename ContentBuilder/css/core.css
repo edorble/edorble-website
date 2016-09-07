@@ -14,6 +14,18 @@ table#links  td { width:70px; height:70px;}
 table#WebAddressBar  td { width:70px; height:70px;}
 table#Info  { background-color: inherit; } 
 
+@font-face {
+		font-family: "opensans";
+		src: url("../fonts/OpenSans-Regular-webfont.woff") format('woff');
+}
+
+.openSansRegular {
+		font-family: opensans;
+		font-size:40pt;
+}
+
+html,body,div,table,tr,td {  font-family: 'opensans', Verdana; }
+
 .iconAdd {
     background-image: url("../i/Add_Dragging_Icon.png");    
 	background-size: 70px 70px;
@@ -96,24 +108,20 @@ table#Info  { background-color: inherit; }
 .myTitle{  font-size: 20pt; width:90px; height:90px; }
 .divIcon {
 position: absolute;
-left: 0px;
-top: 0px;
 width: 252px;
 height: 552px;
 z-index: -1; 
 opacity: 0.2;
+background-size: 400px 400px !important;
+left: -50px;
+top: -50px;
 }
 .myIcon { 
 	background-image: url("../i/Link_Icon.png"); 	
 	background-size: 400px 400px; 
 	background-repeat: no-repeat;	
-	left: -50px;
-	top: -50px;
 }
 .myDescription { 
 	width:200px; height:100%;
 	vertical-align: text-top;
 }
-
-
-
