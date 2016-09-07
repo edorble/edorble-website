@@ -1,13 +1,13 @@
 
-<!-- saved from url=(0083)https://rawgit.com/edorble/edorble-website/gh-pages/ContentBuilder/right-panel.html -->
-<html lang="en-US" class="gr__rawgit_com"><script type="text/javascript">window["_gaUserPrefs"] = { ioo : function() { return true; } }</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html lang="en-US">
+<head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
     	<meta http-equiv="PRAGMA" content="NO-CACHE">
 
-	<link rel="stylesheet" type="text/css" href="./right-panel_files/core.css">
-	<script type="text/javascript" src="./right-panel_files/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="./right-panel_files/coherent.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/core.css">
+	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="js/coherent.js"></script>
 	<script type="text/javascript">
 
 		var WorldcodeId = ""; // current worldcode
@@ -28,6 +28,13 @@
 		//		    engine.trigger('OnTextFieldClick'); // needs for vr keyboard, works with AddCharacter below
 		//		}
 		//	);
+		//
+		//		// '["iconVideo", "Title", "Description"]'
+		//	Icon = "iconVideo"; //To be updated to use firebaseJson object. Check order there.
+		//	Title = "Some Link";
+		//	Description = "There is no CSS property background-opacity, but you can fake it by inserting a pseudo element with regular opacity the exact size of the element behind it.";
+		//	FillInData();
+		//
 		//});
 		
 		//receive data for fill in the HTML template
@@ -42,7 +49,7 @@
 			Id = id;
 		    Icon = arr_from_json[0]; //To be updated to use firebaseJson object. Check order there.
 			Title = arr_from_json[1];
-			Description = arr_from_json[2];;
+			Description = arr_from_json[2];
 			
 			console.log( "OnReceiveData " + Id + ", linkIcon " + Icon + ", title " +  Title + ", desc " + Description);
 			
@@ -54,6 +61,7 @@
 		{
 			var obj = $("#icon");
 			obj.removeClass();
+			obj.addClass("divIcon");
 			obj.addClass(Icon);
 		
 			$("#title").html(Title);
@@ -132,6 +140,6 @@
 <tr><td>&nbsp;</td></tr>
 <tr><td id="description" class="myDescription">...</td></tr>
 </tbody></table>
-<div id="icon" class="myIcon divIcon"></div>
+<div id="icon" class="divIcon myIcon"></div>
 
 </body></html>
