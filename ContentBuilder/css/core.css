@@ -101,7 +101,7 @@ top: 0px;
 width: 252px;
 height: 552px;
 z-index: -1; 
-opacity: 0.5;
+opacity: 0.2;
 }
 .myIcon { 
 	background-image: url("../i/Link_Icon.png"); 	
@@ -114,4 +114,6 @@ opacity: 0.5;
 	width:200px; height:100%;
 	vertical-align: text-top;
 }
+
+
 
