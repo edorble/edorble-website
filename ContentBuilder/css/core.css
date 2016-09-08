@@ -7,7 +7,7 @@ body#InfoPanel { margin:0px; /*display:none;*/}
 .bigText { font-size: 20pt; }
 .yellow { background-color: yellow; }
 .green { background-color: green; }
-.bodyInfoPanel{ background-color: rgba(0, 0, 0, 0.3); }
+.bodyInfoPanel{ background-color: rgba(50, 50, 50, 0.3); }
 
 table { border-collapse:collapse;  background-color: rgba(200, 200, 200, 0.4); height:100%;}
 table#links  td { width:70px; height:70px;}
@@ -118,7 +118,7 @@ top: -50px;
 }
 .myIcon { 
 	background-image: url("../i/Link_Icon.png"); 	
-	background-size: 400px 400px; 
+	background-size: 430px 430px; 
 	background-repeat: no-repeat;	
 }
 .myDescription { 
