@@ -258,39 +258,39 @@
 			});
 		}
 		
+		// add new link to the Firebase
 		function StoreScreenLinkToFirebase(id, url)
 		{
-			var linkName = "";
-			// insert them to the Firebase, use WorldcodeId and ScreenId
-			if(id == 0) linkName = 'linkOne';
-			if(id == 1) linkName = 'linkTwo';
-			if(id == 2) linkName = 'linkThree';
-			if(id == 3) linkName = 'linkFour';
-			if(id == 4) linkName = 'linkFive';
+			var linkRef = GetLinkRef(id);
 			
-			fb.child('worldContent/' + WorldcodeId 
-										+ '/Maps/' + MapId 
-										+ '/Regions/' + RegionId 
-										+ '/Screens/' + ScreenId
-				 						+ '/links/'+ linkName + '/url').set(url);
+			fb.child(linkRef + '/url').set(url); 
+			fb.child(linkRef + '/title').set(url); 
+			fb.child(linkRef + '/description').set(url);
+			fb.child(linkRef + '/link').set('link');
 		}
-
+		
+		// remove link it from the Firebase
 		function RemoveScreenLink(id)
 		{
+			fb.child(GetLinkRef(id)).remove();
+		}
+		
+		// build link path inside the Firebase db
+		function GetLinkRef(id) 
+		{
 			var linkName = "";
-			// insert them to the Firebase, use WorldcodeId and ScreenId
 			if(id == 0) linkName = 'linkOne';
 			if(id == 1) linkName = 'linkTwo';
 			if(id == 2) linkName = 'linkThree';
 			if(id == 3) linkName = 'linkFour';
 			if(id == 4) linkName = 'linkFive';
 			
-			// remove it from the Firebase, use WorldcodeId and ScreenId
-			fb.child('worldContent/' + WorldcodeId 
-								+ '/Maps/' + MapId 
-								+ '/Regions/' + RegionId 
-								+ '/Screens/' + ScreenId
-	 							+ '/links/'+ linkName).remove();
+			//  build ref
+			return 'worldContent/' + WorldcodeId 
+					+ '/Maps/' + MapId 
+					+ '/Regions/' + RegionId 
+					+ '/Screens/' + ScreenId
+					+ '/links/'+ linkName;
 		}
 		
 		function UpdateTableIcons() //update table icons
