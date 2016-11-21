@@ -18,7 +18,7 @@
 		var MapId = ""; // current MapId
 		var RegionId = ""; //current region code
 		var ScreenId = ""; // unique num of the screen in WorldcodeId
-		var LastOpenedLinkId = 0; //last link that was used to show it to the user
+		var LastOpenedLinkId = -1; //last link that was used to show it to the user
 	
 		var linksData = new Array(); // linksData[id] -> JSON data for right panel, Unity will not parse this array and sends it tio the right panel as-is
 		/*
@@ -228,7 +228,7 @@
 		engine.on("OnEnable", function ()
 		{
 			console.log( "OnEnable LP: WorldcodeId " + WorldcodeId + ", screen " + ScreenId + ", regionId " +  RegionId + ", LastOpenedLinkId " + LastOpenedLinkId);
-			if(LastOpenedLinkId > 0) // this works only when user activate left panel for the second time and some was showed before
+			if(LastOpenedLinkId >= 0) // this works only when user activate left panel for the second time and some was showed before
 			   LinkClicked(LastOpenedLinkId); //one right panel
 		});
 		
