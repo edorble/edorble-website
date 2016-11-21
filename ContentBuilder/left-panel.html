@@ -227,7 +227,7 @@
 		// Unity says that left panel now is showed
 		engine.on("OnEnable", function ()
 		{
-			console.log( "OnEnable LP: " + worldcodeId + ", screen " + screenId + ", regionId " +  regionId + ", LastOpenedLinkId " + LastOpenedLinkId);
+			console.log( "OnEnable LP: WorldcodeId " + WorldcodeId + ", screen " + ScreenId + ", regionId " +  RegionId + ", LastOpenedLinkId " + LastOpenedLinkId);
 			if(LastOpenedLinkId > 0) // this works only when user activate left panel for the second time and some was showed before
 			   LinkClicked(LastOpenedLinkId); //one right panel
 		});
