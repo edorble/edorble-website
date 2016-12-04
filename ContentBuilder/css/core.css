@@ -12,7 +12,8 @@ body#InfoPanel { margin:0px; /*display:none;*/}
 table { border-collapse:collapse;  background-color: rgba(200, 200, 200, 0.4); height:100%;}
 table#links  td { width:70px; height:70px;}
 table#WebAddressBar  td { width:70px; height:70px;}
-table#Info  { background-color: inherit; } 
+table#Info { width:200px; background-color:inherit; table-layout:fixed; white-space: normal;}
+table#Info td { word-wrap: break-word; }
 
 @font-face {
 		font-family: "opensans";
@@ -105,16 +106,16 @@ html,body,div,table,tr,td {  font-family: 'opensans', Verdana; }
 }
 
 
-.myTitle{  font-size: 20pt; width:90px; height:90px; padding-left:8px; padding-right:8px}
+.myTitle{  font-size: 20pt; width:90px; height:90px; padding-left:8px; padding-right:8px; word-wrap: break-word;}
 .divIcon {
-position: absolute;
-width: 250px;
-height: 450px;
-z-index: -1; 
-opacity: 0.7;
-background-size: 420px 420px !important;
-left: -50px;
-top: -50px;
+	position: absolute;
+	width: 250px;
+	height: 450px;
+	z-index: -1; 
+	opacity: 0.7;
+	background-size: 420px 420px !important;
+	left: -50px;
+	top: -50px;
 }
 .myIcon { 
 	background-image: url("../i/Link_Icon.png"); 	
@@ -126,6 +127,6 @@ top: -50px;
 	vertical-align: text-top;
 	font-size: 16pt;
 	padding-left:8px; padding-right:8px;
-	
-color: black; text-shadow: #DDD 0.1em 0.1em 0.1em
+	color: black; text-shadow: #DDD 0.1em 0.1em 0.1em;
+	word-wrap: break-word;
 }
